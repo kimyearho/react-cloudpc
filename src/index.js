@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./styles/index.css";
+import "antd/dist/antd.min.css";
 import App from "./views/App";
 
 //* React 18 bootstrap

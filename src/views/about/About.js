@@ -1,20 +1,27 @@
-import { Link } from "react-router-dom";
+import React, { useCallback, useEffect } from "react";
 
-function About() {
- return (
-   <>
-     <main>
-       <h2>Who are we?</h2>
-       <p>
-         That feels like an existential question, don't you
-         think?
-       </p>
-     </main>
-     <nav>
-       <Link to="/">Home</Link>
-     </nav>
-   </>
- );
+function AboutDetail({ featchProduct }) {
+  useEffect(() => {
+    featchProduct()
+  }, [featchProduct]);
+  return (
+    <>
+      <h3>Detail!</h3>
+    </>
+  )
 }
 
-export default About
+function About(props) {
+  const { name } = props
+  const featchProduct = useCallback(() => {
+    console.log("usecallback!");
+  }, []);
+  return (
+    <>
+      <h2>Welcome to About detail {name}</h2>
+      <AboutDetail featchProduct={featchProduct} />
+    </>
+  );
+}
+
+export default About;
