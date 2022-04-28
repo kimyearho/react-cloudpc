@@ -1,20 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import "./styles/index.css";
-import "antd/dist/antd.min.css";
-import App from "./views/App";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import './styles/index.css'
+import 'antd/dist/antd.min.css'
+import './styles/antd.css'
+import App from './views/App'
 
 //* React 18 bootstrap
-const container = document.getElementById("root");
-const root = ReactDOM.createRoot(container);
+const container = document.getElementById('root')
+const root = ReactDOM.createRoot(container)
 
 //* React 18 bootstrap
 root.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>
-);
+)
 
 // import reportWebVitals from './reportWebVitals';
 // If you want to start measuring performance in your app, pass a function

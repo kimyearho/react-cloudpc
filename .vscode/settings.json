@@ -1,0 +1,16 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": false
+  },
+  "eslint.format.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.probe": ["javascript", "javascriptreact", "vue"],
+  "i18n-ally.localesPaths": ["src/lang"]
+}
