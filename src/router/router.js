@@ -1,39 +1,60 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Home from '../views/home/Home'
-import About from '../views/about/About'
-import Dashboard from '../views/dashboard/Dashboard'
-import List from '../views/list/List'
-import Login from '../views/login/Login'
+const Home = React.lazy(() => import('../views/home/Home'))
+const About = React.lazy(() => import('../views/about/About'))
+const Dashboard = React.lazy(() => import('../views/dashboard/Dashboard'))
+const List = React.lazy(() => import('../views/list/List'))
+const Login = React.lazy(() => import('../views/login/Login'))
 
 export const routers = [
   {
     label: <Link to="/main">Main</Link>,
-    element: <Home />,
+    element: (
+      <React.Suspense fallback={<>...</>}>
+        <Home />
+      </React.Suspense>
+    ),
     key: 'main',
     to: '/main'
   },
   {
     label: <Link to="/login">Login</Link>,
-    element: <Login />,
+    element: (
+      <React.Suspense fallback={<>...</>}>
+        <Login />
+      </React.Suspense>
+    ),
     key: 'login',
     to: '/login'
   },
   {
     label: <Link to="/about">About</Link>,
-    element: <About name="Ken" />,
+    element: (
+      <React.Suspense fallback={<>...</>}>
+        <About name="Ken" />
+      </React.Suspense>
+    ),
     key: 'about',
     to: '/about'
   },
   {
     label: <Link to="/dashboard">Dashboard</Link>,
-    element: <Dashboard />,
+    element: (
+      <React.Suspense fallback={<>...</>}>
+        <Dashboard />
+      </React.Suspense>
+    ),
     key: 'dashboard',
     to: '/dashboard'
   },
   {
     label: <Link to="/list">List</Link>,
-    element: <List params={{ meta: { id: 1, name: 'ken' } }} />,
+    element: (
+      <React.Suspense fallback={<>...</>}>
+        <List params={{ meta: { id: 1, name: 'ken' } }} />
+      </React.Suspense>
+    ),
     key: 'list',
     to: '/list'
   }
