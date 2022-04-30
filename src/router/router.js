@@ -4,6 +4,7 @@ import Home from '../views/home/Home'
 import About from '../views/about/About'
 import Dashboard from '../views/dashboard/Dashboard'
 import List from '../views/list/List'
+import Login from '../views/login/Login'
 
 export const routers = [
   {
@@ -11,6 +12,12 @@ export const routers = [
     element: <Home />,
     key: 'main',
     to: '/main'
+  },
+  {
+    label: <Link to="/login">Login</Link>,
+    element: <Login />,
+    key: 'login',
+    to: '/login'
   },
   {
     label: <Link to="/about">About</Link>,

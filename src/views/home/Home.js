@@ -1,39 +1,52 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, decrement, resetCounter } from '../../store/modules/counter'
+
 import logo from '../../assets/images/react.png'
-import MDEditor from '@uiw/react-md-editor'
-import { Button } from 'antd'
+import { Button, Typography, Row } from 'antd'
+import { PlusOutlined, MinusOutlined, RedoOutlined } from '@ant-design/icons'
+const { Text } = Typography
 
 function Home() {
-  //* useState는 배열을 반환 함.
-  //* 첫번째 인자는 상태 값, 두번째 인자는 상태를 업데이트하는 함수를 반환.
-  const [value, setValue] = useState('**Hello world!!!**')
-  const [count, setCount] = useState(0)
-  const countble = () => {
-    setCount(count + 1)
-  }
-
-  //* React는 effect가 수행되는 시점에 이미 DOM이 업데이트 되었음을 보장한다.
-  //* effect는 마운팅과 업데이트를 모두 수행할 수 있다.
-  useEffect(() => {
-    document.title = `You clicked ${count} times`
-  }, [count])
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
 
   return (
     <>
-      <img width={420} alt="logo" src={logo} />
-      <h2 style={{ marginTop: '10px' }}>Welcome to the React!</h2>
-      <p>You clicked {count} times</p>
-      <Button type="primary" onClick={countble}>
-        Click me
-      </Button>
-
-      <MDEditor
-        style={{ marginTop: '30px' }}
-        height={450}
-        value={value}
-        onChange={setValue}
-      />
-      {/* <MDEditor.Markdown source={value} /> */}
+      <img alt="logo" src={logo} />
+      <h1 style={{ marginTop: '10px' }}>
+        <Text type="secondary" style={{ fontSize: '50px' }}>
+          Welcome to the React Redux!
+        </Text>
+      </h1>
+      <Text type="secondary">
+        <h2>You clicked {count} count!</h2>
+      </Text>
+      <Row style={{ marginTop: '40px' }}>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => dispatch(increment())}
+        >
+          증가
+        </Button>
+        <Button
+          style={{ marginLeft: '20px' }}
+          type="primary"
+          icon={<MinusOutlined />}
+          danger
+          onClick={() => dispatch(decrement())}
+        >
+          감소
+        </Button>
+        <Button
+          style={{ marginLeft: '20px' }}
+          icon={<RedoOutlined />}
+          onClick={() => dispatch(resetCounter())}
+        >
+          초기화
+        </Button>
+      </Row>
     </>
   )
 }
