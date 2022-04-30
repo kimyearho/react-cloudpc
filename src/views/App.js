@@ -1,16 +1,12 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Row, Col, Layout } from 'antd'
 import { Header, Content, Footer } from 'antd/lib/layout/layout'
+import { routers } from '../router/router'
 import MenuNavigation from './layouts/MenuNavigation'
 
 class App extends React.Component {
   render() {
-    const { state } = new MenuNavigation()
-    const routeItem = state.menuItems.map((item) => (
-      <Route key={item.key} path={item.key} element={item.element}></Route>
-    ))
-
     return (
       <>
         <Layout className="layout">
@@ -20,7 +16,16 @@ class App extends React.Component {
           <Content className="root-content">
             <Row className="site-layout-content">
               <Col span={24}>
-                <Routes>{routeItem}</Routes>
+                <Routes>
+                  <Route path="/" element={<Navigate replace to="/main" />} />
+                  {routers.map((item) => (
+                    <Route
+                      key={item.key}
+                      path={item.key}
+                      element={item.element}
+                    ></Route>
+                  ))}
+                </Routes>
               </Col>
             </Row>
           </Content>

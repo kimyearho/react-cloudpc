@@ -1,68 +1,35 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { routers } from '../../router/router'
 import { Row, Col, Menu } from 'antd'
 
-import Home from '../home/Home'
-import About from '../about/About'
-import Dashboard from '../dashboard/Dashboard'
-import List from '../list/List'
+function MenuNavigation() {
+  const location = useLocation()
+  const [currentKey, setCurrentKey] = useState('main')
 
-class MenuNavigation extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      currentKey: 'main',
-      menuItems: [
-        {
-          label: <Link to="/main">Main</Link>,
-          element: <Home />,
-          key: 'main',
-          to: '/main'
-        },
-        {
-          label: <Link to="/about">About</Link>,
-          element: <About name="Ken" />,
-          key: 'about',
-          to: '/about'
-        },
-        {
-          label: <Link to="/dashboard">Dashboard</Link>,
-          element: <Dashboard />,
-          key: 'dashboard',
-          to: '/dashboard'
-        },
-        {
-          label: <Link to="/list">List</Link>,
-          element: <List />,
-          key: 'list',
-          to: '/list'
-        }
-      ]
-    }
+  useEffect(() => {
+    const path = location.pathname.split('/')[1]
+    setCurrentKey(path)
+  }, [location])
+
+  const onCurrentKey = (e) => {
+    setCurrentKey(e.key)
   }
 
-  setCurrentKey = (event) => {
-    this.setState({
-      currentKey: event.key
-    })
-  }
-
-  render() {
-    return (
-      <>
-        <Row>
-          <Col span={24}>
-            <Menu
-              mode="horizontal"
-              selectedKeys={this.state.currentKey}
-              items={this.state.menuItems}
-              onClick={this.setCurrentKey}
-            />
-          </Col>
-        </Row>
-      </>
-    )
-  }
+  return (
+    <>
+      <Row>
+        <Col span={24}>
+          <Menu
+            mode="horizontal"
+            selectedKeys={currentKey}
+            items={routers}
+            onClick={onCurrentKey}
+          />
+        </Col>
+      </Row>
+    </>
+  )
 }
 
 export default MenuNavigation

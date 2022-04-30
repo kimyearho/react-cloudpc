@@ -14,7 +14,7 @@ function AboutDetail({ featchProduct }) {
 function About(props) {
   const { name } = props
   const featchProduct = useCallback(() => {
-    console.log('usecallback!')
+    // console.log('usecallback!')
   }, [])
   return (
     <>

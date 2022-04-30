@@ -6,7 +6,7 @@ import { Button } from 'antd'
 function Home() {
   //* useState는 배열을 반환 함.
   //* 첫번째 인자는 상태 값, 두번째 인자는 상태를 업데이트하는 함수를 반환.
-  const [value, setValue] = React.useState('**Hello world!!!**')
+  const [value, setValue] = useState('**Hello world!!!**')
   const [count, setCount] = useState(0)
   const countble = () => {
     setCount(count + 1)
@@ -16,9 +16,6 @@ function Home() {
   //* effect는 마운팅과 업데이트를 모두 수행할 수 있다.
   useEffect(() => {
     document.title = `You clicked ${count} times`
-    return () => {
-      console.log('useEffect unmount!!')
-    }
   }, [count])
 
   return (

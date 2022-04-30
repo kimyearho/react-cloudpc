@@ -1,5 +1,6 @@
 import { Button } from 'antd'
 import React from 'react'
+import { withRouter } from '../../utils/withRouter'
 
 function LoginButton(props) {
   return (
@@ -58,4 +59,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard
+export default withRouter(Dashboard)
