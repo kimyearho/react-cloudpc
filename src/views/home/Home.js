@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement, resetCounter } from '../../store/modules/counter'
 
-import logo from '../../assets/images/react.png'
+import logo from '../../assets/images/react_logo.jpg'
 import { Button, Typography, Row } from 'antd'
 import { PlusOutlined, MinusOutlined, RedoOutlined } from '@ant-design/icons'
 const { Text } = Typography
@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <>
-      <img alt="logo" src={logo} />
+      <img width={650} alt="logo" src={logo} />
       <h1 style={{ marginTop: '10px' }}>
         <Text type="secondary" style={{ fontSize: '50px' }}>
           Welcome to the React Redux!
