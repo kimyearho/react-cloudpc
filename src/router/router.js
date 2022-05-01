@@ -1,15 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import Loader from '../utils/loader'
 import {
   MailOutlined,
   AppstoreOutlined,
   SettingOutlined
 } from '@ant-design/icons'
 
-import Loader from '../utils/loader'
+//* 지연 로딩을 해야한다면 아래 솔루션을 사용한다.
+// const Login = React.lazy(async () => {
+//   const [moduleExports] = await Promise.all([
+//     import('../views/login/Login'),
+//     new Promise((resolve) => setTimeout(resolve, 500))
+//   ])
+//   return moduleExports
+// })
 
-// const Home = React.lazy(() => import('../views/home/Home'))
 const Home = React.lazy(async () => {
   const [moduleExports] = await Promise.all([
     import('../views/home/Home'),
@@ -21,15 +27,6 @@ const About = React.lazy(() => import('../views/about/About'))
 const Dashboard = React.lazy(() => import('../views/dashboard/Dashboard'))
 const List = React.lazy(() => import('../views/list/List'))
 const Login = React.lazy(() => import('../views/login/Login'))
-
-//* 지연 로딩을 해야한다면 아래 솔루션을 사용한다.
-// const Login = React.lazy(async () => {
-//   const [moduleExports] = await Promise.all([
-//     import('../views/login/Login'),
-//     new Promise((resolve) => setTimeout(resolve, 500))
-//   ])
-//   return moduleExports
-// })
 
 export const routers = [
   {
