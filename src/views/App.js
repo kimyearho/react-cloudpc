@@ -18,13 +18,27 @@ class App extends React.Component {
               <Col span={24}>
                 <Routes>
                   <Route path="/" element={<Navigate replace to="/main" />} />
-                  {routers.map((item) => (
-                    <Route
-                      key={item.key}
-                      path={item.key}
-                      element={item.element}
-                    ></Route>
-                  ))}
+                  {routers.map((item) =>
+                    !item.children ? (
+                      <Route
+                        key={item.key}
+                        path={item.path}
+                        element={item.element}
+                      ></Route>
+                    ) : (
+                      item.children.map(
+                        (child) =>
+                          child.children &&
+                          child.children.map((group) => (
+                            <Route
+                              key={group.key}
+                              path={group.path}
+                              element={group.element}
+                            ></Route>
+                          ))
+                      )
+                    )
+                  )}
                 </Routes>
               </Col>
             </Row>

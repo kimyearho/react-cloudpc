@@ -22,7 +22,7 @@ function MenuNavigation() {
         <Col span={24}>
           <Menu
             mode="horizontal"
-            selectedKeys={currentKey}
+            selectedKeys={[currentKey]}
             items={routers}
             onClick={onCurrentKey}
           />
