@@ -1,7 +1,15 @@
+import React, { useEffect } from 'react'
 import { Form, Input, Button, Checkbox, Card, Row, Col } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import request from '../../utils/request'
 
 function Login() {
+  useEffect(() => {
+    request
+      .get('/v1/nauth/system/portals/ui/AAA/public/user')
+      .then(({ data }) => console.log(data))
+  }, [])
+
   const onFinish = (values) => {
     console.log('Received values of form: ', values)
   }
