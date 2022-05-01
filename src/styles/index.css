@@ -1,4 +1,4 @@
-@import "~antd/dist/antd.dark.css";
+/* @import "~antd/dist/antd.dark.css"; */
 
 body {
   margin: 0;
@@ -15,4 +15,12 @@ code {
 .App {
   text-align: center;
   margin-left: 20px;
+}
+
+.loader {
+  height: 100%;
+  padding: 30px 50px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
 }

@@ -8,10 +8,16 @@
   background: initial !important;
 }
 
+.ant-spin-spinning {
+  margin-top: 290px;
+}
+
 .site-layout-content {
   min-height: calc(100vh - 180px);
   padding: 24px;
-  background: #1f1f1f;
+  background: rgb(237 236 236);
+  border: 1px solid rgb(221 221 221 / 63%);
+  border-top: 0;
 }
 
 .root-content {

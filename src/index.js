@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './styles/index.css'
-// import 'antd/dist/antd.min.css'
+import 'antd/dist/antd.min.css'
 import './styles/antd.css'
 import App from './views/App'
 
