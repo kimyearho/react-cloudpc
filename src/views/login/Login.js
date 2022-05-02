@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Form, Input, Button, Checkbox, Card, Row, Col } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { authUser, userAccount } from '../../store/modules/user'
+import { JsonFormatter } from 'react-json-formatter'
 import request from '../../utils/request'
 import _ from 'lodash'
 
@@ -17,6 +18,14 @@ function Login() {
   const isAuthentication = useSelector(
     (state) => state.user.userInfo.isAuthentication
   )
+  const userAccountInfo = useSelector((state) => state.user.userAccount)
+
+  const JsonStyle = {
+    propertyStyle: { color: 'red' },
+    stringStyle: { color: 'green' },
+    numberStyle: { color: 'darkorange' }
+  }
+
   const onFinish = async (values) => {
     if (!_.isEmpty(values)) {
       console.log('Received values of form: ', values)
@@ -35,6 +44,7 @@ function Login() {
       } else {
         //
         console.log('로그인 중')
+        console.log(JSON.stringify(userAccountInfo))
       }
     }
   }
@@ -102,7 +112,11 @@ function Login() {
             </Form.Item>
           </Form>
         </Card>
-        <p>{isAuthentication ? '성공' : '실패'}</p>
+        <JsonFormatter
+          json={JSON.stringify(userAccountInfo)}
+          tabWith="4"
+          JsonStyle={JsonStyle}
+        />
       </Col>
     </Row>
   )
