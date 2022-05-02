@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form, Input, Button, Checkbox, Card, Row, Col } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { authUser, userAccount } from '../../store/modules/user'
 import request from '../../utils/request'
+import _ from 'lodash'
 
 function Login() {
   useEffect(() => {
@@ -10,9 +13,32 @@ function Login() {
       .then(({ data }) => console.log(data))
   }, [])
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values)
+  const dispatch = useDispatch()
+  const isAuthentication = useSelector(
+    (state) => state.user.userInfo.isAuthentication
+  )
+  const onFinish = async (values) => {
+    if (!_.isEmpty(values)) {
+      console.log('Received values of form: ', values)
+      if (!isAuthentication) {
+        const { payload } = await dispatch(authUser(values))
+        const { acct_id } = payload.data
+        const { authorization } = payload.headers
+        if (!_.isEmpty(acct_id)) {
+          const params = {
+            acctId: acct_id,
+            accessToken: authorization
+          }
+          const userInfo = await dispatch(userAccount(params))
+          console.log('userInfo', userInfo)
+        }
+      } else {
+        //
+        console.log('로그인 중')
+      }
+    }
   }
+
   const rules = {
     username: [
       {
@@ -76,6 +102,7 @@ function Login() {
             </Form.Item>
           </Form>
         </Card>
+        <p>{isAuthentication ? '성공' : '실패'}</p>
       </Col>
     </Row>
   )
