@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { uuid } from './utils'
+import { getToken } from './storage'
 
 const service = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -11,9 +12,9 @@ service.interceptors.request.use((config) => {
   config.headers['X-CloudPC-Request-Poc'] = 'POCADMIN'
   config.headers['X-CloudPC-Request-ID'] = uuid()
   config.headers['Accept-Language'] = 'ko'
-  // if (SS_GET_TOKEN()) {
-  //   config.headers['authorization'] = SS_GET_TOKEN()
-  // }
+  if (getToken) {
+    config.headers['authorization'] = getToken()
+  }
   return config
 })
 

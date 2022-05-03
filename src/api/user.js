@@ -1,31 +1,24 @@
 import request from '../utils/request'
+import { userRequesteFactory } from './factory/user_factory'
 
-const userRequesteFactory = (data) => {
-  return {
-    acct_conn_id: data.username,
-    passwd: data.password,
-    usr_ptal_conn_uri: 'AAA'
-  }
+/**
+ * @description 사용자 포털 정적 데이터를 조회한다.
+ * 주 용도는 포털 로고, 배경 이미지와 같은 이미지 정보를 가진다.
+ */
+export const call_public = async () => {
+  const { data } = await request.get(
+    '/v1/nauth/system/portals/ui/AAA/public/user'
+  )
+  return data
 }
 
-export const userResponseFactory = (data) => {
-  return {
-    acct_conn_id: data.acct_conn_id,
-    acct_conn_sts_cd: data.acct_conn_sts_cd,
-    acct_id: data.acct_id,
-    acct_nm: data.acct_nm,
-    acct_sts_cd: data.acct_sts_cd,
-    acct_sts_cd_nm: data.acct_sts_cd_nm,
-    email: data.email,
-    tnt_id: data.tnt_id,
-    tnt_nm: data.tnt_nm,
-    usr_grp_id: data.usr_grp_id,
-    usr_grp_nm: data.usr_grp_nm,
-    cert_plcy_id: data.cert_plcy_id,
-    cert_plcy_nm: data.cert_plcy_nm
-  }
-}
-
+/**
+ * @description 사용자 계정 정보를 조회한다.
+ *
+ * @authority User
+ * @param {Number} acctId - 계정 UUID
+ * @param {String} accessToken - 사용자 인증 토큰
+ */
 export const call_userAccount = async ({ acctId, accessToken }) => {
   const { data } = await request.get(`/v1/user/accounts/${acctId}`, {
     headers: {
@@ -35,6 +28,11 @@ export const call_userAccount = async ({ acctId, accessToken }) => {
   return data
 }
 
+/**
+ * @description 사용자 정보를 인증 요청한다.
+ *
+ * @param {Object} params - 사용자 로그인 정보
+ */
 export const call_auth = async (params) => {
   const payload = userRequesteFactory(params)
   const { data, headers } = await request.post(

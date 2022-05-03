@@ -1,59 +1,28 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import {
-  call_auth,
-  call_userAccount,
-  userResponseFactory
-} from '../../api/user'
-
-export const authUser = createAsyncThunk(
-  'user/authUser',
-  async (payload, thunkAPI) => {
-    try {
-      return await call_auth(payload)
-    } catch (error) {
-      return thunkAPI.rejectWithValue([], error)
-    }
-  }
-)
-
-export const userAccount = createAsyncThunk(
-  'user/userAccount',
-  async (payload, thunkAPI) => {
-    try {
-      return await call_userAccount(payload)
-    } catch (error) {
-      return thunkAPI.rejectWithValue([], error)
-    }
-  }
-)
+import { createSlice } from '@reduxjs/toolkit'
+import { userResponseFactory } from '../../api/factory/user_factory'
+import { authUser, userAccount } from '../actions/user_action'
+import { setToken, getToken, removeToken } from '../../utils/storage'
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
     userInfo: {
       connURI: 'AAA',
-      accessToken: '',
-      isAuthentication: false
+      accessToken: getToken() || null,
+      isAuthentication: sessionStorage.isAuthentication || false
     },
-    userAccount: {
-      acct_conn_id: '',
-      acct_conn_sts_cd: '',
-      acct_id: '',
-      acct_nm: '',
-      acct_sts_cd: '',
-      acct_sts_cd_nm: '',
-      email: '',
-      tnt_id: '',
-      tnt_nm: '',
-      usr_grp_id: '',
-      usr_grp_nm: '',
-      cert_plcy_id: '',
-      cert_plcy_nm: ''
-    }
+    userAccount: JSON.parse(sessionStorage.user || null) || {}
   },
   reducers: {
     SET_TOKEN: (state, action) => {
       state.userInfo.accessToken = action.payload
+      setToken(action.payload)
+    },
+    SET_LOGOUT: (state, action) => {
+      state.userInfo.isAuthentication = false
+      state.userInfo.accessToken = ''
+      sessionStorage.removeItem('isAuthentication')
+      removeToken()
     }
   },
   extraReducers: {
@@ -64,6 +33,8 @@ const userSlice = createSlice({
     [authUser.fulfilled]: (state, { payload }) => {
       state.userInfo.isAuthentication = true
       state.userInfo.accessToken = payload.headers.authorization
+      sessionStorage.isAuthentication = true
+      setToken(payload.headers.authorization)
     },
     [authUser.rejected]: (state, actions) => {
       console.log('authUser rejected', actions)
@@ -75,13 +46,18 @@ const userSlice = createSlice({
     [userAccount.fulfilled]: (state, { payload }) => {
       console.log('userAccount_fulfilled', payload)
       state.userAccount = userResponseFactory(payload)
+      sessionStorage.user = JSON.stringify(userResponseFactory(payload))
     },
     [userAccount.rejected]: (state, actions) => {
       console.log('userAccount_rejected', actions)
       state.userInfo.isAuthentication = false
-      state.userInfo.accessToken = ''
+      state.userInfo.accessToken = null
+      state.userAccount = null
+      sessionStorage.removeItem('isAuthentication')
+      removeToken()
     }
   }
 })
 
+export const { SET_TOKEN, SET_LOGOUT } = userSlice.actions
 export default userSlice.reducer
