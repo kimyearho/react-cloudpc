@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Button,
@@ -18,19 +17,18 @@ import {
   DisconnectOutlined
 } from '@ant-design/icons'
 import { SET_LOGOUT } from '../../store/modules/user'
-import { authUser, userAccount } from '../../store/actions/user_action'
+import {
+  authUser,
+  staticPublic,
+  userAccount
+} from '../../store/actions/user_action'
 import { JsonFormatter } from 'react-json-formatter'
-import request from '../../utils/request'
 import _ from 'lodash'
 
 function Login() {
-  useEffect(() => {
-    request
-      .get('/v1/nauth/system/portals/ui/AAA/public/user')
-      .then(({ data }) => console.log(data))
-  }, [])
-
   const dispatch = useDispatch()
+  dispatch(staticPublic())
+
   const isAuthentication = useSelector(
     (state) => state.user.userInfo.isAuthentication
   )

@@ -19,12 +19,8 @@ export const call_public = async () => {
  * @param {Number} acctId - 계정 UUID
  * @param {String} accessToken - 사용자 인증 토큰
  */
-export const call_userAccount = async ({ acctId, accessToken }) => {
-  const { data } = await request.get(`/v1/user/accounts/${acctId}`, {
-    headers: {
-      Authorization: accessToken
-    }
-  })
+export const call_userAccount = async ({ acctId }) => {
+  const { data } = await request.get(`/v1/user/accounts/${acctId}`)
   return data
 }
 

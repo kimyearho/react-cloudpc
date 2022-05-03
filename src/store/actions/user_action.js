@@ -1,5 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { call_auth, call_userAccount } from '../../api/user'
+import { call_public, call_auth, call_userAccount } from '../../api/user'
+
+export const staticPublic = createAsyncThunk(
+  'user/staticPublic',
+  async (payload, thunkAPI) => {
+    try {
+      return await call_public()
+    } catch (error) {
+      return thunkAPI.rejectWithValue([], error)
+    }
+  }
+)
 
 /**
  * @description 사용자 정보를 인증 요청하기 위한 비동시 action

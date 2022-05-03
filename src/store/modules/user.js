@@ -18,7 +18,7 @@ const userSlice = createSlice({
       state.userInfo.accessToken = action.payload
       setToken(action.payload)
     },
-    SET_LOGOUT: (state, action) => {
+    SET_LOGOUT: (state) => {
       state.userInfo.isAuthentication = false
       state.userInfo.accessToken = ''
       sessionStorage.removeItem('isAuthentication')
@@ -26,13 +26,14 @@ const userSlice = createSlice({
     }
   },
   extraReducers: {
-    [authUser.pending]: (state, actions) => {
-      console.log('pending', actions)
+    [authUser.pending]: (state) => {
       state.userInfo.isAuthentication = false
+      state.userInfo.accessToken = null
     },
     [authUser.fulfilled]: (state, { payload }) => {
       state.userInfo.isAuthentication = true
       state.userInfo.accessToken = payload.headers.authorization
+      removeToken()
       sessionStorage.isAuthentication = true
       setToken(payload.headers.authorization)
     },
@@ -40,8 +41,8 @@ const userSlice = createSlice({
       console.log('authUser rejected', actions)
       state.userInfo.isAuthentication = false
     },
-    [userAccount.pending]: (state, actions) => {
-      console.log('userAccount_pending', actions)
+    [userAccount.pending]: (state) => {
+      state.userAccount = null
     },
     [userAccount.fulfilled]: (state, { payload }) => {
       console.log('userAccount_fulfilled', payload)
@@ -53,6 +54,7 @@ const userSlice = createSlice({
       state.userInfo.isAuthentication = false
       state.userInfo.accessToken = null
       state.userAccount = null
+      sessionStorage.removeItem('user')
       sessionStorage.removeItem('isAuthentication')
       removeToken()
     }
