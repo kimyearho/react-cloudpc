@@ -15,13 +15,12 @@ function MenuNavigation() {
   const navigate = useNavigate()
 
   const [currentKey, setCurrentKey] = useState('main')
-  const userInfo = useSelector((state) =>
-    userInfoFactory(state.user.userAccount)
-  )
+  const userInfo = useSelector((state) => state.user.userAccount)
+  const useFactory = userInfoFactory(userInfo || '')
 
   const userInfoValues = []
   const userInfoLabels = ['GROUP', 'ID', 'NAME', 'DATE']
-  Object.entries(userInfo).map((item, index) =>
+  Object.entries(useFactory).map((item, index) =>
     userInfoValues.push({ label: userInfoLabels[index], value: item[1] })
   )
 
@@ -45,21 +44,17 @@ function MenuNavigation() {
 
   const content = (
     <div className="shotcut-popup">
-      {userInfoValues.map((item) => {
-        return (
-          <>
-            <Row>
-              <Col span={6}>{item.label}</Col>
-              <Col span={2}>
-                <Divider className="shotcut-divider" type="vertical" />
-              </Col>
-              <Col span={16} className="shotcut-menu-item">
-                {item.value}
-              </Col>
-            </Row>
-          </>
-        )
-      })}
+      {userInfoValues.map((item, index) => (
+        <Row key={index}>
+          <Col span={6}>{item.label}</Col>
+          <Col span={2}>
+            <Divider className="shotcut-divider" type="vertical" />
+          </Col>
+          <Col span={16} className="shotcut-menu-item">
+            {item.value}
+          </Col>
+        </Row>
+      ))}
       <Divider className="shotcut-menu" />
       <Row>
         <Col span={12}>
