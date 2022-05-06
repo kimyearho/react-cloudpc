@@ -1,7 +1,7 @@
 import React from 'react'
+import Loader from '../utils/loader'
 import { useSelector } from 'react-redux'
 import { Link, Navigate, useLocation } from 'react-router-dom'
-import Loader from '../utils/loader'
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons'
 
 //* 지연 로딩을 해야한다면 아래 솔루션을 사용한다.
@@ -35,6 +35,7 @@ export const routers = [
     key: 'main',
     path: '/main',
     icon: <AppstoreOutlined />,
+    meta: null,
     element: (
       <RequireAuth>
         <React.Suspense fallback={<Loader />}>

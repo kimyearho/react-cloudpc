@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { Row, Col, Layout } from 'antd'
+import { Layout } from 'antd'
 import { Header, Content, Footer } from 'antd/lib/layout/layout'
 import { routers } from '../router/router'
 import Login from '../views/login/Login'
 import MenuNavigation from './layouts/MenuNavigation'
-import { call_public } from '../api/user'
-import { userPublicMeta } from '../api/factory/user_factory'
+import { staticPublic } from '../store/actions/user_action'
 
 function App() {
   const type = 'user'
-  const [meta, setMeta] = useState(null)
-  const { isAuthentication } = useSelector((state) => ({
-    isAuthentication: state.user.userInfo.isAuthentication
+  const dispatch = useDispatch()
+  const { isAuthentication, meta } = useSelector((state) => ({
+    isAuthentication: state.user.userInfo.isAuthentication,
+    meta: state.user.portalPublic
   }))
 
   useEffect(() => {
-    call_public(type).then((res) => {
-      setMeta(userPublicMeta(res))
-    })
-  }, [type])
+    dispatch(staticPublic(type))
+  }, [type, dispatch])
 
   function AppHeader() {
     return (
@@ -48,6 +46,20 @@ function App() {
     if (meta && !isAuthentication) {
       return {
         backgroundImage: 'url(' + meta['login'].lin_bg_stor_path + ')',
+        backgroundRepeat: 'no-repeat',
+        overflow: 'hidden'
+      }
+    } else {
+      return {
+        marginTop: '40px'
+      }
+    }
+  }
+
+  function portalImage() {
+    if (meta && isAuthentication) {
+      return {
+        backgroundImage: 'url(' + meta['portal'].ptal_bg_stor_path + ')',
         backgroundRepeat: 'no-repeat',
         overflow: 'hidden'
       }
@@ -87,26 +99,32 @@ function App() {
   }
 
   function AppBody() {
-    const layoutStyle = isAuthentication ? 'site-layout-content' : 'ant-login'
+    const layoutStyle = isAuthentication
+      ? 'ant-pro-grid-content wide site-layout-content'
+      : 'ant-login'
     return (
       <>
-        <div className="ant-pro-grid-content wide">
-          <AppContents className={layoutStyle} style={loginImage()} />
+        <div className={layoutStyle} style={loginImage()}>
+          <AppContents />
         </div>
       </>
     )
   }
 
-  const contentsStyle = isAuthentication ? 'auth-content' : 'not-auth-conten'
+  const contentsStyle = isAuthentication ? 'auth-content' : 'not-auth-content'
 
   return (
     <>
       <Layout className="layout">
         {isAuthentication && <AppHeader />}
-        <Content className={contentsStyle}>
+        <Content className={contentsStyle} style={portalImage()}>
           <AppBody />
+          {isAuthentication && (
+            <Footer className="ant-footer">
+              Yeonho React Example @2022 by ken
+            </Footer>
+          )}
         </Content>
-        {isAuthentication && <Footer>Yeonho React Example @2022 by ken</Footer>}
       </Layout>
     </>
   )
