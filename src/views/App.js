@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { Layout } from 'antd'
+import { Layout, Spin } from 'antd'
 import { Header, Content, Footer } from 'antd/lib/layout/layout'
 import { routers } from '../router/router'
+import { staticPublic } from '../store/actions/user_action'
 import Login from '../views/login/Login'
 import MenuNavigation from './layouts/MenuNavigation'
-import { staticPublic } from '../store/actions/user_action'
 
 function App() {
   const type = 'user'
   const dispatch = useDispatch()
-  const { isAuthentication, meta } = useSelector((state) => ({
+  const { loading, isAuthentication, meta } = useSelector((state) => ({
+    loading: state.app.loading,
     isAuthentication: state.user.userInfo.isAuthentication,
     meta: state.user.portalPublic
   }))
@@ -113,9 +114,20 @@ function App() {
 
   const contentsStyle = isAuthentication ? 'auth-content' : 'not-auth-content'
 
+  function AppLoader() {
+    return (
+      <>
+        <div className="ant-app-loader">
+          <Spin className="app-loader" size="large" />
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
       <Layout className="layout">
+        {loading && <AppLoader />}
         {isAuthentication && <AppHeader />}
         <Content className={contentsStyle} style={portalImage()}>
           <AppBody />

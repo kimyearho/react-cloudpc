@@ -31,10 +31,26 @@ export const userResponseFactory = (data) => {
     usr_grp_id: data.usr_grp_id,
     usr_grp_nm: data.usr_grp_nm,
     cert_plcy_id: data.cert_plcy_id,
-    cert_plcy_nm: data.cert_plcy_nm
+    cert_plcy_nm: data.cert_plcy_nm,
+    acct_vlid_end_dt: data.acct_vlid_end_dt
   }
 }
 
+export const userInfoFactory = (data) => {
+  return {
+    usr_grp_nm: data.usr_grp_nm,
+    acct_conn_id: data.acct_conn_id,
+    acct_nm: data.acct_nm,
+    acct_vlid_end_dt: data.acct_vlid_end_dt
+  }
+}
+
+/**
+ * @description 포털 이미지 정보를 재할당한다.
+ *
+ * @authority User
+ * @param {Object} data - 조회된 포탈 이미지 정보
+ */
 export const userPublicMeta = (payload) => {
   return {
     login: {

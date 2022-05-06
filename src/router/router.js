@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Loader from '../utils/loader'
 import { useSelector } from 'react-redux'
-import { Link, Navigate, useLocation } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons'
 
 //* 지연 로딩을 해야한다면 아래 솔루션을 사용한다.
@@ -19,12 +19,11 @@ const Dashboard = React.lazy(() => import('../views/dashboard/Dashboard'))
 const List = React.lazy(() => import('../views/list/List'))
 
 function RequireAuth({ children }) {
-  const location = useLocation()
   const isAuthentication = useSelector(
     (state) => state.user.userInfo.isAuthentication
   )
   if (!isAuthentication) {
-    return <Navigate to="/login" state={{ from: location }} replace />
+    return <Navigate to="/login" replace />
   }
   return children
 }
@@ -38,9 +37,9 @@ export const routers = [
     meta: null,
     element: (
       <RequireAuth>
-        <React.Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader />}>
           <Home />
-        </React.Suspense>
+        </Suspense>
       </RequireAuth>
     )
   },
@@ -59,9 +58,9 @@ export const routers = [
             path: '/about',
             element: (
               <RequireAuth>
-                <React.Suspense fallback={<>...</>}>
+                <Suspense fallback={<Loader />}>
                   <About name="Ken" />
-                </React.Suspense>
+                </Suspense>
               </RequireAuth>
             )
           }
@@ -77,9 +76,9 @@ export const routers = [
             path: '/dashboard',
             element: (
               <RequireAuth>
-                <React.Suspense fallback={<>...</>}>
+                <Suspense fallback={<>...</>}>
                   <Dashboard />
-                </React.Suspense>
+                </Suspense>
               </RequireAuth>
             )
           },
@@ -89,9 +88,9 @@ export const routers = [
             path: '/list',
             element: (
               <RequireAuth>
-                <React.Suspense fallback={<>...</>}>
+                <Suspense fallback={<>...</>}>
                   <List params={{ meta: { id: 1, name: 'ken' } }} />
-                </React.Suspense>
+                </Suspense>
               </RequireAuth>
             )
           }

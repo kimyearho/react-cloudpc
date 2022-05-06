@@ -57,6 +57,8 @@ function Login() {
               name="normal_login"
               className="login-form"
               initialValues={{
+                username: 'yeonho87',
+                password: '1851617kK@',
                 remember: true
               }}
               onFinish={onFinish}
