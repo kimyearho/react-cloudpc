@@ -1,11 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 import Loader from '../utils/loader'
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined
-} from '@ant-design/icons'
+import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons'
 
 //* 지연 로딩을 해야한다면 아래 솔루션을 사용한다.
 // const Login = React.lazy(async () => {
@@ -16,17 +13,21 @@ import {
 //   return moduleExports
 // })
 
-const Home = React.lazy(async () => {
-  const [moduleExports] = await Promise.all([
-    import('../views/home/Home'),
-    new Promise((resolve) => setTimeout(resolve, 1500))
-  ])
-  return moduleExports
-})
+const Home = React.lazy(() => import('../views/home/Home'))
 const About = React.lazy(() => import('../views/about/About'))
 const Dashboard = React.lazy(() => import('../views/dashboard/Dashboard'))
 const List = React.lazy(() => import('../views/list/List'))
-const Login = React.lazy(() => import('../views/login/Login'))
+
+function RequireAuth({ children }) {
+  const location = useLocation()
+  const isAuthentication = useSelector(
+    (state) => state.user.userInfo.isAuthentication
+  )
+  if (!isAuthentication) {
+    return <Navigate to="/login" state={{ from: location }} replace />
+  }
+  return children
+}
 
 export const routers = [
   {
@@ -35,20 +36,11 @@ export const routers = [
     path: '/main',
     icon: <AppstoreOutlined />,
     element: (
-      <React.Suspense fallback={<Loader />}>
-        <Home />
-      </React.Suspense>
-    )
-  },
-  {
-    label: <Link to="/login">Login</Link>,
-    key: 'login',
-    path: '/login',
-    icon: <MailOutlined />,
-    element: (
-      <React.Suspense fallback={<Loader />}>
-        <Login />
-      </React.Suspense>
+      <RequireAuth>
+        <React.Suspense fallback={<Loader />}>
+          <Home />
+        </React.Suspense>
+      </RequireAuth>
     )
   },
   {
@@ -65,9 +57,11 @@ export const routers = [
             key: 'about',
             path: '/about',
             element: (
-              <React.Suspense fallback={<>...</>}>
-                <About name="Ken" />
-              </React.Suspense>
+              <RequireAuth>
+                <React.Suspense fallback={<>...</>}>
+                  <About name="Ken" />
+                </React.Suspense>
+              </RequireAuth>
             )
           }
         ]
@@ -81,9 +75,11 @@ export const routers = [
             key: 'dashboard',
             path: '/dashboard',
             element: (
-              <React.Suspense fallback={<>...</>}>
-                <Dashboard />
-              </React.Suspense>
+              <RequireAuth>
+                <React.Suspense fallback={<>...</>}>
+                  <Dashboard />
+                </React.Suspense>
+              </RequireAuth>
             )
           },
           {
@@ -91,9 +87,11 @@ export const routers = [
             key: 'list',
             path: '/list',
             element: (
-              <React.Suspense fallback={<>...</>}>
-                <List params={{ meta: { id: 1, name: 'ken' } }} />
-              </React.Suspense>
+              <RequireAuth>
+                <React.Suspense fallback={<>...</>}>
+                  <List params={{ meta: { id: 1, name: 'ken' } }} />
+                </React.Suspense>
+              </RequireAuth>
             )
           }
         ]

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { userResponseFactory } from '../../api/factory/user_factory'
-import { authUser, userAccount } from '../actions/user_action'
+import { authUser, userAccount, staticPublic } from '../actions/user_action'
 import { setToken, getToken, removeToken } from '../../utils/storage'
 
 const userSlice = createSlice({
@@ -11,9 +11,26 @@ const userSlice = createSlice({
       accessToken: getToken() || null,
       isAuthentication: sessionStorage.isAuthentication || false
     },
-    userAccount: JSON.parse(sessionStorage.user || null) || {}
+    userAccount: JSON.parse(sessionStorage.user || null) || {},
+    portalPublic: JSON.parse(sessionStorage.portalPublic || null) || {
+      login: {
+        lin_bg_basic_yn: 'Y',
+        lin_bg_file_id: null,
+        lin_bg_file_nm: null,
+        lin_bg_stor_path: null
+      },
+      portal: {
+        ptal_bg_basic_yn: 'Y',
+        ptal_bg_file_id: null,
+        ptal_bg_file_nm: null,
+        ptal_bg_stor_path: null
+      }
+    }
   },
   reducers: {
+    SET_META: (state, action) => {
+      state.portalPublic = action.payload
+    },
     SET_TOKEN: (state, action) => {
       state.userInfo.accessToken = action.payload
       setToken(action.payload)
@@ -26,6 +43,31 @@ const userSlice = createSlice({
     }
   },
   extraReducers: {
+    [staticPublic.fulfilled]: (state, { payload }) => {
+      state.portalPublic.portal = {
+        ptal_bg_basic_yn: payload.ptal_bg_basic_yn,
+        ptal_bg_file_id: payload.ptal_bg_file_id,
+        ptal_bg_file_nm: payload.ptal_bg_file_nm,
+        ptal_bg_stor_path: payload.ptal_bg_stor_path
+      }
+      state.portalPublic.login = {
+        lin_bg_basic_yn: payload.lin_bg_basic_yn,
+        lin_bg_file_id: payload.lin_bg_file_id,
+        lin_bg_file_nm: payload.lin_bg_file_nm,
+        lin_bg_stor_path: payload.lin_bg_stor_path
+      }
+      // sessionStorage.portalPublic = JSON.stringify(state.portalPublic)
+    },
+    [staticPublic.rejected]: (state, actions) => {
+      console.log('staticPublic rejected', actions)
+      state.portalPublic.login = {
+        lin_bg_basic_yn: 'Y',
+        lin_bg_file_id: null,
+        lin_bg_file_nm: null,
+        lin_bg_stor_path: null
+      }
+    },
+    //* ---
     [authUser.pending]: (state) => {
       state.userInfo.isAuthentication = false
       state.userInfo.accessToken = null
@@ -41,6 +83,7 @@ const userSlice = createSlice({
       console.log('authUser rejected', actions)
       state.userInfo.isAuthentication = false
     },
+    //* ---
     [userAccount.pending]: (state) => {
       state.userAccount = null
     },
@@ -61,5 +104,5 @@ const userSlice = createSlice({
   }
 })
 
-export const { SET_TOKEN, SET_LOGOUT } = userSlice.actions
+export const { SET_META, SET_TOKEN, SET_LOGOUT } = userSlice.actions
 export default userSlice.reducer

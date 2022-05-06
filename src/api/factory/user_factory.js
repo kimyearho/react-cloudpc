@@ -34,3 +34,20 @@ export const userResponseFactory = (data) => {
     cert_plcy_nm: data.cert_plcy_nm
   }
 }
+
+export const userPublicMeta = (payload) => {
+  return {
+    login: {
+      lin_bg_basic_yn: payload.lin_bg_basic_yn,
+      lin_bg_file_id: payload.lin_bg_file_id,
+      lin_bg_file_nm: payload.lin_bg_file_nm,
+      lin_bg_stor_path: payload.lin_bg_stor_path
+    },
+    portal: {
+      ptal_bg_basic_yn: payload.ptal_bg_basic_yn,
+      ptal_bg_file_id: payload.ptal_bg_file_id,
+      ptal_bg_file_nm: payload.ptal_bg_file_nm,
+      ptal_bg_stor_path: payload.ptal_bg_stor_path
+    }
+  }
+}

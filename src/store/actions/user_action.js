@@ -5,7 +5,7 @@ export const staticPublic = createAsyncThunk(
   'user/staticPublic',
   async (payload, thunkAPI) => {
     try {
-      return await call_public()
+      return await call_public(payload)
     } catch (error) {
       return thunkAPI.rejectWithValue([], error)
     }

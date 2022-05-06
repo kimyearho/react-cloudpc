@@ -5,9 +5,9 @@ import { userRequesteFactory } from './factory/user_factory'
  * @description 사용자 포털 정적 데이터를 조회한다.
  * 주 용도는 포털 로고, 배경 이미지와 같은 이미지 정보를 가진다.
  */
-export const call_public = async () => {
+export const call_public = async (params) => {
   const { data } = await request.get(
-    '/v1/nauth/system/portals/ui/AAA/public/user'
+    '/v1/nauth/system/portals/ui/AAA/public/' + params
   )
   return data
 }

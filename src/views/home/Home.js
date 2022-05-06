@@ -1,15 +1,27 @@
 import React from 'react'
+import logo from '../../assets/images/react_logo.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement, resetCounter } from '../../store/modules/counter'
-
-import logo from '../../assets/images/react_logo.jpg'
-import { Button, Typography, Row } from 'antd'
-import { PlusOutlined, MinusOutlined, RedoOutlined } from '@ant-design/icons'
+import { Button, Typography, Row, Popconfirm } from 'antd'
+import { SET_LOGOUT } from '../../store/modules/user'
+import { useNavigate } from 'react-router-dom'
+import {
+  PlusOutlined,
+  MinusOutlined,
+  RedoOutlined,
+  DisconnectOutlined
+} from '@ant-design/icons'
 const { Text } = Typography
 
 function Home() {
   const count = useSelector((state) => state.counter.value)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const confirm = async () => {
+    await dispatch(SET_LOGOUT())
+    navigate('/login', { replace: true })
+  }
 
   return (
     <>
@@ -46,6 +58,21 @@ function Home() {
         >
           초기화
         </Button>
+        <Popconfirm
+          title="로그아웃 하시겠습니까?"
+          onConfirm={confirm}
+          okText="Yes"
+          cancelText="No"
+        >
+          <Button
+            style={{ marginLeft: '20px' }}
+            type="primary"
+            key="console"
+            icon={<DisconnectOutlined />}
+          >
+            Logout
+          </Button>
+        </Popconfirm>
       </Row>
     </>
   )
