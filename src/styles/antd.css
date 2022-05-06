@@ -26,14 +26,18 @@
 
 .site-layout-content {
   min-height: calc(100vh - 180px);
-  /* padding: 24px; */
-  padding: 0 50px;
+  padding: 24px;
   background: rgb(237 236 236);
   border: 1px solid rgb(221 221 221 / 63%);
   border-top: 0;
 }
 
-.root-content {
+.auth-content {
+  padding: 0 50px;
+  min-height: calc(100vh - 180px);
+}
+
+.not-auth-content {
   min-height: calc(100vh - 180px);
 }
 

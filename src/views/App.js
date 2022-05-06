@@ -99,11 +99,13 @@ function App() {
     )
   }
 
+  const contentsStyle = isAuthentication ? 'auth-content' : 'not-auth-conten'
+
   return (
     <>
       <Layout className="layout">
         {isAuthentication && <AppHeader />}
-        <Content className="root-content">
+        <Content className={contentsStyle}>
           <AppBody />
         </Content>
         {isAuthentication && <Footer>Yeonho React Example @2022 by ken</Footer>}
