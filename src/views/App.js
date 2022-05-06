@@ -90,11 +90,9 @@ function App() {
     const layoutStyle = isAuthentication ? 'site-layout-content' : 'ant-login'
     return (
       <>
-        <Row className={layoutStyle} style={loginImage()}>
-          <Col span={24}>
-            <AppContents />
-          </Col>
-        </Row>
+        <div className="ant-pro-grid-content wide">
+          <AppContents className={layoutStyle} style={loginImage()} />
+        </div>
       </>
     )
   }

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { routers } from '../../router/router'
-import { Row, Col, Menu } from 'antd'
+import { Menu, Space, Avatar } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
+import logo from '../../assets/images/skb_logo.png'
 
 function MenuNavigation() {
   const location = useLocation()
@@ -18,16 +20,33 @@ function MenuNavigation() {
 
   return (
     <>
-      <Row>
-        <Col span={24}>
-          <Menu
-            mode="horizontal"
-            selectedKeys={[currentKey]}
-            items={routers}
-            onClick={onCurrentKey}
-          />
-        </Col>
-      </Row>
+      <div className="ant-pro-top-nav-header light">
+        <div className="ant-pro-top-nav-header-main wide">
+          <div className="ant-pro-top-nav-header-main-left">
+            <div className="ant-pro-top-nav-header-logo">
+              <img src={logo} alt="logo" />
+            </div>
+          </div>
+          <div className="ant-pro-top-nav-header-menu">
+            <Menu
+              mode="horizontal"
+              selectedKeys={[currentKey]}
+              items={routers}
+              onClick={onCurrentKey}
+            />
+          </div>
+          <div className="ant-pro-right-content ant-space-right">
+            <div className="ant-pro-right-content-resize">
+              <Space size={'middle'}>
+                <Avatar
+                  style={{ backgroundColor: '#87d068' }}
+                  icon={<UserOutlined />}
+                />
+              </Space>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
