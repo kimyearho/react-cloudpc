@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Checkbox, Col, Card, Input, Form, Row, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { authUser, userAccount } from '../../store/actions/user_action'
+import { SET_LOADING } from '../../store/modules/app'
 import { useNavigate } from 'react-router-dom'
 import _ from 'lodash'
 
@@ -40,8 +41,12 @@ function Login() {
           }
           const { meta } = await dispatch(userAccount(params))
           if (meta.requestStatus === 'fulfilled') {
-            navigate('/main', { replace: true })
-            message.info('Success is Login !')
+            dispatch(SET_LOADING(true))
+            setTimeout(() => {
+              dispatch(SET_LOADING(false))
+              navigate('/main', { replace: true })
+              message.info('Success is Login !')
+            }, 500)
           }
         }
       }

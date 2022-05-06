@@ -7,7 +7,9 @@ import { SET_LOADING } from '../../store/modules/app'
 import { Menu, Space, Avatar, Popover, Divider, Button, Row, Col } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { userInfoFactory } from '../../api/factory/user_factory'
+import Icon from '@ant-design/icons'
 import logo from '../../assets/images/skb_logo.png'
+import ko from '../../assets/images/ko.png'
 
 function MenuNavigation() {
   const dispatch = useDispatch()
@@ -107,6 +109,13 @@ function MenuNavigation() {
                     icon={<UserOutlined />}
                   />
                 </Popover>
+                <Button ghost>
+                  <Icon
+                    style={{ verticalAlign: 'text-bottom' }}
+                    component={() => <img src={ko} alt="language" />}
+                  />
+                  한국어
+                </Button>
               </Space>
             </div>
           </div>

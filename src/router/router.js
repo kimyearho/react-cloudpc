@@ -2,7 +2,11 @@ import React, { Suspense } from 'react'
 import Loader from '../utils/loader'
 import { useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
-import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons'
+import {
+  WindowsOutlined,
+  CodepenOutlined,
+  CodeSandboxOutlined
+} from '@ant-design/icons'
 
 //* 지연 로딩을 해야한다면 아래 솔루션을 사용한다.
 // const Login = React.lazy(async () => {
@@ -30,10 +34,10 @@ function RequireAuth({ children }) {
 
 export const routers = [
   {
-    label: <Link to="/main">Main</Link>,
+    label: <Link to="/main">Home</Link>,
     key: 'main',
     path: '/main',
-    icon: <AppstoreOutlined />,
+    icon: <WindowsOutlined />,
     meta: null,
     element: (
       <RequireAuth>
@@ -44,16 +48,30 @@ export const routers = [
     )
   },
   {
-    label: 'Submenu',
+    label: <Link to="/cloudPcInfo">Cloud PC 정보</Link>,
+    key: 'cloudPcInfo',
+    path: '/cloudPcInfo',
+    icon: <CodeSandboxOutlined />,
+    meta: null,
+    element: (
+      <RequireAuth>
+        <Suspense fallback={<Loader />}>
+          <></>
+        </Suspense>
+      </RequireAuth>
+    )
+  },
+  {
+    label: 'Cloud PC 관리',
     key: 'submenu',
-    icon: <SettingOutlined />,
+    icon: <CodepenOutlined />,
     children: [
       {
         type: 'group',
         label: 'User',
         children: [
           {
-            label: <Link to="/about">About</Link>,
+            label: <Link to="/about">자가 오류 복구</Link>,
             key: 'about',
             path: '/about',
             element: (
@@ -71,7 +89,7 @@ export const routers = [
         label: 'Example',
         children: [
           {
-            label: <Link to="/dashboard">Dashboard</Link>,
+            label: <Link to="/dashboard">장애 처리 신청</Link>,
             key: 'dashboard',
             path: '/dashboard',
             element: (
@@ -83,7 +101,7 @@ export const routers = [
             )
           },
           {
-            label: <Link to="/list">List</Link>,
+            label: <Link to="/list">스냅샷 및 복원</Link>,
             key: 'list',
             path: '/list',
             element: (
