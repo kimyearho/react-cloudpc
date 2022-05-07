@@ -1,4 +1,11 @@
 /* Override */
+body {
+  margin: 0;
+  font-family: "NanumGothic", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 #root {
   height: 100%;
 }
@@ -246,8 +253,9 @@
 }
 
 .control-collapse > .ant-collapse-item > .ant-collapse-header {
+  background: #001b34;
   color: hsla(0, 0%, 100%, 0.65);
-  background: #001529;
+  padding: 12px 16px;
 }
 
 .control-collapse > .ant-collapse-item > .ant-collapse-header > .ant-collapse-header-text {
@@ -259,7 +267,7 @@
 }
 
 .control-panel > .ant-collapse-content {
-  border-top: 1px solid rgb(0 0 0 / 85%);
+  border-top: 1px solid #001b34;
 }
 
 .control-panel > .ant-collapse-content > .ant-collapse-content-box {
@@ -268,6 +276,7 @@
 
 .control-menu > .ant-menu-item > .ant-menu-item-icon {
   font-size: 25px;
+  color: #ffffff;
 }
 .control-menu > .ant-menu-item {
   font-size: 17px;
@@ -309,14 +318,14 @@
 }
 
 .os {
-  margin-left: 54px;
+  margin-left: 42px;
   margin-top: 8px;
 }
 
 .os > span {
   border: 1px solid #7ec1ff;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 16px;
   font-weight: 700;
   color: #1890ff;
@@ -325,16 +334,20 @@
 .control-content-divider {
   height: 90%;
   margin-left: 25px;
-  margin-top: 15px;
+  margin-top: 23px;
   background: #f5f5f5;
 }
 
 .control-pc-status {
-  margin: 40px;
+  margin: 35px 40px;
 }
 
 .control-pc-status > .shotcut-divider {
   background: #f5f5f5;
+}
+
+.control-pc-status .fr {
+  font-weight: 700;
 }
 
 .control-pc-usage {

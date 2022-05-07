@@ -135,7 +135,10 @@ function Home() {
                                 </Col>
                               </Row>
                               <Row className="control-pc-useage-progress">
-                                <Col span={24} style={{ padding: '20px 20px' }}>
+                                <Col
+                                  span={24}
+                                  style={{ padding: '15px 20px 15px 10px' }}
+                                >
                                   <Row gutter={20}>
                                     <Col span={6}>
                                       <span>
