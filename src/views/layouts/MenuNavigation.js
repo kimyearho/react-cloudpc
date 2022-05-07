@@ -8,7 +8,7 @@ import { Menu, Space, Avatar, Popover, Divider, Button, Row, Col } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { userInfoFactory } from '../../api/factory/user_factory'
 import Icon from '@ant-design/icons'
-import logo from '../../assets/images/skb_logo.png'
+import logo from '../../assets/images/img_logo.png'
 import ko from '../../assets/images/ko.png'
 
 function MenuNavigation() {

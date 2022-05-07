@@ -3,6 +3,10 @@
   height: 100%;
 }
 
+.width-100 {
+  width: 100% !important;
+}
+
 .ant-layout {
   height: 100%;
 }
@@ -78,7 +82,7 @@
 
 .ant-pro-top-nav-header.light {
   background: linear-gradient(to right, #145bab, #32a4df);
-  box-shadow: 0px 0px 19px #585858;
+  box-shadow: 0px 0px 10px rgb(0 0 0 / 45%);
 }
 
 .ant-pro-top-nav-header {
@@ -214,4 +218,157 @@
 
 .ant-popover-inner {
   background-color: #314b68;
+}
+
+.vm-number {
+  border: 1px solid #096dd9;
+  color: #096dd9;
+  font-weight: 700;
+  width: 29px;
+  text-align: center;
+  padding: 0 6px;
+}
+
+.vm-prefix > span,
+.vm-name > span {
+  color: hsla(0, 0%, 100%, 0.65);
+  vertical-align: middle;
+}
+
+.control-wrapper {
+  width: 870px !important;
+  margin-top: 130px !important;
+}
+
+.control-collapse {
+  border: inherit;
+  background: inherit;
+}
+
+.control-collapse > .ant-collapse-item > .ant-collapse-header {
+  color: hsla(0, 0%, 100%, 0.65);
+  background: #001529;
+}
+
+.control-collapse > .ant-collapse-item > .ant-collapse-header > .ant-collapse-header-text {
+  width: 100%;
+}
+
+.control-panel {
+  border-bottom: inherit !important;
+}
+
+.control-panel > .ant-collapse-content {
+  border-top: 1px solid rgb(0 0 0 / 85%);
+}
+
+.control-panel > .ant-collapse-content > .ant-collapse-content-box {
+  padding: 0;
+}
+
+.control-menu > .ant-menu-item > .ant-menu-item-icon {
+  font-size: 25px;
+}
+.control-menu > .ant-menu-item {
+  font-size: 17px;
+  border-bottom: 2px solid rgb(0 0 0 / 32%);
+}
+.control-menu > .ant-menu-item:nth-child(1),
+.control-menu > .ant-menu-item:nth-child(2) {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 34px !important;
+  height: 90px;
+}
+
+.control-menu > .ant-menu-item:nth-child(1) > .ant-menu-title-content,
+.control-menu > .ant-menu-item:nth-child(2) > .ant-menu-title-content {
+  padding-left: 18px;
+}
+
+.control-menu > .ant-menu-item:nth-child(3) {
+  margin-top: 0;
+  margin-bottom: 0;
+  border-bottom: 0;
+  padding-left: 22px !important;
+  height: 150px;
+}
+
+.control-content > .ant-card-head {
+  background: #292e35fa;
+  border-radius: 0;
+  color: #fff;
+}
+
+.control-content > .ant-card-body {
+  padding: 10px 0;
+}
+
+.monitor {
+  padding: 20px 40px;
+}
+
+.os {
+  margin-left: 54px;
+  margin-top: 8px;
+}
+
+.os > span {
+  border: 1px solid #7ec1ff;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1890ff;
+}
+
+.control-content-divider {
+  height: 90%;
+  margin-left: 25px;
+  margin-top: 15px;
+  background: #f5f5f5;
+}
+
+.control-pc-status {
+  margin: 40px;
+}
+
+.control-pc-status > .shotcut-divider {
+  background: #f5f5f5;
+}
+
+.control-pc-usage {
+  margin: -10px 40px;
+}
+
+.control-pc-useage-progress {
+  margin: 20px 40px 0px 40px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.control-pc-useage-progress .ant-row:nth-child(1) {
+  padding-bottom: 3px;
+}
+.control-pc-useage-progress .ant-row:nth-child(2) {
+  padding: 3px 0px;
+}
+.control-pc-useage-progress .ant-row:nth-child(2) {
+  padding-top: 3px;
+}
+
+.control-pc-useage-progress span {
+  font-weight: 700;
+}
+
+.control-pc-useage-progress span > small {
+  color: #8b8b8b;
+}
+
+.useage-progress {
+  margin-left: 5px;
+}
+
+.fr {
+  float: right;
 }
