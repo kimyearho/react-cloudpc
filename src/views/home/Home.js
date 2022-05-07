@@ -1,26 +1,36 @@
-import React from 'react'
-import vmicon from '../../assets/images/vm_on.png'
-import winPc from '../../assets/images/img_win_pc_on.png'
-import { useSelector, useDispatch } from 'react-redux'
-import {
-  Typography,
-  Row,
-  Col,
-  Card,
-  Collapse,
-  Space,
-  Menu,
-  Divider,
-  Progress
-} from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Typography, Row, Col, Collapse, Space, Menu } from 'antd'
 import { DesktopOutlined } from '@ant-design/icons'
+import { call_resource, call_imageInfo } from '../../api/resource'
 import Icon from '@ant-design/icons'
+import vmicon from '../../assets/images/vm_on.png'
+import ControlContent from './ControlContent'
 
 const { Text } = Typography
 const { Panel } = Collapse
 
 function Home() {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
+  const [resource, setResource] = useState([])
+  const [defaultKey, setDefaultKey] = useState('')
+
+  useEffect(() => {
+    //* 전체 리소스 조회
+    call_resource().then((resource) => {
+      if (resource.length > 0) {
+        const vm_auth_id = resource[0].vm_auth_id
+        const img_id = resource[0].img_id
+        //* Collapse 기본 키
+        setDefaultKey(vm_auth_id)
+        //* 이미지 아이디로 이미지 조회
+        call_imageInfo(img_id).then((data) => {
+          //* 소프트웨어 명을 리소스 정보에 추가한다.
+          resource[0].sw_nm = data.img_sw_l[0].sw_nm
+          setResource(resource)
+        })
+      }
+    })
+  }, [])
 
   const menuItems = [
     {
@@ -45,7 +55,7 @@ function Home() {
     }
   ]
 
-  const customHeader = () => {
+  const customHeader = ({ vm_als, vm_nm }) => {
     return (
       <>
         <Row>
@@ -54,17 +64,22 @@ function Home() {
           </Col>
           <Col span={16}>
             <span className="vm-prefix">
-              <Text>별칭 변경</Text>
+              <Text>{vm_als}</Text>
             </span>
           </Col>
           <Col span={6}>
             <span className="vm-name">
-              <Text>WD00-OEE-739023</Text>
+              <Text>{vm_nm}</Text>
             </span>
           </Col>
         </Row>
       </>
     )
+  }
+
+  const onChnageUserResource = (key) => {
+    console.log(key)
+    // setDefaultKey(key)
   }
 
   return (
@@ -74,128 +89,35 @@ function Home() {
           <Space className="width-100" direction="vertical">
             <Collapse
               className="control-collapse"
+              accordion={true}
               collapsible="header"
               expandIconPosition="right"
-              defaultActiveKey={['1']}
+              activeKey={[defaultKey]}
+              onChange={onChnageUserResource}
             >
-              <Panel className="control-panel" header={customHeader()} key="1">
-                <Row>
-                  <Col span={6}>
-                    <Menu
-                      className="control-menu"
-                      mode="inline"
-                      theme="dark"
-                      items={menuItems}
-                      selectable={false}
-                    />
-                  </Col>
-                  <Col span={18}>
-                    <Row>
-                      <Col span={24}>
-                        <Card
-                          className="control-content"
-                          title="Cloud PC 상세 정보"
-                          bordered={false}
-                        >
-                          <Row>
-                            <Col span={9}>
-                              <div className="monitor">
-                                <img width={180} src={winPc} alt="monitor" />
-                              </div>
-                              <div className="os">
-                                <span>Windows 10 Enter</span>
-                              </div>
-                            </Col>
-                            <Col span={1}>
-                              <Divider
-                                type="vertical"
-                                className="control-content-divider"
-                              />
-                            </Col>
-                            <Col span={14}>
-                              <Row className="control-pc-status">
-                                <Col span={4}>PC 상태</Col>
-                                <Col span={2}>
-                                  <Divider
-                                    className="shotcut-divider"
-                                    type="vertical"
-                                  />
-                                </Col>
-                                <Col span={18}>
-                                  <span className="fr">사용 가능</span>
-                                </Col>
-                              </Row>
-                              <Row className="control-pc-usage">
-                                <Col span={4}>PC 사용</Col>
-                                <Col span={2}>
-                                  <Divider
-                                    className="shotcut-divider"
-                                    type="vertical"
-                                  />
-                                </Col>
-                              </Row>
-                              <Row className="control-pc-useage-progress">
-                                <Col
-                                  span={24}
-                                  style={{ padding: '15px 20px 15px 10px' }}
-                                >
-                                  <Row gutter={20}>
-                                    <Col span={6}>
-                                      <span>
-                                        CPU&nbsp;<small>(4core)</small>
-                                      </span>
-                                    </Col>
-                                    <Col span={18}>
-                                      <Progress
-                                        className="useage-progress"
-                                        strokeColor="#ed6d6d"
-                                        percent={70}
-                                        size="small"
-                                        status="active"
-                                      />
-                                    </Col>
-                                  </Row>
-                                  <Row gutter={20}>
-                                    <Col span={6}>
-                                      <span>
-                                        MEM&nbsp;<small>(8GB)</small>
-                                      </span>
-                                    </Col>
-                                    <Col span={18}>
-                                      <Progress
-                                        className="useage-progress"
-                                        strokeColor="#edd118"
-                                        percent={52}
-                                        size="small"
-                                        status="active"
-                                      />
-                                    </Col>
-                                  </Row>
-                                  <Row gutter={20}>
-                                    <Col span={6}>
-                                      <span>
-                                        HDD&nbsp;<small>(50GB)</small>
-                                      </span>
-                                    </Col>
-                                    <Col span={18}>
-                                      <Progress
-                                        className="useage-progress"
-                                        percent={25}
-                                        size="small"
-                                        status="active"
-                                      />
-                                    </Col>
-                                  </Row>
-                                </Col>
-                              </Row>
-                            </Col>
-                          </Row>
-                        </Card>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </Panel>
+              {resource.map((item) => (
+                <Panel
+                  // forceRender={true}
+                  className="control-panel"
+                  header={customHeader(item)}
+                  key={item.vm_auth_id}
+                >
+                  <Row>
+                    <Col span={6}>
+                      <Menu
+                        className="control-menu"
+                        mode="inline"
+                        theme="dark"
+                        items={menuItems}
+                        selectable={false}
+                      />
+                    </Col>
+                    <Col span={18}>
+                      <ControlContent {...item} />
+                    </Col>
+                  </Row>
+                </Panel>
+              ))}
             </Collapse>
           </Space>
         </Col>

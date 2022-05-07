@@ -9,7 +9,7 @@ const service = axios.create({
 
 //* HTTP 요청 인터셉터
 service.interceptors.request.use((config) => {
-  config.headers['X-CloudPC-Request-Poc'] = 'POCADMIN'
+  config.headers['X-CloudPC-Request-Poc'] = 'POCUSER'
   config.headers['X-CloudPC-Request-ID'] = uuid()
   config.headers['Accept-Language'] = 'ko'
   if (getToken) {

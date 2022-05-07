@@ -62,7 +62,7 @@ function Login() {
               name="normal_login"
               className="login-form"
               initialValues={{
-                username: 'yeonho87',
+                username: 'kimyearho',
                 password: '1851617kK@',
                 remember: true
               }}

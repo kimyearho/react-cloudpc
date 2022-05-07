@@ -7,7 +7,7 @@ export const userRequesteFactory = (data) => {
   return {
     acct_conn_id: data.username,
     passwd: data.password,
-    usr_ptal_conn_uri: 'AAA'
+    usr_ptal_conn_uri: 'BBB'
   }
 }
 

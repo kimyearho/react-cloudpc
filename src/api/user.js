@@ -7,7 +7,7 @@ import { userRequesteFactory } from './factory/user_factory'
  */
 export const call_public = async (params) => {
   const { data } = await request.get(
-    '/v1/nauth/system/portals/ui/AAA/public/' + params
+    '/v1/nauth/system/portals/ui/BBB/public/' + params
   )
   return data
 }
