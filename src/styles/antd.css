@@ -121,6 +121,7 @@ body {
 .ant-pro-top-nav-header-menu {
   min-width: 0;
   margin-left: 50px;
+  font-weight: 700;
 }
 
 .ant-menu-horizontal {
@@ -244,7 +245,7 @@ body {
 
 .control-wrapper {
   width: 870px !important;
-  margin-top: 130px !important;
+  margin-top: 90px !important;
 }
 
 .control-collapse {
@@ -263,6 +264,7 @@ body {
 }
 
 .control-panel {
+  margin-top: 10px;
   border-bottom: inherit !important;
 }
 

@@ -8,3 +8,7 @@ export function uuid() {
     ).toString(16)
   )
 }
+
+export function percent(a, b) {
+  return Math.floor((Number(a) / Number(b)) * 100)
+}
