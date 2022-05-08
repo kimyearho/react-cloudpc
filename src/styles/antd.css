@@ -240,7 +240,12 @@ body {
 .vm-prefix > span,
 .vm-name > span {
   color: hsla(0, 0%, 100%, 0.65);
-  vertical-align: middle;
+  /* vertical-align: middle; */
+}
+
+.vm-name {
+  float: right;
+  margin-right: 30px;
 }
 
 .control-wrapper {

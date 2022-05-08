@@ -30,7 +30,7 @@ const ControlContent = ({
           bordered={false}
           extra={
             <Button type="link" size="small" onClick={onPrefixChange}>
-              별칭 변경 ({vm_auth_id})
+              별칭 변경
             </Button>
           }
         >
