@@ -13,10 +13,10 @@ const ControlContent = ({
   vmm_capa,
   cpu_usage,
   disk_used_per,
-  mem_used_per
+  mem_used_per,
+  loading,
+  onClick
 }) => {
-  function onPrefixChange() {}
-
   useCallback(() => {
     console.log('ControlContent', vm_auth_id)
   }, [vm_auth_id])
@@ -29,7 +29,7 @@ const ControlContent = ({
           title="Cloud PC 상세 정보"
           bordered={false}
           extra={
-            <Button type="link" size="small" onClick={onPrefixChange}>
+            <Button type="link" size="small" onClick={onClick}>
               별칭 변경
             </Button>
           }

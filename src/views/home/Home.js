@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { Typography, Row, Col, Collapse, Space, Menu } from 'antd'
+import { Row, Col, Collapse, Space, Menu } from 'antd'
 import { DesktopOutlined } from '@ant-design/icons'
 import { userResourceFactory } from '../../api/factory/resource_factory'
 import {
@@ -10,10 +11,11 @@ import {
 } from '../../api/resource'
 import Icon from '@ant-design/icons'
 import vmicon from '../../assets/images/vm_on.png'
+import CustomHeader from './CustomHeader'
 import ControlContent from './ControlContent'
+
 import _ from 'lodash'
 
-const { Text } = Typography
 const { Panel } = Collapse
 
 function Home() {
@@ -48,16 +50,16 @@ function Home() {
    */
   async function fetchResource(key) {
     try {
-      //* 1. 선택한 VM 조회
-      const userResourceData = await call_userResource(key)
-      //* 2. VM의 이미지 아이디로 이미지 정보 조회
-      const resourceImageData = await call_imageInfo(userResourceData.img_id)
-      //* 3. 이미지내 소프트 웨어 이름을 1번에서 조회했던 VM데이터에 추가한다.
-      userResourceData.sw_nm = resourceImageData.img_sw_l[0].sw_nm
-      //* 4. 사용자 VM 상태 갱신
-      await fetchUsageResource(userResourceData, key)
-      //* 5. 활성키 상태 갱신
+      //* 1. 활성키 상태 갱신
       setActiveKey(key)
+      //* 2. 선택한 VM 조회
+      const userResourceData = await call_userResource(key)
+      //* 3. VM의 이미지 아이디로 이미지 정보 조회
+      const resourceImageData = await call_imageInfo(userResourceData.img_id)
+      //* 4. 이미지내 소프트 웨어 이름을 1번에서 조회했던 VM데이터에 추가한다.
+      userResourceData.sw_nm = resourceImageData.img_sw_l[0].sw_nm
+      //* 5. 사용자 VM 상태 갱신
+      await fetchUsageResource(userResourceData, key)
     } catch (error) {
       console.error(error)
     }
@@ -77,6 +79,10 @@ function Home() {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  const onPrefixChange = (e) => {
+    console.log(e)
   }
 
   const menuItems = [
@@ -102,28 +108,6 @@ function Home() {
     }
   ]
 
-  const customHeader = ({ vm_als, vm_nm }, index) => {
-    return (
-      <>
-        <Row>
-          <Col span={2}>
-            <div className="vm-number">{index + 1}</div>
-          </Col>
-          <Col span={16}>
-            <span className="vm-prefix">
-              <Text>{!vm_als ? '─' : vm_als}</Text>
-            </span>
-          </Col>
-          <Col span={6}>
-            <span className="vm-name">
-              <Text>{vm_nm}</Text>
-            </span>
-          </Col>
-        </Row>
-      </>
-    )
-  }
-
   const onChnageUserResource = async (key) => {
     if (key === activeKey) return
     if (!key) return
@@ -135,7 +119,7 @@ function Home() {
   return (
     <>
       <Row className="control-wrapper">
-        <Col offset={3} span={24}>
+        <Col span={24} style={{ marginLeft: '14.3%' }}>
           <Space className="width-100" direction="vertical">
             <Collapse
               className="control-collapse"
@@ -149,7 +133,7 @@ function Home() {
               {resource.map((item, index) => (
                 <Panel
                   className="control-panel"
-                  header={customHeader(item, index)}
+                  header={<CustomHeader index={index} {...item} />}
                   key={item.vm_auth_id}
                 >
                   <Row>
@@ -164,7 +148,11 @@ function Home() {
                     </Col>
                     <Col span={18}>
                       {userResource !== null && (
-                        <ControlContent key={item.vm_nm} {...userResource} />
+                        <ControlContent
+                          key={item.vm_nm}
+                          onClick={onPrefixChange}
+                          {...userResource}
+                        />
                       )}
                     </Col>
                   </Row>
