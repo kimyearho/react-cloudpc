@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Collapse, Space, Menu } from 'antd'
+import { Row, Col, Collapse, Space, Menu, Button, Form } from 'antd'
 import { DesktopOutlined } from '@ant-design/icons'
 import { userResourceFactory } from '../../api/factory/resource_factory'
 import {
@@ -13,6 +13,7 @@ import Icon from '@ant-design/icons'
 import vmicon from '../../assets/images/vm_on.png'
 import CustomHeader from './CustomHeader'
 import ControlContent from './ControlContent'
+import AliasChangeModal from './AliasChangeModal'
 
 import _ from 'lodash'
 
@@ -23,6 +24,21 @@ function Home() {
   const [resource, setResource] = useState([])
   const [activeKey, setActiveKey] = useState('')
   const [userResource, setUserResource] = useState(null)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [alias, setAlias] = useState(null)
+
+  const [form] = Form.useForm()
+
+  const showModal = (data) => {
+    const modalData = {
+      vm_als: data.vm_als,
+      vm_auth_id: data.vm_auth_id,
+      vm_nm: data.vm_nm
+    }
+    console.log(modalData)
+    setAlias(modalData)
+    setIsModalVisible(true)
+  }
 
   useEffect(() => {
     async function fetchInit() {
@@ -81,10 +97,6 @@ function Home() {
     }
   }
 
-  const onPrefixChange = (e) => {
-    console.log(e)
-  }
-
   const menuItems = [
     {
       key: '1',
@@ -134,6 +146,19 @@ function Home() {
                 <Panel
                   className="control-panel"
                   header={<CustomHeader index={index} {...item} />}
+                  extra={
+                    <Row style={{ marginRight: '30px' }}>
+                      <Col>
+                        <Button
+                          type="link"
+                          size="small"
+                          onClick={() => showModal(item)}
+                        >
+                          <small>별칭 변경</small>
+                        </Button>
+                      </Col>
+                    </Row>
+                  }
                   key={item.vm_auth_id}
                 >
                   <Row>
@@ -148,11 +173,7 @@ function Home() {
                     </Col>
                     <Col span={18}>
                       {userResource !== null && (
-                        <ControlContent
-                          key={item.vm_nm}
-                          onClick={onPrefixChange}
-                          {...userResource}
-                        />
+                        <ControlContent key={item.vm_nm} {...userResource} />
                       )}
                     </Col>
                   </Row>
@@ -162,6 +183,13 @@ function Home() {
           </Space>
         </Col>
       </Row>
+      <AliasChangeModal
+        isModalVisible={isModalVisible}
+        handleOk={() => setIsModalVisible(false)}
+        handleCancel={() => setIsModalVisible(false)}
+        form={form}
+        {...alias}
+      />
     </>
   )
 }

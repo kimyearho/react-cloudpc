@@ -14,6 +14,7 @@
     "lodash": "^4.17.21",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-hook-form": "^7.30.0",
     "react-json-formatter": "^0.2.1",
     "react-redux": "^8.0.1",
     "react-router-dom": "6",

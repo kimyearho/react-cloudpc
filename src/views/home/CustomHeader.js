@@ -15,7 +15,9 @@ const customHeader = ({ vm_als, vm_nm, index }) => {
         </Col>
         <Col span={6}>
           <span className="vm-name">
-            <Text>{vm_nm}</Text>
+            <Text>
+              <small>{vm_nm}</small>
+            </Text>
           </span>
         </Col>
       </Row>

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { routers } from '../../router/router'
 import { SET_LOGOUT } from '../../store/modules/user'
-import { SET_LOADING } from '../../store/modules/app'
+// import { SET_LOADING } from '../../store/modules/app'
 import { Menu, Space, Avatar, Popover, Divider, Button, Row, Col } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { userInfoFactory } from '../../api/factory/user_factory'
@@ -14,7 +14,7 @@ import ko from '../../assets/images/ko.png'
 function MenuNavigation() {
   const dispatch = useDispatch()
   const location = useLocation()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [currentKey, setCurrentKey] = useState('main')
   const userInfo = useSelector((state) => state.user.userAccount)
@@ -36,12 +36,11 @@ function MenuNavigation() {
   }
 
   const confirm = async () => {
-    dispatch(SET_LOADING(true))
-    setTimeout(() => {
-      dispatch(SET_LOGOUT())
-      dispatch(SET_LOADING(false))
-      navigate('/login', { replace: true })
-    }, 1000)
+    // dispatch(SET_LOADING(true))
+    // setTimeout(() => {
+    dispatch(SET_LOGOUT())
+    // dispatch(SET_LOADING(false))
+    // }, 1000)
   }
 
   const content = (
@@ -70,7 +69,7 @@ function MenuNavigation() {
             size="small"
             ghost
             style={{ marginLeft: '15px', float: 'right' }}
-            onClick={() => confirm()}
+            onClick={confirm}
           >
             로그아웃
           </Button>

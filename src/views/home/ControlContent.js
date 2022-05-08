@@ -1,4 +1,4 @@
-import { Button, Row, Col, Card, Divider, Progress } from 'antd'
+import { Row, Col, Card, Divider, Progress } from 'antd'
 import { useCallback } from 'react'
 
 import winPc from '../../assets/images/img_win_pc_on.png'
@@ -28,11 +28,6 @@ const ControlContent = ({
           className="control-content"
           title="Cloud PC 상세 정보"
           bordered={false}
-          extra={
-            <Button type="link" size="small" onClick={onClick}>
-              별칭 변경
-            </Button>
-          }
         >
           <Row>
             <Col span={9}>
