@@ -14,12 +14,24 @@ body {
   width: 100% !important;
 }
 
+.width-100p {
+  width: 100px !important;
+}
+
+.mb-20p {
+  margin-bottom: 20px;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
 .ant-layout {
   height: 100%;
 }
 
 .ant-footer {
-  padding: 0 50px;
+  padding: 0 74px;
   margin: 0 auto;
   max-width: 400px;
   background: #0000;

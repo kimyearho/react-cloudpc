@@ -64,7 +64,8 @@ const ControlContent = ({
                   <Row gutter={20}>
                     <Col span={6}>
                       <span>
-                        CPU&nbsp;<small>({vcpu_cnt}core)</small>
+                        <span className="font-12">CPU</span>&nbsp;
+                        <small>({vcpu_cnt}core)</small>
                       </span>
                     </Col>
                     <Col span={18}>
@@ -80,7 +81,8 @@ const ControlContent = ({
                   <Row gutter={20}>
                     <Col span={6}>
                       <span>
-                        MEM&nbsp;<small>(8GB)</small>
+                        <span className="font-12">MEM</span>&nbsp;
+                        <small>(8GB)</small>
                       </span>
                     </Col>
                     <Col span={18}>
@@ -96,7 +98,8 @@ const ControlContent = ({
                   <Row gutter={20}>
                     <Col span={6}>
                       <span>
-                        HDD&nbsp;<small>({vhd_capa}GB)</small>
+                        <span className="font-12">HDD</span>&nbsp;
+                        <small>({vhd_capa}GB)</small>
                       </span>
                     </Col>
                     <Col span={18}>

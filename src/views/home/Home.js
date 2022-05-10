@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Collapse, Space, Menu, Button, Form } from 'antd'
+import { Row, Col, Collapse, Space, Menu, Button, message } from 'antd'
 import { DesktopOutlined } from '@ant-design/icons'
 import { userResourceFactory } from '../../api/factory/resource_factory'
 import {
   call_resource,
   call_userResource,
   call_imageInfo,
-  call_resourceUsage
+  call_resourceUsage,
+  call_updateVmAlias
 } from '../../api/resource'
 import Icon from '@ant-design/icons'
 import vmicon from '../../assets/images/vm_on.png'
@@ -27,34 +28,26 @@ function Home() {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [alias, setAlias] = useState(null)
 
-  const [form] = Form.useForm()
-
-  const showModal = (data) => {
-    const modalData = {
-      vm_als: data.vm_als,
-      vm_auth_id: data.vm_auth_id,
-      vm_nm: data.vm_nm
-    }
-    console.log(modalData)
-    setAlias(modalData)
-    setIsModalVisible(true)
-  }
-
   useEffect(() => {
-    async function fetchInit() {
-      //* 전체 리소스 조회
-      const resourceList = await call_resource()
-      if (resourceList.length > 0) {
-        //* 1. 전체 리소스 데이터 상태 저장
-        setResource(resourceList)
-        //* 2. 첫번째 리소스 데이터의 아이디값들 추출
-        const vm_auth_id = resourceList[0].vm_auth_id
-        //* 3. 리소스 업데이트
-        await fetchResource(vm_auth_id)
-      }
-    }
     fetchInit()
   }, [])
+
+  /**
+   * @@description
+   * mount시 useEffect에 의해 처음 한번만 실행한다.
+   */
+  async function fetchInit() {
+    //* 전체 리소스 조회
+    const resourceList = await call_resource()
+    if (resourceList.length > 0) {
+      //* 1. 전체 리소스 데이터 상태 저장
+      setResource(resourceList)
+      //* 2. 첫번째 리소스 데이터의 아이디값들 추출
+      const vm_auth_id = resourceList[0].vm_auth_id
+      //* 3. 리소스 업데이트
+      await fetchResource(vm_auth_id)
+    }
+  }
 
   /**
    * @description
@@ -97,6 +90,43 @@ function Home() {
     }
   }
 
+  /**
+   *
+   * @param {*} key
+   * @returns
+   */
+  const onChnageUserResource = async (key) => {
+    if (key === activeKey) return
+    if (!key) return
+    //* 리소스 업데이트
+    await fetchResource(key)
+  }
+
+  const showModal = (data) => {
+    const modalData = {
+      vm_als: data.vm_als,
+      vm_auth_id: data.vm_auth_id,
+      vm_nm: data.vm_nm
+    }
+    setAlias(modalData)
+    setIsModalVisible(true)
+  }
+
+  const parentModalCallback = async (data) => {
+    try {
+      const { status } = await call_updateVmAlias(data)
+      if (status === 200) {
+        const resourceList = await call_resource()
+        setResource(resourceList)
+        setAlias(null)
+        setIsModalVisible(false)
+        message.success('별칭이 변경 되었습니다.')
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const menuItems = [
     {
       key: '1',
@@ -119,14 +149,6 @@ function Home() {
       label: 'Cloud PC 전원'
     }
   ]
-
-  const onChnageUserResource = async (key) => {
-    if (key === activeKey) return
-    if (!key) return
-
-    //* 리소스 업데이트
-    await fetchResource(key)
-  }
 
   return (
     <>
@@ -183,13 +205,14 @@ function Home() {
           </Space>
         </Col>
       </Row>
-      <AliasChangeModal
-        isModalVisible={isModalVisible}
-        handleOk={() => setIsModalVisible(false)}
-        handleCancel={() => setIsModalVisible(false)}
-        form={form}
-        {...alias}
-      />
+      {isModalVisible ? (
+        <AliasChangeModal
+          isModalVisible={isModalVisible}
+          handleOk={parentModalCallback}
+          handleCancel={() => setIsModalVisible(false)}
+          {...alias}
+        />
+      ) : null}
     </>
   )
 }

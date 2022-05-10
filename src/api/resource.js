@@ -33,6 +33,7 @@ export const call_imageInfo = async (imageId) => {
 }
 
 /**
+ * 가상 PC 자원 사용률 정보를 조회한다.
  *
  * @authority User
  * @param {String} vmAuthId - 가상 PC 인증 아이디
@@ -42,4 +43,20 @@ export const call_resourceUsage = async (vmAuthId) => {
     `/v1/management/dashboard/user/${vmAuthId}/stat`
   )
   return data
+}
+
+/**
+ * 가상 PC 별칭을 변경한다.
+ *
+ * @authority User
+ * @param {vmAuthId} vmAuthId - 가상 PC 인증 아이디
+ * @param {newAlias} newAlias - 새 별칭
+ */
+export const call_updateVmAlias = async ({ vmAuthId, newAlias }) => {
+  const body = { vm_als: newAlias }
+  const response = await request.put(
+    `/v1/resource/vpcs/resources/${vmAuthId}/user`,
+    body
+  )
+  return response
 }
