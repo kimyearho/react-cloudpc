@@ -18,9 +18,9 @@ import {
 // })
 
 const Home = React.lazy(() => import('../views/home/Home'))
-const About = React.lazy(() => import('../views/about/About'))
-const Dashboard = React.lazy(() => import('../views/dashboard/Dashboard'))
-const List = React.lazy(() => import('../views/list/List'))
+const CloudPcDetail = React.lazy(() =>
+  import('../views/cloudPcInfo/CloudPcDetail')
+)
 
 function RequireAuth({ children }) {
   const isAuthentication = useSelector(
@@ -56,7 +56,17 @@ export const routers = [
     element: (
       <RequireAuth>
         <Suspense fallback={<Loader />}>
-          <></>
+          <CloudPcDetail
+            meta={{
+              title: 'CloudPC 정보',
+              showPcSubmenu: false,
+              showAlert: true,
+              alertTitle:
+                '자가 오류복구는 Cloud PC에 이상이 있을 시 사용자가 직접 Cloud PC를 초기화 하는 기능입니다.',
+              alertMessage:
+                '오류 복구는 C드라이브에 설치된 OS 영역만 초기화되며 D드라이브의 데이터는 초기화되지 않습니다. (사용자가 별도로 설치한 프로그램은 모두 삭제됨)'
+            }}
+          />
         </Suspense>
       </RequireAuth>
     )
@@ -77,7 +87,7 @@ export const routers = [
             element: (
               <RequireAuth>
                 <Suspense fallback={<Loader />}>
-                  <About name="Ken" />
+                  <></>
                 </Suspense>
               </RequireAuth>
             )
@@ -95,7 +105,7 @@ export const routers = [
             element: (
               <RequireAuth>
                 <Suspense fallback={<>...</>}>
-                  <Dashboard />
+                  <></>
                 </Suspense>
               </RequireAuth>
             )
@@ -107,7 +117,8 @@ export const routers = [
             element: (
               <RequireAuth>
                 <Suspense fallback={<>...</>}>
-                  <List params={{ meta: { id: 1, name: 'ken' } }} />
+                  {/* <List params={{ meta: { id: 1, name: 'ken' } }} /> */}
+                  <></>
                 </Suspense>
               </RequireAuth>
             )

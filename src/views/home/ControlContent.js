@@ -48,7 +48,13 @@ const ControlContent = ({
                   <Divider className="shotcut-divider" type="vertical" />
                 </Col>
                 <Col span={18}>
-                  <span className="fr">
+                  <span
+                    className={
+                      vm_state === 'active'
+                        ? 'vm-status active'
+                        : 'vm-status fail'
+                    }
+                  >
                     {vm_state === 'active' ? '사용 가능' : '사용 불가'}
                   </span>
                 </Col>
