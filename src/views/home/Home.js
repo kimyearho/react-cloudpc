@@ -98,6 +98,7 @@ function Home() {
   const onChnageUserResource = async (key) => {
     if (key === activeKey) return
     if (!key) return
+
     //* 리소스 업데이트
     await fetchResource(key)
   }
