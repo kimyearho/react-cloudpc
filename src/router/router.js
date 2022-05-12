@@ -48,9 +48,9 @@ export const routers = [
     )
   },
   {
-    label: <Link to="/cloudPcInfo">Cloud PC 정보</Link>,
+    label: <Link to="/cloudPc/info">Cloud PC 정보</Link>,
     key: 'cloudPcInfo',
-    path: '/cloudPcInfo',
+    path: '/cloudPc/info',
     icon: <CodeSandboxOutlined />,
     meta: null,
     element: (
@@ -59,12 +59,8 @@ export const routers = [
           <CloudPcDetail
             meta={{
               title: 'CloudPC 정보',
-              showPcSubmenu: false,
-              showAlert: true,
-              alertTitle:
-                '자가 오류복구는 Cloud PC에 이상이 있을 시 사용자가 직접 Cloud PC를 초기화 하는 기능입니다.',
-              alertMessage:
-                '오류 복구는 C드라이브에 설치된 OS 영역만 초기화되며 D드라이브의 데이터는 초기화되지 않습니다. (사용자가 별도로 설치한 프로그램은 모두 삭제됨)'
+              showPcSubmenu: true,
+              showAlert: false
             }}
           />
         </Suspense>

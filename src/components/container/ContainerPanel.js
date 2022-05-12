@@ -4,6 +4,7 @@ import { Col, Row, Button, Card } from 'antd'
 import { metaFactory } from '../../api/factory/common_factory'
 import { CloseOutlined } from '@ant-design/icons'
 import AlertDescription from '../alert/AlertDescription'
+import CloudPcTopMenu from '../topSubmenu/CloudPcTopMenu'
 
 const ContainerPanel = ({ children, routeMeta }) => {
   const navigate = useNavigate()
@@ -29,12 +30,13 @@ const ContainerPanel = ({ children, routeMeta }) => {
           <Button type="link" icon={<CloseOutlined />} onClick={onRedirect} />
         }
       >
-        {meta.ctrShowAlert ? (
+        {meta.ctrShowAlert && (
           <AlertDescription
             alertTitle={meta.alertTitle}
             alertMessage={meta.alertMessage}
           />
-        ) : null}
+        )}
+        {meta.ctrTopSubmenu && <CloudPcTopMenu />}
         {children}
       </Card>
     </>

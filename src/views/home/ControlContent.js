@@ -1,6 +1,4 @@
-import { Row, Col, Card, Divider, Progress, Tooltip } from 'antd'
-import { useEffect, useState } from 'react'
-
+import { Row, Col, Card, Divider, Progress } from 'antd'
 import winPc from '../../assets/images/img_win_pc_on.png'
 
 const ControlContent = ({
@@ -14,49 +12,6 @@ const ControlContent = ({
   disk_used_per,
   mem_used_per
 }) => {
-  const [tooltipVisible, setTooltipVisible] = useState(false)
-  const WarnningAlarm = () => {
-    let message = ''
-    if (cpu_usage >= 50) {
-      message = `CPU 사용율이 ${cpu_usage}% 이상 입니다.`
-    } else if (mem_used_per >= 50) {
-      message = `메모리 사용율이 ${mem_used_per}% 이상 입니다.`
-    } else if (disk_used_per >= 50) {
-      message = `디스크 사용율이 ${disk_used_per}% 이상 입니다.`
-    }
-    return (
-      <>
-        <Tooltip
-          placement="top"
-          color="red"
-          visible={tooltipVisible}
-          title={
-            <>
-              {tooltipVisible && (
-                <div>
-                  <div>경고</div>
-                  <p>{message}</p>
-                </div>
-              )}
-            </>
-          }
-        >
-          <img width={180} src={winPc} alt="monitor" />
-        </Tooltip>
-      </>
-    )
-  }
-
-  useEffect(() => {
-    setTooltipVisible(false)
-    if (cpu_usage > 50 || disk_used_per > 50 || mem_used_per > 50) {
-      setTooltipVisible(true)
-    }
-    return () => {
-      setTooltipVisible(false)
-    }
-  }, [cpu_usage, disk_used_per, mem_used_per])
-
   return (
     <Row>
       <Col span={24}>
@@ -68,11 +23,7 @@ const ControlContent = ({
           <Row>
             <Col span={9}>
               <div className="monitor">
-                {tooltipVisible ? (
-                  <WarnningAlarm />
-                ) : (
-                  <img width={180} src={winPc} alt="monitor" />
-                )}
+                <img width={180} src={winPc} alt="monitor" />
               </div>
               <div className="os">
                 <span>{sw_nm}</span>
