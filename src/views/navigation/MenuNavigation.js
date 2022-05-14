@@ -47,13 +47,26 @@ function MenuNavigation() {
       label: <Link to="/dashboard">Home</Link>
     },
     {
-      key: 'cpc',
+      key: 'cpc-info',
       icon: <CodeSandboxOutlined />,
-      label: 'Cloud PC 정보',
+      label: <Link to="/cpc-info">Cloud PC 정보</Link>
+    },
+    {
+      key: 'cpc-setting',
+      icon: <CodeSandboxOutlined />,
+      label: 'Cloud PC 관리',
       children: [
         {
-          key: 'cpc-info',
-          label: <Link to="/cpc-info">Cloud PC 목록</Link>
+          key: '1',
+          label: '자가 오류 복구'
+        },
+        {
+          key: '2',
+          label: '장애 처리 신청'
+        },
+        {
+          key: '3',
+          label: '스냅샷 및 복원'
         }
       ]
     }

@@ -67,7 +67,7 @@ function Login() {
               dispatch(SET_LOADING(false))
               navigate('/dashboard', { replace: true })
               message.info('Success is Login !')
-            }, 500)
+            }, 1000)
           }
         }
       }
