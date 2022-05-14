@@ -9,6 +9,10 @@ const CloudPcDetail = ({ meta }) => {
         <Col offset={2}>
           <ContainerPanel routeMeta={meta}>
             <h1>레이아웃 구성 중...</h1>
+            <Row>
+              <Col span={8}></Col>
+              <Col span={16}></Col>
+            </Row>
           </ContainerPanel>
         </Col>
       </Row>

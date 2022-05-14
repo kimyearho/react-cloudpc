@@ -108,7 +108,7 @@ body {
 }
 
 .login-wrapper {
-  margin-top: 200px;
+  margin-top: 170px;
   width: 800px;
   max-height: 560px;
 }
@@ -271,6 +271,7 @@ body {
 .ant-pro-grid-content.wide {
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 40px;
 }
 
 .shotcut-divider {
@@ -329,7 +330,7 @@ body {
 
 .control-wrapper {
   width: 870px !important;
-  margin-top: 70px !important;
+  margin-top: 110px !important;
 }
 
 .control-collapse {
@@ -471,10 +472,6 @@ body {
 .container-title {
   font-size: 28px;
   font-weight: 700;
-}
-
-.container-panel {
-  width: 1040px;
 }
 
 .vm-status {

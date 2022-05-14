@@ -1,12 +1,16 @@
 import React, { Suspense } from 'react'
-import Loader from '../utils/loader'
 import { useSelector } from 'react-redux'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import {
   WindowsOutlined,
   CodepenOutlined,
   CodeSandboxOutlined
 } from '@ant-design/icons'
+
+import Layout from '../layouts/Layout'
+import Login from '../views/login/Login'
+import Loader from '../utils/loader'
+import Home from '../views/home/Home'
 
 //* 지연 로딩을 해야한다면 아래 솔루션을 사용한다.
 // const Login = React.lazy(async () => {
@@ -17,12 +21,12 @@ import {
 //   return moduleExports
 // })
 
-const Home = React.lazy(() => import('../views/home/Home'))
+// const Home = React.lazy(() => imporCt('../views/home/Home'))
 const CloudPcDetail = React.lazy(() =>
   import('../views/cloudPcInfo/CloudPcDetail')
 )
 
-function RequireAuth({ children }) {
+const RequireAuth = ({ children }) => {
   const isAuthentication = useSelector(
     (state) => state.user.userInfo.isAuthentication
   )
@@ -32,89 +36,58 @@ function RequireAuth({ children }) {
   return children
 }
 
+const IsLogin = () => {
+  const isAuthentication = useSelector(
+    (state) => state.user.userInfo.isAuthentication
+  )
+  if (!isAuthentication) {
+    return <Login />
+  }
+  return <></>
+}
+
 export const routers = [
   {
-    label: <Link to="/main">Home</Link>,
-    key: 'main',
-    path: '/main',
-    icon: <WindowsOutlined />,
-    meta: null,
-    element: (
-      <RequireAuth>
-        <Suspense fallback={<Loader />}>
-          <Home />
-        </Suspense>
-      </RequireAuth>
-    )
-  },
-  {
-    label: <Link to="/cloudPc/info">Cloud PC 정보</Link>,
-    key: 'cloudPcInfo',
-    path: '/cloudPc/info',
-    icon: <CodeSandboxOutlined />,
-    meta: null,
-    element: (
-      <RequireAuth>
-        <Suspense fallback={<Loader />}>
-          <CloudPcDetail
-            meta={{
-              title: 'CloudPC 정보',
-              showPcSubmenu: true,
-              showAlert: false
-            }}
-          />
-        </Suspense>
-      </RequireAuth>
-    )
-  },
-  {
-    label: 'Cloud PC 관리',
-    key: 'submenu',
-    icon: <CodepenOutlined />,
+    key: 'root',
+    path: '/',
+    element: <Layout />,
     children: [
       {
-        type: 'group',
-        label: 'User',
+        key: 'login',
+        path: '/login',
+        element: <IsLogin />
+      },
+      {
+        key: 'dashboard',
+        path: '/dashboard',
+        index: true,
+        icon: <WindowsOutlined />,
+        element: (
+          <RequireAuth>
+            <Suspense fallback={<Loader />}>
+              <Home />
+            </Suspense>
+          </RequireAuth>
+        )
+      },
+      {
+        key: 'cpcinfo',
+        path: '/cpc-info',
+        icon: <CodeSandboxOutlined />,
+        label: 'Cloud PC 정보',
         children: [
           {
-            label: <Link to="/about">자가 오류 복구</Link>,
-            key: 'about',
-            path: '/about',
+            index: true,
             element: (
               <RequireAuth>
                 <Suspense fallback={<Loader />}>
-                  <></>
-                </Suspense>
-              </RequireAuth>
-            )
-          }
-        ]
-      },
-      {
-        type: 'group',
-        label: 'Example',
-        children: [
-          {
-            label: <Link to="/dashboard">장애 처리 신청</Link>,
-            key: 'dashboard',
-            path: '/dashboard',
-            element: (
-              <RequireAuth>
-                <Suspense fallback={<>...</>}>
-                  <></>
-                </Suspense>
-              </RequireAuth>
-            )
-          },
-          {
-            label: <Link to="/list">스냅샷 및 복원</Link>,
-            key: 'list',
-            path: '/list',
-            element: (
-              <RequireAuth>
-                <Suspense fallback={<>...</>}>
-                  {/* <List params={{ meta: { id: 1, name: 'ken' } }} /> */}
-                  <></>
+                  <CloudPcDetail
+                    meta={{
+                      title: 'Cloud PC 목록',
+                      showPcSubmenu: true,
+                      showAlert: false
+                    }}
+                  />
                 </Suspense>
               </RequireAuth>
             )

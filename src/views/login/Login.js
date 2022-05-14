@@ -65,7 +65,7 @@ function Login() {
             dispatch(SET_LOADING(true))
             setTimeout(() => {
               dispatch(SET_LOADING(false))
-              navigate('/main', { replace: true })
+              navigate('/dashboard', { replace: true })
               message.info('Success is Login !')
             }, 500)
           }

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { routers } from '../../router/router'
 import { SET_LOGOUT } from '../../store/modules/user'
-// import { SET_LOADING } from '../../store/modules/app'
 import { Menu, Space, Avatar, Popover, Divider, Button, Row, Col } from 'antd'
-import { UserOutlined } from '@ant-design/icons'
+import {
+  UserOutlined,
+  WindowsOutlined,
+  CodeSandboxOutlined
+} from '@ant-design/icons'
 import { userInfoFactory } from '../../api/factory/user_factory'
 import Icon from '@ant-design/icons'
 import logo from '../../assets/images/img_logo.png'
@@ -14,7 +16,6 @@ import ko from '../../assets/images/ko.png'
 function MenuNavigation() {
   const dispatch = useDispatch()
   const location = useLocation()
-  // const navigate = useNavigate()
 
   const [currentKey, setCurrentKey] = useState('main')
   const userInfo = useSelector((state) => state.user.userAccount)
@@ -36,12 +37,27 @@ function MenuNavigation() {
   }
 
   const confirm = async () => {
-    // dispatch(SET_LOADING(true))
-    // setTimeout(() => {
     dispatch(SET_LOGOUT())
-    // dispatch(SET_LOADING(false))
-    // }, 1000)
   }
+
+  const menus = [
+    {
+      key: 'dashboard',
+      icon: <WindowsOutlined />,
+      label: <Link to="/dashboard">Home</Link>
+    },
+    {
+      key: 'cpc',
+      icon: <CodeSandboxOutlined />,
+      label: 'Cloud PC 정보',
+      children: [
+        {
+          key: 'cpc-info',
+          label: <Link to="/cpc-info">Cloud PC 목록</Link>
+        }
+      ]
+    }
+  ]
 
   const content = (
     <div className="shotcut-popup">
@@ -91,7 +107,7 @@ function MenuNavigation() {
             <Menu
               mode="horizontal"
               selectedKeys={[currentKey]}
-              items={routers}
+              items={menus}
               onClick={onCurrentKey}
             />
           </div>

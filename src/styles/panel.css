@@ -1,0 +1,11 @@
+.container-panel {
+  width: 1040px;
+}
+
+.container-panel .ant-card-head-wrapper > .ant-card-extra {
+  padding: 0;
+}
+
+.container-panel .ant-card-head-wrapper > .ant-card-extra > .ant-space {
+  padding-top: 30px;
+}
