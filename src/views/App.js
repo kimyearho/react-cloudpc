@@ -12,6 +12,8 @@ const App = () => {
     dispatch(staticPublic(type))
   }, [type, dispatch])
 
+  console.log('App')
+
   const element = useRoutes(routers)
   return <>{element}</>
 }

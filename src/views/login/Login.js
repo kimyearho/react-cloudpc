@@ -63,11 +63,11 @@ function Login() {
           const { meta } = await dispatch(userAccount(params))
           if (meta.requestStatus === 'fulfilled') {
             dispatch(SET_LOADING(true))
+            navigate('/dashboard', { replace: true })
             setTimeout(() => {
               dispatch(SET_LOADING(false))
-              navigate('/dashboard', { replace: true })
               message.info('Success is Login !')
-            }, 1000)
+            }, 500)
           }
         }
       }

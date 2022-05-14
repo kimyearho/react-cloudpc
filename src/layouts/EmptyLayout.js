@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet, Navigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const EmptyLayout = () => {
@@ -26,7 +26,6 @@ const EmptyLayout = () => {
     return (
       <>
         <div className="ant-login" style={loginImage()}>
-          {!isAuthentication && <Navigate to="/login" replace />}
           <Outlet />
         </div>
       </>

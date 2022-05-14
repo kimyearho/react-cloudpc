@@ -1,25 +1,12 @@
 import React, { Suspense } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import {
-  WindowsOutlined,
-  CodepenOutlined,
-  CodeSandboxOutlined
-} from '@ant-design/icons'
+import { WindowsOutlined, CodeSandboxOutlined } from '@ant-design/icons'
 
 import Layout from '../layouts/Layout'
 import Login from '../views/login/Login'
 import Loader from '../utils/loader'
 import Home from '../views/home/Home'
-
-//* 지연 로딩을 해야한다면 아래 솔루션을 사용한다.
-// const Login = React.lazy(async () => {
-//   const [moduleExports] = await Promise.all([
-//     import('../views/login/Login'),
-//     new Promise((resolve) => setTimeout(resolve, 500))
-//   ])
-//   return moduleExports
-// })
 
 // const Home = React.lazy(() => imporCt('../views/home/Home'))
 const CloudPcDetail = React.lazy(() =>
@@ -43,7 +30,6 @@ const IsLogin = () => {
   if (!isAuthentication) {
     return <Login />
   }
-  return <></>
 }
 
 export const routers = [
