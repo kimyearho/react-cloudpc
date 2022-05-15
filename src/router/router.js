@@ -8,7 +8,7 @@ import Login from '../views/login/Login'
 import Loader from '../utils/loader'
 import Home from '../views/home/Home'
 
-// const Home = React.lazy(() => imporCt('../views/home/Home'))
+// const Home = React.lazy(() => import('../views/home/Home'))
 const CloudPcDetail = React.lazy(() =>
   import('../views/cloudPcInfo/CloudPcDetail')
 )
@@ -50,9 +50,9 @@ export const routers = [
         icon: <WindowsOutlined />,
         element: (
           <RequireAuth>
-            <Suspense fallback={<Loader />}>
-              <Home />
-            </Suspense>
+            {/* <Suspense fallback={<Loader />}> */}
+            <Home />
+            {/* </Suspense> */}
           </RequireAuth>
         )
       },

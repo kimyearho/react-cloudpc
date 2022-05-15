@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { SET_LOGOUT } from '../../store/modules/user'
+import { SET_LOADING } from '../../store/modules/app'
 import { Menu, Space, Avatar, Popover, Divider, Button, Row, Col } from 'antd'
 import {
   UserOutlined,
@@ -16,6 +17,7 @@ import ko from '../../assets/images/ko.png'
 function MenuNavigation() {
   const dispatch = useDispatch()
   const location = useLocation()
+  const navigate = useNavigate()
 
   const [currentKey, setCurrentKey] = useState('main')
   const userInfo = useSelector((state) => state.user.userAccount)
@@ -37,7 +39,12 @@ function MenuNavigation() {
   }
 
   const confirm = async () => {
-    dispatch(SET_LOGOUT())
+    await dispatch(SET_LOADING(true))
+    setTimeout(() => {
+      dispatch(SET_LOGOUT())
+      navigate('/login', { replace: true })
+      dispatch(SET_LOADING(false))
+    }, 600)
   }
 
   const menus = [

@@ -63,11 +63,11 @@ function Login() {
           const { meta } = await dispatch(userAccount(params))
           if (meta.requestStatus === 'fulfilled') {
             dispatch(SET_LOADING(true))
-            navigate('/dashboard', { replace: true })
             setTimeout(() => {
+              navigate('/dashboard', { replace: true })
               dispatch(SET_LOADING(false))
-              message.info('Success is Login !')
-            }, 500)
+              message.info('정상적으로 로그인 되었습니다.')
+            }, 600)
           }
         }
       }
