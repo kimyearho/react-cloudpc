@@ -12,7 +12,8 @@ const CloudPcTopMenu = () => {
     },
     divider: {
       marginTop: '60px',
-      borderBottom: '1px solid'
+      borderBottom: '1px solid',
+      marginBottom: '15px'
     }
   }
   return (
