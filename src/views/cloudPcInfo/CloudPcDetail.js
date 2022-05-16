@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Space, Divider, Typography, Button } from 'antd'
+import { Col, Card, Row, Space, Divider, Typography, Button } from 'antd'
 import ContainerPanel from '../../components/container/ContainerPanel'
 import winPc from '../../assets/images/img_win_pc_on.png'
 
@@ -51,7 +51,17 @@ const CloudPcDetail = ({ meta }) => {
                   </Col>
                 </Row>
               </Col>
-              <Col span={16}></Col>
+              <Col span={16}>
+                <Row gutter={24}>
+                  <Col span={12}>
+                    <Card title={<b>기본 정보</b>} bordered={false}></Card>
+                  </Col>
+                  <Col span={12}>
+                    <Card title={<b>지원 정보</b>} bordered={false}></Card>
+                  </Col>
+                </Row>
+                <Row></Row>
+              </Col>
             </Row>
           </ContainerPanel>
         </Col>
