@@ -76,7 +76,7 @@ function Login() {
 
   return (
     <Row className="login-wrapper">
-      <Col span={24} offset={16}>
+      <Col span={24} offset={15}>
         <Row>
           <Col span={12}>
             <Carousel style={{ width: 400 }} autoplay>

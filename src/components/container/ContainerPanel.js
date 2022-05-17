@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Breadcrumb, Card, Space } from 'antd'
+import { Breadcrumb, Card, Space } from 'antd'
 import { metaFactory } from '../../api/factory/common_factory'
 import { HomeOutlined } from '@ant-design/icons'
 import AlertDescription from '../alert/AlertDescription'
@@ -29,7 +29,7 @@ const ContainerPanel = ({ children, routeMeta }) => {
         extra={
           <>
             <Space>
-              <Breadcrumb separator=">">
+              <Breadcrumb separator=">" style={{ fontSize: '13px' }}>
                 <Breadcrumb.Item
                   style={{ cursor: 'pointer' }}
                   onClick={onRedirect}
