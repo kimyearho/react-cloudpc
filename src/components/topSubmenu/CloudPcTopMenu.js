@@ -7,8 +7,7 @@ const CloudPcTopMenu = () => {
       float: 'right'
     },
     button: {
-      width: '146px',
-      fontWeight: '600'
+      width: '146px'
     },
     divider: {
       marginTop: '60px',
@@ -21,7 +20,7 @@ const CloudPcTopMenu = () => {
       <Row style={style.rowRight}>
         <Col>
           <Space size="large">
-            <Button style={style.button} size="large">
+            <Button type="primary" style={style.button} size="large">
               개인 디스크 관리
             </Button>
             <Button style={style.button} size="large">

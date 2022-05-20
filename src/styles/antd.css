@@ -46,6 +46,10 @@ body {
   font-size: 12px;
 }
 
+.ant-col > small {
+  font-weight: 700;
+}
+
 .ant-layout {
   height: 100%;
 }
@@ -375,7 +379,7 @@ body {
 }
 .control-menu > .ant-menu-item {
   font-size: 17px;
-  border-bottom: 2px solid rgb(0 0 0 / 32%);
+  border-bottom: 2px solid #d9d9d914 !important;
 }
 .control-menu > .ant-menu-item:nth-child(1),
 .control-menu > .ant-menu-item:nth-child(2) {
