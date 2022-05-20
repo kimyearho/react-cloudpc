@@ -1,0 +1,16 @@
+.container-loader {
+  min-height: 530px;
+  text-align: center;
+}
+
+.container-loader > .ant-spin {
+  margin-top: 240px;
+}
+
+.home-loader {
+  text-align: center;
+}
+
+.home-loader > .ant-spin {
+  margin-top: 150px;
+}

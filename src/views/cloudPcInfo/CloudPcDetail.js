@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'antd'
 import ContainerPanel from '../../components/container/ContainerPanel'
@@ -10,6 +11,7 @@ import { call_resource } from '../../api/resource'
 
 const CloudPcDetail = ({ meta }) => {
   const [cloudPcList, setCloudPcList] = useState([])
+  const [loading, setLoading] = useState(true)
   const style = {
     divRow: {
       borderBottom: '1px solid #ddd',
@@ -25,6 +27,11 @@ const CloudPcDetail = ({ meta }) => {
     try {
       const data = await call_resource()
       setCloudPcList(data)
+      if (data.length > 0) {
+        setTimeout(() => {
+          setLoading(false)
+        }, 500)
+      }
     } catch (error) {
       console.error(error)
     }
@@ -34,7 +41,7 @@ const CloudPcDetail = ({ meta }) => {
     <>
       <Row className="mr-30">
         <Col offset={2}>
-          <ContainerPanel routeMeta={meta}>
+          <ContainerPanel loading={loading} routeMeta={meta}>
             {cloudPcList.map((item) => (
               <Row style={style.divRow} key={item.vm_id}>
                 <Col span={8}>

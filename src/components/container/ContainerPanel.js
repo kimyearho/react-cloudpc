@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Breadcrumb, Card, Space } from 'antd'
+import { Breadcrumb, Card, Space, Spin } from 'antd'
 import { metaFactory } from '../../api/factory/common_factory'
 import { HomeOutlined } from '@ant-design/icons'
 import AlertDescription from '../alert/AlertDescription'
 import CloudPcTopMenu from '../topSubmenu/CloudPcTopMenu'
 
-const ContainerPanel = ({ children, routeMeta }) => {
+const ContainerLoading = () => {
+  return (
+    <>
+      <div className="container-loader">
+        <Spin size="large" />
+      </div>
+    </>
+  )
+}
+
+const ContainerPanel = ({ loading, routeMeta, children }) => {
   const navigate = useNavigate()
   const [meta, setMeta] = useState({})
 
@@ -17,7 +27,7 @@ const ContainerPanel = ({ children, routeMeta }) => {
   }, [routeMeta])
 
   const onRedirect = () => {
-    navigate('/main', { replace: true })
+    navigate('/dashboard', { replace: true })
   }
 
   return (
@@ -39,11 +49,6 @@ const ContainerPanel = ({ children, routeMeta }) => {
                 <Breadcrumb.Item href="">Cloud PC 정보</Breadcrumb.Item>
                 <Breadcrumb.Item href="">Cloud PC 목록</Breadcrumb.Item>
               </Breadcrumb>
-              {/* <Button
-                type="link"
-                icon={<CloseOutlined />}
-                onClick={onRedirect}
-              /> */}
             </Space>
           </>
         }
@@ -55,7 +60,7 @@ const ContainerPanel = ({ children, routeMeta }) => {
           />
         )}
         {meta.ctrTopSubmenu && <CloudPcTopMenu />}
-        {children}
+        {loading === true ? <ContainerLoading /> : children}
       </Card>
     </>
   )

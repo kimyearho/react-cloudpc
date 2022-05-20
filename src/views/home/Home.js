@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Collapse, Space, Menu, Button, message } from 'antd'
+import { Row, Col, Collapse, Space, Spin, Menu, Button, message } from 'antd'
 import { DesktopOutlined } from '@ant-design/icons'
 import { userResourceFactory } from '../../api/factory/resource_factory'
 import {
@@ -20,8 +20,19 @@ import _ from 'lodash'
 
 const { Panel } = Collapse
 
+const ContainerLoading = () => {
+  return (
+    <>
+      <div className="home-loader">
+        <Spin size="large" />
+      </div>
+    </>
+  )
+}
+
 function Home() {
   // const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true)
   const [resource, setResource] = useState([])
   const [activeKey, setActiveKey] = useState('')
   const [userResource, setUserResource] = useState(null)
@@ -85,6 +96,9 @@ function Home() {
       const usageResource = await call_resourceUsage(vm_auth_id)
       const mergeResourceData = _.merge(userResourceData, usageResource)
       setUserResource(userResourceFactory(mergeResourceData))
+      setTimeout(() => {
+        setLoading(false)
+      }, 100)
     } catch (error) {
       console.error(error)
     }
@@ -195,9 +209,14 @@ function Home() {
                       />
                     </Col>
                     <Col span={18}>
-                      {userResource !== null && (
+                      {loading === true ? (
+                        <ContainerLoading />
+                      ) : (
                         <ControlContent key={item.vm_nm} {...userResource} />
                       )}
+                      {/* {userResource !== null && (
+                        <ControlContent key={item.vm_nm} {...userResource} />
+                      )} */}
                     </Col>
                   </Row>
                 </Panel>

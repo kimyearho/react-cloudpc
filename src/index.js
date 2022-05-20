@@ -5,6 +5,7 @@ import './styles/index.css'
 import 'antd/dist/antd.min.css'
 import './styles/antd.css'
 import './styles/panel.css'
+import './styles/loader.css'
 import App from './views/App'
 
 import { Provider } from 'react-redux'
