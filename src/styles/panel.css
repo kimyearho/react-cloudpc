@@ -1,5 +1,7 @@
 .container-panel {
   width: 1040px;
+  max-height: 750px;
+  overflow: scroll;
 }
 
 .container-panel .ant-card-head-wrapper > .ant-card-extra {

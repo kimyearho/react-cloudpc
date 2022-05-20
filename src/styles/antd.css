@@ -279,7 +279,7 @@ body {
 .ant-pro-grid-content.wide {
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .shotcut-divider {
@@ -506,6 +506,10 @@ body {
 
 .vm-status.fail::before {
   background: linear-gradient(0deg, rgb(255 0 0) 0%, #ff4d4f87 100%);
+}
+
+.vpc-info {
+  padding: 0 12px;
 }
 
 .vpc-info .ant-card-body {
