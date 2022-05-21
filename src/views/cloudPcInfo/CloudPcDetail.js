@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'antd'
 import ContainerPanel from '../../components/container/ContainerPanel'
 
-import CloudPcInfo from './CloudPcInfo'
+import CloudPcPeriod from './CloudPcPeriod'
 import CloudPcResource from './CloudPcResource'
 import CloudPcSecurity from './CloudPcSecurity'
 
@@ -46,7 +46,7 @@ const CloudPcDetail = ({ meta }) => {
               <Row style={style.divRow} key={item.vm_id}>
                 <Col span={8}>
                   {/* 좌측 CloudPc 정보 */}
-                  <CloudPcInfo {...item} />
+                  <CloudPcPeriod {...item} />
                 </Col>
                 <Col span={16}>
                   <Row>

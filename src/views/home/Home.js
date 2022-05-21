@@ -14,7 +14,7 @@ import Icon from '@ant-design/icons'
 import vmicon from '../../assets/images/vm_on.png'
 import CustomHeader from './CustomHeader'
 import ControlContent from './ControlContent'
-import AliasChangeModal from './AliasChangeModal'
+import { AliasCangeMdoal } from './DashboardModal'
 
 import _ from 'lodash'
 
@@ -38,6 +38,15 @@ function Home() {
   const [userResource, setUserResource] = useState(null)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [alias, setAlias] = useState(null)
+  const modalMessage = {
+    title: '가상 PC 별칭 설정',
+    description:
+      '가상 PC 별로 별칭을 설정하면 목록에서 가상 PC를 쉽고 빠르게 구분할 수 있습니다.',
+    button: {
+      apply: '변경',
+      cancel: '취소'
+    }
+  }
 
   useEffect(() => {
     fetchInit()
@@ -47,7 +56,7 @@ function Home() {
    * @@description
    * mount시 useEffect에 의해 처음 한번만 실행한다.
    */
-  async function fetchInit() {
+  const fetchInit = async () => {
     //* 전체 리소스 조회
     const resourceList = await call_resource()
     if (resourceList.length > 0) {
@@ -68,7 +77,7 @@ function Home() {
    *
    * @param {*} key - VM 인증 아이디
    */
-  async function fetchResource(key) {
+  const fetchResource = async (key) => {
     try {
       //* 1. 활성키 상태 갱신
       setActiveKey(key)
@@ -86,12 +95,13 @@ function Home() {
   }
 
   /**
+   * @description
    * 선택한 VM 데이터에 해당 VM의 자원 사용량 정보를 조회하여 추가한다.
    *
    * @param {Object} userResourceData - 특정 VM 데이터
    * @param {String} vm_auth_id - VM 인증 아이디
    */
-  async function fetchUsageResource(userResourceData, vm_auth_id) {
+  const fetchUsageResource = async (userResourceData, vm_auth_id) => {
     try {
       const usageResource = await call_resourceUsage(vm_auth_id)
       const mergeResourceData = _.merge(userResourceData, usageResource)
@@ -105,18 +115,26 @@ function Home() {
   }
 
   /**
+   * @description
+   * VM 선택시 실행된다.
    *
-   * @param {*} key
-   * @returns
+   * @param {String} vm_auth_id - VM 인증 아이디
    */
-  const onChnageUserResource = async (key) => {
-    if (key === activeKey) return
-    if (!key) return
+  const onChnageUserResource = async (vm_auth_id) => {
+    if (vm_auth_id === activeKey) return
+    if (!vm_auth_id) return
 
     //* 리소스 업데이트
-    await fetchResource(key)
+    await fetchResource(vm_auth_id)
   }
 
+  /**
+   * @description
+   * 별칭 변경을 클릭했을때 실행 된다.
+   * 모달의 데이터를 설정하고 모달을 오픈한다.
+   *
+   * @param {Object} data - {vm_als: string, vm_auth_id: string, vm_nm: string}
+   */
   const showModal = (data) => {
     const modalData = {
       vm_als: data.vm_als,
@@ -127,9 +145,16 @@ function Home() {
     setIsModalVisible(true)
   }
 
+  /**
+   * @description
+   * Modal submit이 발생했을 때 이벤트 처리를 위한 callback을 받는다.
+   *
+   * @param {Object} data - {newAlias: string}
+   */
   const parentModalCallback = async (data) => {
     try {
-      const { status } = await call_updateVmAlias(data)
+      const model = { newAlias: data.newAlias, vmAuthId: alias.vm_auth_id }
+      const { status } = await call_updateVmAlias(model)
       if (status === 200) {
         const resourceList = await call_resource()
         setResource(resourceList)
@@ -214,9 +239,6 @@ function Home() {
                       ) : (
                         <ControlContent key={item.vm_nm} {...userResource} />
                       )}
-                      {/* {userResource !== null && (
-                        <ControlContent key={item.vm_nm} {...userResource} />
-                      )} */}
                     </Col>
                   </Row>
                 </Panel>
@@ -226,11 +248,12 @@ function Home() {
         </Col>
       </Row>
       {isModalVisible ? (
-        <AliasChangeModal
+        <AliasCangeMdoal
           isModalVisible={isModalVisible}
           handleOk={parentModalCallback}
           handleCancel={() => setIsModalVisible(false)}
-          {...alias}
+          message={modalMessage}
+          items={alias}
         />
       ) : null}
     </>

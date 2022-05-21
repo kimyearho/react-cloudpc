@@ -6,6 +6,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.App {
+  text-align: center;
+  margin-left: 20px;
+}
+
+.loader {
+  height: 100%;
+  padding: 30px 50px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
 #root {
   height: 100%;
 }

@@ -1,0 +1,45 @@
+.container-panel {
+  width: 1040px;
+  max-height: 780px;
+  overflow: scroll;
+
+  .ant-card-head-wrapper > .ant-card-extra {
+    padding: 0;
+
+    > .ant-space {
+      padding-top: 30px;
+    }
+  }
+
+  .ant-card-body .ant-row {
+    .monitor {
+      text-align: center;
+    }
+
+    .os {
+      margin: 0 auto;
+      text-align: center;
+
+      > span {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .shotcut-popup {
+    /* margin: 20px; */
+    /* padding: 20px; */
+    background-color: #f2f4f7;
+    color: #000;
+
+    .shotcut-menu-item {
+      color: #000 !important;
+    }
+  }
+}
+
+.vpc-usage {
+  padding: 20px;
+  font-size: 12px;
+  background: #f2f4f7;
+}

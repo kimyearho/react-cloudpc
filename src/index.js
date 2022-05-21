@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import './styles/index.css'
 import 'antd/dist/antd.min.css'
-import './styles/antd.css'
-import './styles/panel.css'
-import './styles/loader.css'
+// import './styles/antd.css'
+// import './styles/panel.css'
+// import './styles/loader.css'
+
+import './styles/scss/index.scss'
 import App from './views/App'
 
 import { Provider } from 'react-redux'

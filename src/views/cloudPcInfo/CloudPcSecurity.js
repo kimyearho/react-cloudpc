@@ -216,7 +216,7 @@ const CloudPcSecurity = (props) => {
               </Col>
             </Row>
           </TabPane>
-          <TabPane tab="예외망 보안 정책" key="2">
+          <TabPane disabled tab="예외망 보안 정책" key="2">
             Content of Tab Pane 2
           </TabPane>
         </Tabs>
