@@ -3,12 +3,15 @@ import { Col, Row, Space, Divider, Typography, Button } from 'antd'
 import CommonModal from '../../components/modal/CommonModal'
 import winPc from '../../assets/images/img_win_pc_on.png'
 
-function CloudPcInfo({
-  vm_on_ctrl_tm,
+function CloudPcPeriod({
+  acct_conn_id,
+  acct_id,
   usr_vm_ctrl_tm,
+  os_typ_cd_nm,
+  vm_id,
+  vm_on_ctrl_tm,
   vm_vlid_stt_dt,
-  vm_vlid_end_dt,
-  os_typ_cd_nm
+  vm_vlid_end_dt
 }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [modalData, setModalData] = useState({})
@@ -92,4 +95,4 @@ function CloudPcInfo({
   )
 }
 
-export default CloudPcInfo
+export default CloudPcPeriod

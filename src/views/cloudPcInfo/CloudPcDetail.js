@@ -1,13 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'antd'
-import ContainerPanel from '../../components/container/ContainerPanel'
+import { call_resource } from '../../api/resource'
+import {
+  userPcPeriodFactory,
+  userPcInfoFactory
+} from '../../api/factory/resource_factory'
 
+import ContainerPanel from '../../components/container/ContainerPanel'
 import CloudPcPeriod from './CloudPcPeriod'
 import CloudPcResource from './CloudPcResource'
 import CloudPcSecurity from './CloudPcSecurity'
-
-import { call_resource } from '../../api/resource'
 
 const CloudPcDetail = ({ meta }) => {
   const [cloudPcList, setCloudPcList] = useState([])
@@ -46,12 +49,12 @@ const CloudPcDetail = ({ meta }) => {
               <Row style={style.divRow} key={item.vm_id}>
                 <Col span={8}>
                   {/* 좌측 CloudPc 정보 */}
-                  <CloudPcPeriod {...item} />
+                  <CloudPcPeriod {...userPcPeriodFactory(item)} />
                 </Col>
                 <Col span={16}>
                   <Row>
                     {/* 우측 상단 기본 정보 & 지원 정보 */}
-                    <CloudPcResource {...item} />
+                    <CloudPcResource {...userPcInfoFactory(item)} />
                   </Row>
                   <Row>
                     {/* 우측 하단 보안 정책 */}
