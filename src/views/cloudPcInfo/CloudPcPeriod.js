@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Col, Row, Space, Divider, Typography, Button } from 'antd'
-import CommonModal from '../../components/modal/CommonModal'
+import { PeriodExtensionModal } from './components/ResourceModal'
+import moment from 'moment'
 import winPc from '../../assets/images/img_win_pc_on.png'
 
 function CloudPcPeriod({
@@ -27,8 +28,10 @@ function CloudPcPeriod({
 
   const showPcPeriod = () => {
     const modalModel = {
-      a: '1',
-      b: '2'
+      desired_date: moment(vm_vlid_end_dt, 'YYYY-MM-DD').add(1, 'day'),
+      vm_vlid_stt_dt: vm_vlid_stt_dt,
+      vm_vlid_end_dt: vm_vlid_end_dt,
+      current_period: vm_vlid_stt_dt + ' ~ ' + vm_vlid_end_dt
     }
     setModalData(modalModel)
     setIsModalVisible(true)
@@ -83,7 +86,7 @@ function CloudPcPeriod({
         </Col>
       </Row>
       {isModalVisible ? (
-        <CommonModal
+        <PeriodExtensionModal
           isModalVisible={isModalVisible}
           items={modalData}
           message={message}

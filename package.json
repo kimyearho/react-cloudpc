@@ -11,6 +11,7 @@
     "axios": "^0.27.2",
     "eslint-plugin-react-hooks": "^4.5.0-next-bd4784c8f-20220425",
     "lodash": "^4.17.21",
+    "moment": "^2.29.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-json-formatter": "^0.2.1",
