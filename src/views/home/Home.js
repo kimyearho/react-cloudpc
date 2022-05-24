@@ -39,10 +39,11 @@ function Home() {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [alias, setAlias] = useState(null)
   const modalStaticOptions = {
+    width: 630,
     title: '가상 PC 별칭 설정',
     description:
       '가상 PC 별로 별칭을 설정하면 목록에서 가상 PC를 쉽고 빠르게 구분할 수 있습니다.',
-    button: {
+    buttonLabel: {
       apply: '변경',
       cancel: '취소'
     },

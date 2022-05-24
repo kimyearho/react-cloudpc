@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Alert, Modal, Form, Button } from 'antd'
+import { Alert, Modal, Form, Button, Divider } from 'antd'
 import _ from 'lodash'
 
 const CommonModal = ({
@@ -11,6 +11,15 @@ const CommonModal = ({
   children
 }) => {
   const [form] = Form.useForm()
+  const modalStyle = {
+    divder: {
+      margin: '30px 0'
+    },
+    footer: {
+      marginTop: '10px',
+      marginBottom: '0'
+    }
+  }
   const layout = {
     labelCol: {
       span: 8
@@ -47,6 +56,7 @@ const CommonModal = ({
     <>
       <Modal
         title={<b>{modalOptions.title}</b>}
+        width={modalOptions.width}
         centered
         forceRender
         footer={null}
@@ -71,7 +81,8 @@ const CommonModal = ({
           autoComplete="off"
         >
           {children}
-          <Form.Item {...tailLayout} style={{ marginTop: '10px' }}>
+          <Divider style={modalStyle.divder} />
+          <Form.Item {...tailLayout} style={modalStyle.footer}>
             <Button
               className="width-100p"
               type="primary"
@@ -79,7 +90,7 @@ const CommonModal = ({
               htmlType="button"
               onClick={onFinish}
             >
-              {modalOptions.button.apply}
+              {modalOptions.buttonLabel.apply}
             </Button>
             <Button
               className="width-100p"
@@ -88,7 +99,7 @@ const CommonModal = ({
               style={{ marginLeft: '10px' }}
               onClick={handleCancel}
             >
-              {modalOptions.button.cancel}
+              {modalOptions.buttonLabel.cancel}
             </Button>
           </Form.Item>
         </Form>
