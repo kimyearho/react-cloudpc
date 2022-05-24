@@ -45,6 +45,9 @@ function Home() {
     button: {
       apply: '변경',
       cancel: '취소'
+    },
+    buttonProps: {
+      disabled: false
     }
   }
 

@@ -5,7 +5,6 @@ import { WindowsOutlined, CodeSandboxOutlined } from '@ant-design/icons'
 
 import Layout from '../layouts/Layout'
 import Login from '../views/login/Login'
-import Loader from '../utils/loader'
 import Home from '../views/home/Home'
 
 // const Home = React.lazy(() => import('../views/home/Home'))
@@ -66,7 +65,7 @@ export const routers = [
             index: true,
             element: (
               <RequireAuth>
-                <Suspense fallback={<Loader />}>
+                <Suspense fallback={<></>}>
                   <CloudPcDetail
                     meta={{
                       title: 'Cloud PC 목록',

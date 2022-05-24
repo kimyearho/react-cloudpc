@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Alert, Modal, Form, Button } from 'antd'
+import _ from 'lodash'
 
 const CommonModal = ({
   isModalVisible,
@@ -27,6 +28,7 @@ const CommonModal = ({
   const onFinish = async () => {
     const values = await form.validateFields()
     if (values) {
+      values.origin = Object.assign({}, items)
       handleOk(values)
     }
   }

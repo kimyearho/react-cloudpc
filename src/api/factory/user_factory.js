@@ -45,6 +45,12 @@ export const userInfoFactory = (data) => {
   }
 }
 
+export const userPcPeriodFactory = (data) => {
+  return {
+    req_vlid_end_dt: data.req_vlid_end_dt
+  }
+}
+
 /**
  * @description 포털 이미지 정보를 재할당한다.
  *

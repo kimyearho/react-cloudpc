@@ -37,3 +37,41 @@ export const call_auth = async (params) => {
   )
   return { data, headers }
 }
+
+/**
+ * @description
+ * 기간 연장 신청 정보를 조회한다.
+ *
+ * @param {Object} params - 신청 정보
+ * @returns {...model}
+ */
+export const call_userPcPeriodHistory = async (params) => {
+  const { data, headers } = await request.get('/v1/user/work/request', {
+    params
+  })
+  return { data, headers }
+}
+
+/**
+ * @description
+ * 사용자가 입력한 기간 만큼 연장 신청을 한다.
+ * 이 스펙은 신청만 하는 것으로, 관리자 승인이 되어야한다.
+ *
+ * @param {Object} payload - 신청 정보
+ * @returns {...model}
+ */
+export const call_userPcPeriodRequest = async (payload) => {
+  return await request.post('/v1/user/work/request', payload)
+}
+
+/**
+ * @description
+ * 기간 연장을 신청한 PC에 대한 취소 요청을한다.
+ *
+ * @param {*} requestId - 요청 아이디
+ * @param {*} payload - 요청 BODY
+ * @returns Promise
+ */
+export const call_userPcPeriodRequestCancel = async (requestId, payload) => {
+  return await request.put(`/v1/user/work/request/${requestId}`, payload)
+}
