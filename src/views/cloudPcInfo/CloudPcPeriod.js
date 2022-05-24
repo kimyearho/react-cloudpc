@@ -16,7 +16,7 @@ function CloudPcPeriod({
 }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [modalData, setModalData] = useState({})
-  const messageData = {
+  const modalStaticOptions = {
     title: '가상 PC 기간 연장 신청',
     description:
       '가상 PC 기간 연장 신청 접수 후 담당 관리자의 검토 후 처리 예정 입니다.',
@@ -89,8 +89,8 @@ function CloudPcPeriod({
       {isModalVisible ? (
         <PeriodExtensionModal
           isModalVisible={isModalVisible}
-          items={modalData}
-          message={messageData}
+          modalData={modalData}
+          modalOptions={modalStaticOptions}
           handleCancel={() => setIsModalVisible(false)}
         />
       ) : null}

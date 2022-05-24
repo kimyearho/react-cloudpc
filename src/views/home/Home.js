@@ -38,7 +38,7 @@ function Home() {
   const [userResource, setUserResource] = useState(null)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [alias, setAlias] = useState(null)
-  const modalMessage = {
+  const modalStaticOptions = {
     title: '가상 PC 별칭 설정',
     description:
       '가상 PC 별로 별칭을 설정하면 목록에서 가상 PC를 쉽고 빠르게 구분할 수 있습니다.',
@@ -255,8 +255,8 @@ function Home() {
           isModalVisible={isModalVisible}
           handleOk={parentModalCallback}
           handleCancel={() => setIsModalVisible(false)}
-          message={modalMessage}
-          items={alias}
+          modalOptions={modalStaticOptions}
+          modalData={alias}
         />
       ) : null}
     </>

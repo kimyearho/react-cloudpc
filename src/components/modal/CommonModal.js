@@ -4,8 +4,8 @@ import _ from 'lodash'
 
 const CommonModal = ({
   isModalVisible,
-  items,
-  message,
+  modalData,
+  modalOptions,
   handleOk,
   handleCancel,
   children
@@ -28,7 +28,7 @@ const CommonModal = ({
   const onFinish = async () => {
     const values = await form.validateFields()
     if (values) {
-      values.origin = Object.assign({}, items)
+      values.origin = Object.assign({}, modalData)
       handleOk(values)
     }
   }
@@ -36,17 +36,17 @@ const CommonModal = ({
   useEffect(() => {
     if (isModalVisible) {
       let formModels = {}
-      for (const [key, value] of Object.entries(items)) {
+      for (const [key, value] of Object.entries(modalData)) {
         formModels[key] = value
       }
       form.setFieldsValue(formModels)
     }
-  }, [form, isModalVisible, items])
+  }, [form, isModalVisible, modalData])
 
   return (
     <>
       <Modal
-        title={<b>{message.title}</b>}
+        title={<b>{modalOptions.title}</b>}
         centered
         forceRender
         footer={null}
@@ -57,7 +57,7 @@ const CommonModal = ({
       >
         <Alert
           className="mb-20p"
-          description={<b>{message.description}</b>}
+          description={<b>{modalOptions.description}</b>}
           type="info"
           showIcon
         />
@@ -79,7 +79,7 @@ const CommonModal = ({
               htmlType="button"
               onClick={onFinish}
             >
-              {message.button.apply}
+              {modalOptions.button.apply}
             </Button>
             <Button
               className="width-100p"
@@ -88,7 +88,7 @@ const CommonModal = ({
               style={{ marginLeft: '10px' }}
               onClick={handleCancel}
             >
-              {message.button.cancel}
+              {modalOptions.button.cancel}
             </Button>
           </Form.Item>
         </Form>
