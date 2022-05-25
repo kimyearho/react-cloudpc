@@ -9,6 +9,7 @@ import {
   call_userPcPeriodRequestCancel
 } from '../../../api/user'
 import CommonModal from '../../../components/modal/CommonModal'
+import { confirmBox, infoBox } from '../../../components/messageBox/MessageBox'
 
 const dateFormat = 'YYYY-MM-DD'
 
@@ -98,18 +99,26 @@ export const PeriodExtensionModal = (rootProps) => {
         pgrs_sts_cd: 'J001C',
         tgt_vm_id: parentData.vm_id
       }
-      try {
-        const requestId = requestPeriod.usr_req_id
-        const { status } = await call_userPcPeriodRequestCancel(
-          requestId,
-          payload
-        )
-        if (status === 200) {
-          message.info('신청이 취소 되었습니다.')
-        }
-      } catch (error) {
-        console.log(error)
+
+      const confirmProps = {
+        title: '알림',
+        content: <>Cloud PC 기간 연장 신청을 취소하시겠습니까?</>
       }
+      confirmBox(confirmProps, async () => {
+        try {
+          const requestId = requestPeriod.usr_req_id
+          const { status } = await call_userPcPeriodRequestCancel(
+            requestId,
+            payload
+          )
+          if (status === 200) {
+            message.info('신청이 취소 되었습니다.')
+            parentProps.handleCancel()
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      })
     } else {
       //* 신청 이력 없음
       payload = {
@@ -121,16 +130,27 @@ export const PeriodExtensionModal = (rootProps) => {
         tgt_vm_id: parentData.vm_id,
         usr_req_div_cd: 'J003PET'
       }
-      try {
-        const { status } = await call_userPcPeriodRequest(payload)
-        if (status === 200) {
-          message.info('기간 연장 신청 되었습니다.')
-        }
-      } catch (error) {
-        console.log(error)
+      const infoProps = {
+        title: '알림',
+        content: (
+          <>
+            Cloud PC 기간 연장 신청이 접수되었습니다.
+            <br /> 담당 관리자의검토 후 처리 예정입니다.
+          </>
+        )
       }
+      infoBox(infoProps, async () => {
+        try {
+          const { status } = await call_userPcPeriodRequest(payload)
+          if (status === 200) {
+            message.info('기간 연장 신청 되었습니다.')
+            parentProps.handleCancel()
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      })
     }
-    parentProps.handleCancel()
   }
 
   return (
