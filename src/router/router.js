@@ -5,7 +5,7 @@ import { WindowsOutlined, CodeSandboxOutlined } from '@ant-design/icons'
 
 import Layout from '../layouts/Layout'
 import Login from '../views/login/Login'
-import Home from '../views/home/Home'
+import Home from '../views/dashboard/Dashboard'
 
 // const Home = React.lazy(() => import('../views/home/Home'))
 const CloudPcDetail = React.lazy(() =>
