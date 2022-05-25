@@ -17,7 +17,6 @@ const AppLayout = () => {
       return {
         background:
           'url(' + meta['portal'].ptal_bg_stor_path + ') 0% 0% / cover',
-        backgroundRepeat: 'no-repeat',
         overflow: 'hidden'
       }
     }

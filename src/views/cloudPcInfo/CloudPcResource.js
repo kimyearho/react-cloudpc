@@ -101,7 +101,7 @@ const CloudPcResource = ({
             </Col>
             <Col span={4} className="alias-change-btn">
               <Button type="link" onClick={handelShowModal}>
-                <small>▶변경</small>
+                <small>▶&nbsp;변경</small>
               </Button>
             </Col>
           </Row>
