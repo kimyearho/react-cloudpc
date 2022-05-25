@@ -11,7 +11,7 @@ const EmptyLayout = () => {
   const loginImage = () => {
     if (meta && !isAuthentication) {
       return {
-        backgroundImage: 'url(' + meta['login'].lin_bg_stor_path + ')',
+        background: 'url(' + meta['login'].lin_bg_stor_path + ') 0% 0% / cover',
         backgroundRepeat: 'no-repeat',
         overflow: 'hidden'
       }

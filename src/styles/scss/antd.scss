@@ -122,8 +122,11 @@ body {
 
 .login-wrapper {
   margin-top: 200px;
-  width: 800px;
   max-height: 560px;
+
+  .ant-input-prefix {
+    margin-right: 15px;
+  }
 }
 
 .welcome-to {

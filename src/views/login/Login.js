@@ -19,7 +19,11 @@ import { SET_LOADING } from '../../store/modules/app'
 import { useNavigate } from 'react-router-dom'
 import _ from 'lodash'
 
-function Login() {
+import banner1 from '../../assets/images/login/user_banner_01.png'
+import banner2 from '../../assets/images/login/user_banner_02.png'
+import banner3 from '../../assets/images/login/user_banner_03.png'
+
+const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isAuthentication } = useSelector((state) => ({
@@ -80,38 +84,23 @@ function Login() {
 
   return (
     <Row className="login-wrapper">
-      <Col span={24} offset={15}>
+      <Col span={24}>
         <Row>
           <Col span={12}>
-            <Carousel style={{ width: 400 }} autoplay>
+            <Carousel style={{ width: 400, float: 'right' }} autoplay>
               <div>
                 <h3 style={contentStyle}>
-                  <img
-                    src={
-                      'https://192.168.162.45/pc/style/images/common/user_banner_03.png'
-                    }
-                    alt="logo1"
-                  />
+                  <img src={banner1} alt="logo1" />
                 </h3>
               </div>
               <div>
                 <h3 style={contentStyle}>
-                  <img
-                    src={
-                      'https://192.168.162.45/pc/style/images/common/user_banner_01.png'
-                    }
-                    alt="logo2"
-                  />
+                  <img src={banner2} alt="logo2" />
                 </h3>
               </div>
               <div>
                 <h3 style={contentStyle}>
-                  <img
-                    src={
-                      'https://192.168.162.45/pc/style/images/common/user_banner_02.png'
-                    }
-                    alt="logo3"
-                  />
+                  <img src={banner3} alt="logo3" />
                 </h3>
               </div>
             </Carousel>

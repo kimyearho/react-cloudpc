@@ -15,7 +15,8 @@ const AppLayout = () => {
   const portalImage = () => {
     if (meta && isAuthentication) {
       return {
-        backgroundImage: 'url(' + meta['portal'].ptal_bg_stor_path + ')',
+        background:
+          'url(' + meta['portal'].ptal_bg_stor_path + ') 0% 0% / cover',
         backgroundRepeat: 'no-repeat',
         overflow: 'hidden'
       }
