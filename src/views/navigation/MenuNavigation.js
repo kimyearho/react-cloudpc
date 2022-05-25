@@ -65,15 +65,7 @@ function MenuNavigation() {
       children: [
         {
           key: '1',
-          label: '자가 오류 복구'
-        },
-        {
-          key: '2',
-          label: '장애 처리 신청'
-        },
-        {
-          key: '3',
-          label: '스냅샷 및 복원'
+          label: <Link to="/cpc-setting">자가 오류 복구</Link>
         }
       ]
     }
