@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input } from 'antd'
 import CommonModal from '../../components/modal/CommonModal'
 
-export const AliasCangeMdoal = (props) => {
+export const AliasChangeMdoal = (props) => {
   return (
     <CommonModal {...props}>
       <Form.Item label="PC ID (권한 ID)" name="vm_nm">

@@ -57,6 +57,7 @@ export const userPcInfoFactory = (props) => {
     tnt_mtd_cd_nm: props.tnt_mtd_cd_nm,
     vm_nm: props.vm_nm,
     vm_als: props.vm_als,
+    vm_auth_id: props.vm_auth_id,
     vcpu_cnt: props.vcpu_cnt,
     vmm_capa: props.vmm_capa,
     vhd_capa: props.vhd_capa,

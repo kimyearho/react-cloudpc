@@ -536,6 +536,20 @@ body {
 .vpc-info {
   padding: 0 12px;
 
+  .word-overflow {
+    display: inline-block;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .alias-change-btn {
+    position: absolute;
+    right: 50px;
+    bottom: 25px;
+  }
+
   .ant-card-body {
     padding: 20px;
     font-size: 13px;

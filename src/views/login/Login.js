@@ -52,23 +52,27 @@ function Login() {
   const onFinish = async (values) => {
     if (!_.isEmpty(values)) {
       if (!isAuthentication) {
-        const { payload } = await dispatch(authUser(values))
-        const { acct_id } = payload.data
-        const { authorization } = payload.headers
-        if (!_.isEmpty(acct_id)) {
-          const params = {
-            acctId: acct_id,
-            accessToken: authorization
+        try {
+          const { payload } = await dispatch(authUser(values))
+          const { acct_id } = payload.data
+          const { authorization } = payload.headers
+          if (!_.isEmpty(acct_id)) {
+            const params = {
+              acctId: acct_id,
+              accessToken: authorization
+            }
+            const { meta } = await dispatch(userAccount(params))
+            if (meta.requestStatus === 'fulfilled') {
+              dispatch(SET_LOADING(true))
+              setTimeout(() => {
+                navigate('/dashboard', { replace: true })
+                dispatch(SET_LOADING(false))
+                message.info('정상적으로 로그인 되었습니다.')
+              }, 600)
+            }
           }
-          const { meta } = await dispatch(userAccount(params))
-          if (meta.requestStatus === 'fulfilled') {
-            dispatch(SET_LOADING(true))
-            setTimeout(() => {
-              navigate('/dashboard', { replace: true })
-              dispatch(SET_LOADING(false))
-              message.info('정상적으로 로그인 되었습니다.')
-            }, 600)
-          }
+        } catch (error) {
+          console.error(error)
         }
       }
     }

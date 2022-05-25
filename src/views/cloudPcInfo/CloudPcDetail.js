@@ -40,6 +40,10 @@ const CloudPcDetail = ({ meta }) => {
     }
   }
 
+  const aliasChangeCallbak = async () => {
+    await fetchResource()
+  }
+
   return (
     <>
       <Row className="mr-30">
@@ -54,7 +58,10 @@ const CloudPcDetail = ({ meta }) => {
                 <Col span={16}>
                   <Row>
                     {/* 우측 상단 기본 정보 & 지원 정보 */}
-                    <CloudPcResource {...userPcInfoFactory(item)} />
+                    <CloudPcResource
+                      {...userPcInfoFactory(item)}
+                      callback={aliasChangeCallbak}
+                    />
                   </Row>
                   <Row>
                     {/* 우측 하단 보안 정책 */}

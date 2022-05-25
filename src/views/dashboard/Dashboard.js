@@ -14,7 +14,7 @@ import Icon from '@ant-design/icons'
 import vmicon from '../../assets/images/vm_on.png'
 import CustomHeader from './CustomHeader'
 import ControlContent from './ControlContent'
-import { AliasCangeMdoal } from './DashboardModal'
+import { AliasChangeMdoal } from './DashboardModal'
 
 import _ from 'lodash'
 
@@ -252,7 +252,7 @@ function Home() {
         </Col>
       </Row>
       {isModalVisible ? (
-        <AliasCangeMdoal
+        <AliasChangeMdoal
           isModalVisible={isModalVisible}
           handleOk={parentModalCallback}
           handleCancel={() => setIsModalVisible(false)}
