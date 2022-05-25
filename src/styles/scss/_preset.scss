@@ -1,0 +1,101 @@
+#root {
+  height: 100%;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.mt-10p {
+  margin-top: 10px;
+}
+
+.width-100 {
+  width: 100% !important;
+}
+
+.width-150 {
+  width: 150%;
+}
+
+.width-100p {
+  width: 100px !important;
+}
+
+.mb-20p {
+  margin-bottom: 20px;
+}
+
+.mr-30 {
+  margin-right: 40%;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+// rem: from {m, mt, mb, ml, mr}-0 to {m, mt, mb, ml, mr}-10,
+// px: from {m, mt, mb, ml, mr}-0 to {m, mt, mb, ml, mr}-10px,
+// rem: from {p, pt, pb, pl, pr}-0 to {p, pt, pb, pl, pr}-10,
+// px: from {p, pt, pb, pl, pr}-0 to {p, pt, pb, pl, pr}-10px,
+@for $i from 0 through 50 {
+  .m-#{$i} {
+    margin: #{1 * $i}rem !important;
+  }
+  .mt-#{$i} {
+    margin-top: #{1 * $i}rem !important;
+  }
+  .mb-#{$i} {
+    margin-bottom: #{1 * $i}rem !important;
+  }
+  .ml-#{$i} {
+    margin-left: #{1 * $i}rem !important;
+  }
+  .mr-#{$i} {
+    margin-right: #{1 * $i}rem !important;
+  }
+  .mt-#{$i}px {
+    margin-top: #{$i}px !important;
+  }
+  .mb-#{$i}px {
+    margin-bottom: #{$i}px !important;
+  }
+  .ml-#{$i}px {
+    margin-left: #{$i}px !important;
+  }
+  .mr-#{$i}px {
+    margin-right: #{$i}px !important;
+  }
+
+  .p-#{$i} {
+    padding: #{1 * $i}rem !important;
+  }
+  .pt-#{$i} {
+    padding-top: #{1 * $i}rem !important;
+  }
+  .pb-#{$i} {
+    padding-bottom: #{1 * $i}rem !important;
+  }
+  .pl-#{$i} {
+    padding-left: #{1 * $i}rem !important;
+  }
+  .pr-#{$i} {
+    padding-right: #{1 * $i}rem !important;
+  }
+  .pt-#{$i}px {
+    padding-top: #{$i}px !important;
+  }
+  .pb-#{$i}px {
+    padding-bottom: #{$i}px !important;
+  }
+  .pl-#{$i}px {
+    padding-left: #{$i}px !important;
+  }
+  .pr-#{$i}px {
+    padding-right: #{$i}px !important;
+  }
+}

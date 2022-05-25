@@ -11,6 +11,20 @@
     }
   }
 
+  .ant-card-body {
+    .grid-title {
+      padding-left: 5px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .ant-table-wrapper {
+      border-top: 1px solid;
+    }
+    .ant-spin-spinning {
+      margin-top: 0;
+    }
+  }
+
   .ant-card-body .ant-row {
     .monitor {
       text-align: center;

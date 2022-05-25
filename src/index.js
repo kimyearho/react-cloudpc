@@ -2,11 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import 'antd/dist/antd.min.css'
-// import './styles/antd.css'
-// import './styles/panel.css'
-// import './styles/loader.css'
-
-import './styles/scss/index.scss'
+import './styles/index.scss'
 import App from './views/App'
 
 import { Provider } from 'react-redux'
@@ -18,13 +14,13 @@ const root = ReactDOM.createRoot(container)
 
 //* React 18 bootstrap
 root.render(
-  // <React.StrictMode>
+  //<React.StrictMode>
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>
-  // {/* </React.StrictMode> */}
+  //</React.StrictMode>
 )
 
 // import reportWebVitals from './reportWebVitals';

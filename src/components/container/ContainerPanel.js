@@ -16,7 +16,7 @@ const ContainerLoading = () => {
   )
 }
 
-const ContainerPanel = ({ loading, routeMeta, children }) => {
+const ContainerPanel = ({ loading, routeMeta, children, height }) => {
   const navigate = useNavigate()
   const [meta, setMeta] = useState({})
 
@@ -34,6 +34,7 @@ const ContainerPanel = ({ loading, routeMeta, children }) => {
     <>
       <Card
         className="container-panel"
+        style={{ height: height }}
         title={<div className="container-title">{meta.ctrTitle}</div>}
         bordered={false}
         extra={

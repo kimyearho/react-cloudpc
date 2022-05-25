@@ -53,9 +53,7 @@ export const routers = [
         icon: <WindowsOutlined />,
         element: (
           <RequireAuth>
-            {/* <Suspense fallback={<Loader />}> */}
             <Home />
-            {/* </Suspense> */}
           </RequireAuth>
         )
       },
