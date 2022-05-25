@@ -1,6 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import _ from 'lodash'
-import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { Form, Input, DatePicker, message } from 'antd'
 import {
@@ -8,8 +6,11 @@ import {
   call_userPcPeriodRequest,
   call_userPcPeriodRequestCancel
 } from '../../../api/user'
-import CommonModal from '../../../components/modal/CommonModal'
 import { confirmBox, infoBox } from '../../../components/messageBox/MessageBox'
+import CommonWrapperModal from '../../../components/modal/CommonWrapperModal'
+
+import _ from 'lodash'
+import moment from 'moment'
 
 const dateFormat = 'YYYY-MM-DD'
 
@@ -155,7 +156,7 @@ export const PeriodExtensionModal = (rootProps) => {
 
   return (
     <>
-      <CommonModal {...parentProps} handleOk={userPeriodReqeust}>
+      <CommonWrapperModal {...parentProps} handleOk={userPeriodReqeust}>
         <Form.Item label="현재 사용기간" name="current_period">
           <Input readOnly />
         </Form.Item>
@@ -168,7 +169,7 @@ export const PeriodExtensionModal = (rootProps) => {
             format={dateFormat}
           />
         </Form.Item>
-      </CommonModal>
+      </CommonWrapperModal>
     </>
   )
 }

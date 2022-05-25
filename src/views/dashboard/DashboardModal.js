@@ -1,16 +1,16 @@
 import React from 'react'
 import { Form, Input } from 'antd'
-import CommonModal from '../../components/modal/CommonModal'
+import CommonWrapperModal from '../../components/modal/CommonWrapperModal'
 
 export const AliasChangeMdoal = (props) => {
   return (
-    <CommonModal {...props}>
+    <CommonWrapperModal {...props}>
       <Form.Item label="PC ID (권한 ID)" name="vm_nm">
-        <Input disabled />
+        <Input readOnly />
       </Form.Item>
 
       <Form.Item label="기존 별칭" name="vm_als">
-        <Input disabled />
+        <Input readOnly />
       </Form.Item>
 
       <Form.Item
@@ -20,6 +20,6 @@ export const AliasChangeMdoal = (props) => {
       >
         <Input />
       </Form.Item>
-    </CommonModal>
+    </CommonWrapperModal>
   )
 }
