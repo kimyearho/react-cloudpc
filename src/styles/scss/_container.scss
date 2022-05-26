@@ -19,9 +19,12 @@
     }
     .ant-table-wrapper {
       border-top: 1px solid;
+      .ant-spin-spinning {
+        margin-top: 0;
+      }
     }
-    .ant-spin-spinning {
-      margin-top: 0;
+    .ant-table-content {
+      font-size: 13px;
     }
   }
 

@@ -7,7 +7,7 @@ import {
   userPcInfoFactory
 } from '../../api/factory/resource_factory'
 
-import ContainerPanel from '../../components/container/ContainerPanel'
+import ContainerWrapper from '../../components/container/ContainerWrapper'
 import CloudPcPeriod from './CloudPcPeriod'
 import CloudPcResource from './CloudPcResource'
 import CloudPcSecurity from './CloudPcSecurity'
@@ -26,6 +26,10 @@ const CloudPcDetail = ({ meta }) => {
     fetchResource()
   }, [])
 
+  /**
+   * @description
+   * 사용자에게 할당 된 전체 VM을 조회 합니다.
+   */
   const fetchResource = async () => {
     try {
       const data = await call_resource()
@@ -40,7 +44,11 @@ const CloudPcDetail = ({ meta }) => {
     }
   }
 
-  const aliasChangeCallbak = async () => {
+  /**
+   * @description
+   * 별칭 변경시 목록을 갱신 합니다.
+   */
+  const aliasChangeCallback = async () => {
     await fetchResource()
   }
 
@@ -48,7 +56,7 @@ const CloudPcDetail = ({ meta }) => {
     <>
       <Row className="mr-30">
         <Col offset={2}>
-          <ContainerPanel loading={loading} routeMeta={meta}>
+          <ContainerWrapper loading={loading} routeMeta={meta}>
             {cloudPcList.map((item) => (
               <Row style={style.divRow} key={item.vm_id}>
                 <Col span={8}>
@@ -60,7 +68,7 @@ const CloudPcDetail = ({ meta }) => {
                     {/* 우측 상단 기본 정보 & 지원 정보 */}
                     <CloudPcResource
                       {...userPcInfoFactory(item)}
-                      callback={aliasChangeCallbak}
+                      callback={aliasChangeCallback}
                     />
                   </Row>
                   <Row>
@@ -70,7 +78,7 @@ const CloudPcDetail = ({ meta }) => {
                 </Col>
               </Row>
             ))}
-          </ContainerPanel>
+          </ContainerWrapper>
         </Col>
       </Row>
     </>

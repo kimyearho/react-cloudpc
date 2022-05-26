@@ -31,7 +31,6 @@ const ContainerLoading = () => {
 }
 
 function Home() {
-  // const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const [resource, setResource] = useState([])
   const [activeKey, setActiveKey] = useState('')
@@ -58,7 +57,7 @@ function Home() {
 
   /**
    * @@description
-   * mount시 useEffect에 의해 처음 한번만 실행한다.
+   * 할당 된 VM을 모두 조회 합니다.
    */
   const fetchInit = async () => {
     //* 전체 리소스 조회
@@ -75,9 +74,9 @@ function Home() {
 
   /**
    * @description
-   * 선택한 VM의 데이터와, VM의 이미지 아이디로 이미지 정보를 함께 조회한다.
-   * 이미지 정보에는 소프트웨어 명이 포함되어 있어, 소프트웨어 명을 추출하여 VM정보에 추가한다.
-   * 마지막으로 Collapse의 활성화 key값을 업데이트한다.
+   * 선택한 VM의 데이터와, VM의 이미지 아이디로 이미지 정보를 함께 조회합니다.
+   * 이미지 정보에는 소프트웨어 명이 포함되어 있어, 소프트웨어 명을 추출하여 VM정보에 추가하고,
+   * 마지막으로 Collapse의 활성화 key값을 업데이트합니다.
    *
    * @param {*} key - VM 인증 아이디
    */
@@ -100,7 +99,7 @@ function Home() {
 
   /**
    * @description
-   * 선택한 VM 데이터에 해당 VM의 자원 사용량 정보를 조회하여 추가한다.
+   * 선택한 VM 데이터에 해당 VM의 자원 사용량 정보를 조회한 뒤 추가합니다.
    *
    * @param {Object} userResourceData - 특정 VM 데이터
    * @param {String} vm_auth_id - VM 인증 아이디
@@ -120,7 +119,7 @@ function Home() {
 
   /**
    * @description
-   * VM 선택시 실행된다.
+   * VM 선택시 실행 됩니다.
    *
    * @param {String} vm_auth_id - VM 인증 아이디
    */
@@ -134,8 +133,8 @@ function Home() {
 
   /**
    * @description
-   * 별칭 변경을 클릭했을때 실행 된다.
-   * 모달의 데이터를 설정하고 모달을 오픈한다.
+   * 별칭 변경을 클릭했을때 실행 됩니다.
+   * 모달의 데이터를 설정하고 모달을 오픈합니다.
    *
    * @param {Object} data - {vm_als: string, vm_auth_id: string, vm_nm: string}
    */
@@ -151,7 +150,7 @@ function Home() {
 
   /**
    * @description
-   * Modal submit이 발생했을 때 이벤트 처리를 위한 callback을 받는다.
+   * 별칭 변경이 발생했을 때 이벤트 처리를 합니다.
    *
    * @param {Object} data - {newAlias: string}
    */

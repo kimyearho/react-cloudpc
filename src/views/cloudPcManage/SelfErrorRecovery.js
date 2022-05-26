@@ -6,7 +6,7 @@ import { CheckOutlined } from '@ant-design/icons'
 import { call_recoveryList } from '../../api/system'
 import { recoveryFactory } from '../../api/factory/system_factory'
 
-import ContainerPanel from '../../components/container/ContainerPanel'
+import ContainerWrapper from '../../components/container/ContainerWrapper'
 
 const SelfErrorRecovery = ({ meta }) => {
   const [loading, setLoading] = useState(true)
@@ -52,6 +52,10 @@ const SelfErrorRecovery = ({ meta }) => {
     fetchRecoveryList()
   }, [])
 
+  /**
+   * @description
+   * 최근 오류 복구 내역을 조회한다.
+   */
   const fetchRecoveryList = async () => {
     try {
       const params = {
@@ -72,11 +76,17 @@ const SelfErrorRecovery = ({ meta }) => {
     }
   }
 
+  /**
+   * @description
+   * 오류 복구 실행을 시작한다.
+   */
+  const recoveryExcute = async () => {}
+
   return (
     <>
       <Row className="mr-30">
         <Col offset={2}>
-          <ContainerPanel loading={false} routeMeta={meta} height="700px">
+          <ContainerWrapper loading={false} routeMeta={meta} height="700px">
             <Row>
               <Col span={24}>
                 <Space className="grid-title">
@@ -99,12 +109,12 @@ const SelfErrorRecovery = ({ meta }) => {
             </Row>
             <Row className="fr mt-30px">
               <Col span={24}>
-                <Button size="middle" icon={<CheckOutlined />}>
+                <Button size="middle" icon={<CheckOutlined />} onClick>
                   오류 복구 실행
                 </Button>
               </Col>
             </Row>
-          </ContainerPanel>
+          </ContainerWrapper>
         </Col>
       </Row>
     </>
