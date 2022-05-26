@@ -6,8 +6,8 @@ const AlertDescription = ({ alertTitle, alertMessage }) => {
     <>
       <Alert
         className="mb-20p"
-        message={<b>{alertTitle}</b>}
-        description={alertMessage}
+        message={alertTitle}
+        description={<b>{alertMessage}</b>}
         type="info"
         showIcon
       />

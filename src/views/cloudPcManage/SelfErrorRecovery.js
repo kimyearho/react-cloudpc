@@ -7,10 +7,12 @@ import { call_recoveryList } from '../../api/system'
 import { recoveryFactory } from '../../api/factory/system_factory'
 
 import ContainerWrapper from '../../components/container/ContainerWrapper'
+import RecoveryPcModal from './components/RecoveryPcModal'
 
 const SelfErrorRecovery = ({ meta }) => {
   const [loading, setLoading] = useState(true)
   const [recoveryList, setRecoveryList] = useState([])
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const { userAccount } = useSelector((state) => ({
     userAccount: state.user.userAccount
   }))
@@ -54,7 +56,7 @@ const SelfErrorRecovery = ({ meta }) => {
 
   /**
    * @description
-   * 최근 오류 복구 내역을 조회한다.
+   * 최근 오류 복구 내역을 조회합니다.
    */
   const fetchRecoveryList = async () => {
     try {
@@ -76,12 +78,6 @@ const SelfErrorRecovery = ({ meta }) => {
     }
   }
 
-  /**
-   * @description
-   * 오류 복구 실행을 시작한다.
-   */
-  const recoveryExcute = async () => {}
-
   return (
     <>
       <Row className="mr-30">
@@ -101,6 +97,7 @@ const SelfErrorRecovery = ({ meta }) => {
                 <Table
                   className="ant-table"
                   columns={columns}
+                  size="middle"
                   dataSource={recoveryList}
                   pagination={false}
                   loading={loading}
@@ -109,7 +106,11 @@ const SelfErrorRecovery = ({ meta }) => {
             </Row>
             <Row className="fr mt-30px">
               <Col span={24}>
-                <Button size="middle" icon={<CheckOutlined />} onClick>
+                <Button
+                  size="middle"
+                  icon={<CheckOutlined />}
+                  onClick={() => setIsModalVisible(true)}
+                >
                   오류 복구 실행
                 </Button>
               </Col>
@@ -117,6 +118,12 @@ const SelfErrorRecovery = ({ meta }) => {
           </ContainerWrapper>
         </Col>
       </Row>
+      {isModalVisible ? (
+        <RecoveryPcModal
+          isModalVisible={isModalVisible}
+          handelCancel={() => setIsModalVisible(false)}
+        />
+      ) : null}
     </>
   )
 }

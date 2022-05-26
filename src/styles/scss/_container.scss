@@ -26,6 +26,9 @@
     .ant-table-content {
       font-size: 13px;
     }
+    .ant-alert-description {
+      font-size: 12px;
+    }
   }
 
   .ant-card-body .ant-row {
@@ -59,4 +62,17 @@
   padding: 20px;
   font-size: 12px;
   background: #f2f4f7;
+}
+
+.recovery-wrapper {
+  .ant-table {
+    border-top: 1px solid;
+    font-size: 12px;
+  }
+}
+
+.recovery-modal {
+  .ant-alert-description {
+    font-size: 12px;
+  }
 }

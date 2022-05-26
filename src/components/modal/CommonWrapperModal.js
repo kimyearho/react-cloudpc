@@ -55,6 +55,7 @@ const CommonModal = ({
   return (
     <>
       <Modal
+        className={modalOptions.className}
         title={<b>{modalOptions.title}</b>}
         width={modalOptions.width}
         centered
@@ -67,6 +68,7 @@ const CommonModal = ({
       >
         <Alert
           className="mb-20p"
+          message={modalOptions.alertTitle}
           description={<b>{modalOptions.description}</b>}
           type="info"
           showIcon
