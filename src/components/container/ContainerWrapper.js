@@ -24,6 +24,22 @@ const ContainerWrapper = ({ loading, routeMeta, children, height }) => {
 
   const routes = routers[0].children
   const currentRoute = routes.filter((item) => item.path === pathname)
+  const breadcrumbChildItems = () => {
+    let breadcrumbItems = []
+    currentRoute.forEach((item) => {
+      breadcrumbItems.push(
+        <Breadcrumb.Item key={item.key}>{item.label}</Breadcrumb.Item>
+      )
+      if (item.children && item.children.length > 0) {
+        item.children.forEach((child) => {
+          breadcrumbItems.push(
+            <Breadcrumb.Item key={child.key}>{child.label}</Breadcrumb.Item>
+          )
+        })
+      }
+    })
+    return breadcrumbItems
+  }
 
   useEffect(() => {
     if (routeMeta) {
@@ -52,18 +68,7 @@ const ContainerWrapper = ({ loading, routeMeta, children, height }) => {
                 >
                   <HomeOutlined />
                 </Breadcrumb.Item>
-                {currentRoute.map((item) => (
-                  <Breadcrumb.Item key={item.key}>{item.label}</Breadcrumb.Item>
-                ))}
-                {currentRoute.map((item) =>
-                  item.children
-                    ? item.children.map((child) => (
-                        <Breadcrumb.Item key={child.key}>
-                          {child.label}
-                        </Breadcrumb.Item>
-                      ))
-                    : null
-                )}
+                {breadcrumbChildItems()}
               </Breadcrumb>
             </Space>
           </>
