@@ -20,8 +20,6 @@ service.interceptors.request.use((config) => {
 
 service.interceptors.response.use(
   (res) => {
-    // const token = res.headers.authorization
-    // if (token) store.commit('account/SET_TOKEN', token)
     res['data'] = res.data.data || res.data
     return res
   },
@@ -35,6 +33,7 @@ service.interceptors.response.use(
         forwardCodes.includes(apiError.code)
     if (apiError) {
       if ('AGW-1003,AGW-1004,AGW-1005'.indexOf(apiError.code) > -1) {
+        console.log('11111111111111')
         // store.dispatch('user/fedLogOut').then(() => {
         //   let query
         //   if (location.pathname !== '/dashboard') {

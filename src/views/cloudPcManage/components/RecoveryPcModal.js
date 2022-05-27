@@ -3,10 +3,19 @@ import { Row, Col, Space, Table } from 'antd'
 import { call_resource } from '../../../api/resource'
 import { resourceFactory } from '../../../api/factory/system_factory'
 import { recoveryModalOptions } from '../../../utils/modalOptions'
+import { call_updateVmRecovery } from '../../../api/resource'
+import { confirmBox } from '../../../components/messageBox/MessageBox'
 import CommonWrapperModal from '../../../components/modal/CommonWrapperModal'
+import _ from 'lodash'
 
-const RecoveryPcModal = ({ isModalVisible, handelCancel }) => {
+const RecoveryPcModal = ({
+  isModalVisible,
+  handelCancel,
+  listLoading,
+  listCallback
+}) => {
   const [loading, setLoading] = useState(false)
+  const [selectedRow, setSelectedRow] = useState({})
   const [vmList, setVmList] = useState([])
   const columns = [
     {
@@ -24,6 +33,7 @@ const RecoveryPcModal = ({ isModalVisible, handelCancel }) => {
   ]
 
   useEffect(() => {
+    setLoading(true)
     fetchResource()
   }, [])
 
@@ -32,6 +42,7 @@ const RecoveryPcModal = ({ isModalVisible, handelCancel }) => {
       const data = await call_resource()
       if (data.length > 0) {
         setVmList(resourceFactory(data))
+        setLoading(false)
       }
     } catch (error) {
       console.error(error)
@@ -39,23 +50,49 @@ const RecoveryPcModal = ({ isModalVisible, handelCancel }) => {
   }
 
   const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        'selectedRows: ',
-        selectedRows
-      )
+    onChange: (_, selectedRows) => {
+      if (selectedRows.length > 0) {
+        setSelectedRow(selectedRows[0])
+        recoveryModalOptions.buttonProps.disabled = false
+      }
     },
     getCheckboxProps: (record) => ({
       tnt_mtd_cd_nm: record.tnt_mtd_cd_nm
     })
   }
 
-  const recoveryExcute = async () => {
-    console.log('recoveryExcute !')
+  const recoveryExcute = () => {
+    if (_.isEmpty(selectedRow)) return
+    const { vm_power_sts_cd } = selectedRow
+    if (vm_power_sts_cd === 'V002ONC') {
+      const confirmProps = {
+        title: '알림',
+        content: (
+          <>가상 PC 전원이 켜져 있습니다. 강제로 종료 후 진행하시겠습니까?</>
+        )
+      }
+      confirmBox(confirmProps, async () => {
+        closeRecoveryModal()
+        listLoading(true)
+        try {
+          const { vm_auth_id } = selectedRow
+          const { status } = await call_updateVmRecovery(vm_auth_id)
+          setTimeout(() => {
+            if (status === 200) {
+              listLoading(false)
+              listCallback()
+            }
+          }, 10000)
+        } catch (error) {
+          console.error(error)
+          setLoading(false)
+        }
+      })
+    }
   }
 
-  const closeModal = () => {
+  const closeRecoveryModal = () => {
+    recoveryModalOptions.buttonProps.disabled = true
     handelCancel()
   }
 
@@ -63,10 +100,9 @@ const RecoveryPcModal = ({ isModalVisible, handelCancel }) => {
     <>
       <CommonWrapperModal
         isModalVisible={isModalVisible}
-        modalData={{ a: '1', b: '2' }}
         modalOptions={recoveryModalOptions}
         handleOk={recoveryExcute}
-        handleCancel={closeModal}
+        handleCancel={closeRecoveryModal}
       >
         <Row className="recovery-wrapper">
           <Col span={24}>
@@ -84,7 +120,7 @@ const RecoveryPcModal = ({ isModalVisible, handelCancel }) => {
                 <Table
                   className="ant-table"
                   rowSelection={{
-                    type: 'checkbox',
+                    type: 'radio',
                     ...rowSelection
                   }}
                   size="small"

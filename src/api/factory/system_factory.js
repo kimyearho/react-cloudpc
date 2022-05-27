@@ -25,7 +25,9 @@ export const resourceFactory = (data) => {
       key: index,
       tnt_mtd_cd_nm: item.tnt_mtd_cd_nm,
       vm_nm: item.vm_nm,
-      vm_als: item.vm_als
+      vm_als: item.vm_als,
+      vm_auth_id: item.vm_auth_id,
+      vm_power_sts_cd: item.vm_power_sts_cd
     })
   })
   return list

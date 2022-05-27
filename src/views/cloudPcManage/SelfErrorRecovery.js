@@ -98,13 +98,18 @@ const SelfErrorRecovery = ({ meta }) => {
                   className="ant-table"
                   columns={columns}
                   size="middle"
+                  pagination={{
+                    position: ['bottomLeft'],
+                    total: recoveryList.length,
+                    pageSize: 5,
+                    defaultCurrent: 1
+                  }}
                   dataSource={recoveryList}
-                  pagination={false}
                   loading={loading}
                 />
               </Col>
             </Row>
-            <Row className="fr mt-30px">
+            <Row className="fr">
               <Col span={24}>
                 <Button
                   size="middle"
@@ -122,6 +127,8 @@ const SelfErrorRecovery = ({ meta }) => {
         <RecoveryPcModal
           isModalVisible={isModalVisible}
           handelCancel={() => setIsModalVisible(false)}
+          listLoading={setLoading}
+          listCallback={fetchRecoveryList}
         />
       ) : null}
     </>

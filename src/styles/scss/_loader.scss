@@ -14,3 +14,9 @@
     margin-top: 150px;
   }
 }
+
+.recovery-modal {
+  .ant-modal-content .ant-spin-spinning {
+    margin-top: 0;
+  }
+}

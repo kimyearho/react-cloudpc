@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react'
 import { Alert, Modal, Form, Button, Divider } from 'antd'
 import _ from 'lodash'
@@ -11,6 +12,7 @@ const CommonModal = ({
   children
 }) => {
   const [form] = Form.useForm()
+  const templateType = modalOptions.templateType
   const modalStyle = {
     divder: {
       margin: '30px 0'
@@ -35,22 +37,26 @@ const CommonModal = ({
     }
   }
   const onFinish = async () => {
-    const values = await form.validateFields()
-    if (values) {
-      values.origin = Object.assign({}, modalData)
-      handleOk(values)
+    if (templateType === 'form') {
+      const values = await form.validateFields()
+      if (values) {
+        values.origin = Object.assign({}, modalData)
+        handleOk(values)
+      }
+    } else {
+      handleOk()
     }
   }
 
   useEffect(() => {
-    if (isModalVisible) {
+    if (isModalVisible && templateType === 'form') {
       let formModels = {}
       for (const [key, value] of Object.entries(modalData)) {
         formModels[key] = value
       }
       form.setFieldsValue(formModels)
     }
-  }, [form, isModalVisible, modalData])
+  }, [form, isModalVisible, modalData, templateType])
 
   return (
     <>
@@ -90,6 +96,10 @@ const CommonModal = ({
               type="primary"
               size="large"
               htmlType="button"
+              disabled={
+                modalOptions.buttonProps.disabled &&
+                modalOptions.buttonProps.disabled
+              }
               onClick={onFinish}
             >
               {modalOptions.buttonLabel.apply}
