@@ -1,4 +1,4 @@
-import request from '../utils/request'
+import { service as request } from '../utils/request'
 import { userRequesteFactory } from './factory/user_factory'
 
 /**

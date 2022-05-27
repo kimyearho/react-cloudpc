@@ -1,4 +1,4 @@
-import request from '../utils/request'
+import { service as request } from '../utils/request'
 
 /**
  * @description 자가 오류 복구를 조회한다.

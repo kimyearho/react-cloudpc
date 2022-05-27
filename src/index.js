@@ -6,7 +6,9 @@ import './styles/index.scss'
 import App from './views/App'
 
 import { Provider } from 'react-redux'
+import { injectStore } from './utils/request'
 import store from './store/store'
+injectStore(store)
 
 //* React 18 bootstrap
 const container = document.getElementById('root')

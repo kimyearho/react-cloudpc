@@ -1,8 +1,17 @@
 import axios from 'axios'
 import { uuid } from './utils'
 import { getToken } from './storage'
+import { infoBox } from '../components/messageBox/MessageBox'
 
-const service = axios.create({
+import { SET_LOGOUT } from '../store/modules/user'
+import { SET_LOADING } from '../store/modules/app'
+
+let store
+export const injectStore = (_store) => {
+  store = _store
+}
+
+export const service = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 10000
 })
@@ -33,22 +42,22 @@ service.interceptors.response.use(
         forwardCodes.includes(apiError.code)
     if (apiError) {
       if ('AGW-1003,AGW-1004,AGW-1005'.indexOf(apiError.code) > -1) {
-        console.log('11111111111111')
-        // store.dispatch('user/fedLogOut').then(() => {
-        //   let query
-        //   if (location.pathname !== '/dashboard') {
-        //     query = { redirect: location.pathname }
-        //   }
-        //   router.replace({
-        //     path: '/login',
-        //     params: {
-        //       errCode: apiError.code,
-        //       errMsg: apiError.comment
-        //     },
-        //     query
-        //   })
-        //   alert(apiError.comment || 'Verification failed, please login again')
-        // })
+        const boxProps = {
+          title: '알림',
+          content: '인증이 만료되어 로그인 페이지로 이동합니다.'
+        }
+        infoBox(boxProps, async () => {
+          try {
+            await store.dispatch(SET_LOADING(true))
+            setTimeout(() => {
+              store.dispatch(SET_LOGOUT())
+              window.location.href = '/login'
+              store.dispatch(SET_LOADING(false))
+            }, 600)
+          } catch (error) {
+            console.error(error)
+          }
+        })
       } else {
         if ('AGW-1007'.indexOf(apiError.code) > -1) {
           console.log('AGW-1007 error')
@@ -66,5 +75,3 @@ service.interceptors.response.use(
     }
   }
 )
-
-export default service

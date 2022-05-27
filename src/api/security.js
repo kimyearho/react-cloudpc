@@ -1,4 +1,4 @@
-import request from '../utils/request'
+import { service as request } from '../utils/request'
 
 /**
  * @description 특정 보안 정책을 조회한다.
