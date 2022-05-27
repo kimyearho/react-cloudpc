@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Col, Card, Row, Button, message } from 'antd'
 import { call_updateVmAlias } from '../../api/resource'
 import { AliasChangeMdoal } from '../dashboard/DashboardModal'
+import { aliasChangeMdoalOptions } from '../../utils/modalOptions'
 
 import iconCpu from '../../assets/images/security/ico_cpu.png'
 import iconMem from '../../assets/images/security/ico_mem.png'
@@ -21,19 +22,6 @@ const CloudPcResource = ({
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [alias, setAlias] = useState(null)
-  const modalStaticOptions = {
-    width: 630,
-    title: '가상 PC 별칭 설정',
-    description:
-      '가상 PC 별로 별칭을 설정하면 목록에서 가상 PC를 쉽고 빠르게 구분할 수 있습니다.',
-    buttonLabel: {
-      apply: '변경',
-      cancel: '취소'
-    },
-    buttonProps: {
-      disabled: false
-    }
-  }
 
   const style = {
     specTitle: {
@@ -152,7 +140,7 @@ const CloudPcResource = ({
           isModalVisible={isModalVisible}
           handleOk={handelModalCallback}
           handleCancel={() => setIsModalVisible(false)}
-          modalOptions={modalStaticOptions}
+          modalOptions={aliasChangeMdoalOptions}
           modalData={alias}
         />
       ) : null}

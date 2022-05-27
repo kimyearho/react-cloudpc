@@ -15,6 +15,7 @@ import vmicon from '../../assets/images/vm_on.png'
 import CustomHeader from './CustomHeader'
 import ControlContent from './ControlContent'
 import { AliasChangeMdoal } from './DashboardModal'
+import { aliasChangeMdoalOptions } from '../../utils/modalOptions'
 
 import _ from 'lodash'
 
@@ -255,7 +256,7 @@ function Home() {
           isModalVisible={isModalVisible}
           handleOk={parentModalCallback}
           handleCancel={() => setIsModalVisible(false)}
-          modalOptions={modalStaticOptions}
+          modalOptions={aliasChangeMdoalOptions}
           modalData={alias}
         />
       ) : null}

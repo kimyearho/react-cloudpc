@@ -2,6 +2,7 @@ import moment from 'moment'
 import React, { useState } from 'react'
 import { Col, Row, Space, Divider, Typography, Button } from 'antd'
 import { PeriodExtensionModal } from './components/ResourceModal'
+import { userPcPeriodModalOptions } from '../../utils/modalOptions'
 import winPc from '../../assets/images/img_win_pc_on.png'
 
 function CloudPcPeriod({
@@ -16,19 +17,6 @@ function CloudPcPeriod({
 }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [modalData, setModalData] = useState({})
-  const modalStaticOptions = {
-    width: 560,
-    title: '가상 PC 기간 연장 신청',
-    description:
-      '가상 PC 기간 연장 신청 접수 후 담당 관리자의 검토 후 처리 예정 입니다.',
-    buttonLabel: {
-      apply: '신청',
-      cancel: '취소'
-    },
-    buttonProps: {
-      disabled: false
-    }
-  }
 
   const showPcPeriod = () => {
     const modalModel = {
@@ -91,7 +79,7 @@ function CloudPcPeriod({
         <PeriodExtensionModal
           isModalVisible={isModalVisible}
           modalData={modalData}
-          modalOptions={modalStaticOptions}
+          modalOptions={userPcPeriodModalOptions}
           handleCancel={() => setIsModalVisible(false)}
         />
       ) : null}
