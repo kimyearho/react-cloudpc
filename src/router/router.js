@@ -64,6 +64,7 @@ export const routers = [
         label: 'Cloud PC 정보',
         children: [
           {
+            key: 'child-cpc-list',
             index: true,
             label: 'Cloud PC 목록',
             element: (
@@ -89,6 +90,7 @@ export const routers = [
         label: 'Cloud PC 관리',
         children: [
           {
+            key: 'child-cpc-recovery',
             index: true,
             label: '자가 오류 복구',
             element: (
