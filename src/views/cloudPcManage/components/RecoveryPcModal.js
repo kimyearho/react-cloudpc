@@ -1,48 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col, Space, Table } from 'antd'
+import { call_resource } from '../../../api/resource'
+import { resourceFactory } from '../../../api/factory/system_factory'
+import { recoveryModalOptions } from '../../../utils/modalOptions'
 import CommonWrapperModal from '../../../components/modal/CommonWrapperModal'
 
 const RecoveryPcModal = ({ isModalVisible, handelCancel }) => {
   const [loading, setLoading] = useState(false)
-
-  const modalStaticOptions = {
-    width: 550,
-    className: 'recovery-modal',
-    title: '오류 복구 실행',
-    alertTitle: '중요',
-    description: (
-      <>
-        오류 복구를 실행한 Cloud PC의 모든 데이터는 초기화 됩니다.
-        <br />
-        오류 복구중인 가상 PC는 오류 복구 실행을 할 수 없습니다.
-      </>
-    ),
-    buttonLabel: {
-      apply: '실행',
-      cancel: '취소'
-    },
-    buttonProps: {
-      disabled: false
-    }
-  }
-
+  const [vmList, setVmList] = useState([])
   const columns = [
     {
       title: 'Cloud PC 유형',
-      dataIndex: 'tnt_mtd_cd_nm',
-      key: 'tnt_mtd_cd_nm'
+      dataIndex: 'tnt_mtd_cd_nm'
     },
     {
       title: 'Cloud PC ID',
-      dataIndex: 'vm_nm',
-      key: 'vm_nm'
+      dataIndex: 'vm_nm'
     },
     {
       title: 'Cloud PC 별칭',
-      dataIndex: 'vm_als',
-      key: 'vm_als'
+      dataIndex: 'vm_als'
     }
   ]
+
+  useEffect(() => {
+    fetchResource()
+  }, [])
+
+  const fetchResource = async () => {
+    try {
+      const data = await call_resource()
+      if (data.length > 0) {
+        setVmList(resourceFactory(data))
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -70,7 +64,7 @@ const RecoveryPcModal = ({ isModalVisible, handelCancel }) => {
       <CommonWrapperModal
         isModalVisible={isModalVisible}
         modalData={{ a: '1', b: '2' }}
-        modalOptions={modalStaticOptions}
+        modalOptions={recoveryModalOptions}
         handleOk={recoveryExcute}
         handleCancel={closeModal}
       >
@@ -90,10 +84,12 @@ const RecoveryPcModal = ({ isModalVisible, handelCancel }) => {
                 <Table
                   className="ant-table"
                   rowSelection={{
+                    type: 'checkbox',
                     ...rowSelection
                   }}
                   size="small"
                   columns={columns}
+                  dataSource={vmList}
                   pagination={false}
                   loading={loading}
                 />

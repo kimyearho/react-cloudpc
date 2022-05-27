@@ -17,3 +17,16 @@ export const recoveryFactory = (data) => {
   })
   return list
 }
+
+export const resourceFactory = (data) => {
+  let list = []
+  data.forEach((item, index) => {
+    list.push({
+      key: index,
+      tnt_mtd_cd_nm: item.tnt_mtd_cd_nm,
+      vm_nm: item.vm_nm,
+      vm_als: item.vm_als
+    })
+  })
+  return list
+}
