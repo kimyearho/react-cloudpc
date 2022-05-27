@@ -65,6 +65,7 @@ export const routers = [
         children: [
           {
             index: true,
+            label: 'Cloud PC 목록',
             element: (
               <RequireAuth>
                 <Suspense fallback={<></>}>
@@ -89,6 +90,7 @@ export const routers = [
         children: [
           {
             index: true,
+            label: '자가 오류 복구',
             element: (
               <RequireAuth>
                 <Suspense fallback={<></>}>

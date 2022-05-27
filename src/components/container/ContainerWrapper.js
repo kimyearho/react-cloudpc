@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { routers } from '../../router/router'
 import { Breadcrumb, Card, Space, Spin } from 'antd'
 import { metaFactory } from '../../api/factory/common_factory'
 import { HomeOutlined } from '@ant-design/icons'
@@ -16,9 +17,13 @@ const ContainerLoading = () => {
   )
 }
 
-const ContainerPanel = ({ loading, routeMeta, children, height }) => {
+const ContainerWrapper = ({ loading, routeMeta, children, height }) => {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [meta, setMeta] = useState({})
+
+  const routes = routers[0].children
+  const currentRoute = routes.filter((item) => item.path === pathname)
 
   useEffect(() => {
     if (routeMeta) {
@@ -47,8 +52,18 @@ const ContainerPanel = ({ loading, routeMeta, children, height }) => {
                 >
                   <HomeOutlined />
                 </Breadcrumb.Item>
-                <Breadcrumb.Item href="">Cloud PC 정보</Breadcrumb.Item>
-                <Breadcrumb.Item href="">Cloud PC 목록</Breadcrumb.Item>
+                {currentRoute.map((item) => (
+                  <Breadcrumb.Item key={item.key}>{item.label}</Breadcrumb.Item>
+                ))}
+                {currentRoute.map((item) =>
+                  item.children
+                    ? item.children.map((child) => (
+                        <Breadcrumb.Item key={child.key}>
+                          {child.label}
+                        </Breadcrumb.Item>
+                      ))
+                    : null
+                )}
               </Breadcrumb>
             </Space>
           </>
@@ -67,4 +82,4 @@ const ContainerPanel = ({ loading, routeMeta, children, height }) => {
   )
 }
 
-export default ContainerPanel
+export default ContainerWrapper
