@@ -116,6 +116,9 @@ body {
   min-width: 165px;
   height: 100%;
   overflow: hidden;
+  img {
+    cursor: pointer;
+  }
 }
 
 .ant-pro-top-nav-header-main-left {
@@ -289,6 +292,7 @@ body {
 
   > .ant-collapse-content {
     border-top: 1px solid #001b34;
+    background-color: initial;
 
     > .ant-collapse-content-box {
       padding: 0;
@@ -327,6 +331,10 @@ body {
   }
 }
 
+.control-content {
+  height: 330px;
+  border-bottom: 1px solid;
+}
 .control-content > {
   .ant-card-head {
     background: #292e35fa;
@@ -381,7 +389,7 @@ body {
 }
 
 .control-pc-useage-progress {
-  margin: 20px 40px 0px 40px;
+  margin: 30px 40px 0px 40px;
   border: 1px solid #ddd;
   border-radius: 5px;
 

@@ -31,7 +31,7 @@ const ContainerLoading = () => {
   )
 }
 
-function Home() {
+function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [resource, setResource] = useState([])
   const [activeKey, setActiveKey] = useState('')
@@ -251,4 +251,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Dashboard

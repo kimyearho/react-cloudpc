@@ -37,7 +37,7 @@ const CloudPcDetail = ({ meta }) => {
       if (data.length > 0) {
         setTimeout(() => {
           setLoading(false)
-        }, 500)
+        }, 250)
       }
     } catch (error) {
       console.error(error)

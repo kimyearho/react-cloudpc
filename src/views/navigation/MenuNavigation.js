@@ -38,6 +38,10 @@ function MenuNavigation() {
     setCurrentKey(e.key)
   }
 
+  const redirectDashboard = () => {
+    navigate('/dashboard', { replace: true })
+  }
+
   const confirm = async () => {
     await dispatch(SET_LOADING(true))
     setTimeout(() => {
@@ -66,6 +70,17 @@ function MenuNavigation() {
         {
           key: '1',
           label: <Link to="/cpc-setting">자가 오류 복구</Link>
+        }
+      ]
+    },
+    {
+      key: 'cpc-support',
+      icon: <CodeSandboxOutlined />,
+      label: '고객 지원',
+      children: [
+        {
+          key: '1',
+          label: <Link to="/cpc-support">공지 사항</Link>
         }
       ]
     }
@@ -112,7 +127,7 @@ function MenuNavigation() {
         <div className="ant-pro-top-nav-header-main wide">
           <div className="ant-pro-top-nav-header-main-left">
             <div className="ant-pro-top-nav-header-logo">
-              <img src={logo} alt="logo" />
+              <img src={logo} alt="logo" onClick={redirectDashboard} />
             </div>
           </div>
           <div className="ant-pro-top-nav-header-menu">
