@@ -43,7 +43,7 @@ function MenuNavigation() {
   }
 
   const confirm = async () => {
-    await dispatch(SET_LOADING(true))
+    dispatch(SET_LOADING(true))
     setTimeout(() => {
       dispatch(SET_LOGOUT())
       navigate('/login', { replace: true })

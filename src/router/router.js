@@ -1,9 +1,8 @@
 import React, { Suspense } from 'react'
-import { RequireUserAuth, IsDefaultLogin } from './RequireUserAuth'
 import { WindowsOutlined, CodeSandboxOutlined } from '@ant-design/icons'
-
 import Layout from '../layouts/Layout'
 import Home from '../views/dashboard/Dashboard'
+import { RequireUserAuth, IsDefaultLogin } from './RequireUserAuth'
 
 /* Lazy Routes */
 const CloudPcDetail = React.lazy(() =>

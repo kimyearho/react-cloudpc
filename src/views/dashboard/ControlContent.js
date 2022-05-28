@@ -2,12 +2,10 @@ import { Row, Col, Card, Divider, Progress } from 'antd'
 import winPc from '../../assets/images/img_win_pc_on.png'
 
 const ControlContent = ({
-  vm_auth_id,
   sw_nm,
   vm_state,
   vcpu_cnt,
   vhd_capa,
-  vmm_capa,
   cpu_usage,
   disk_used_per,
   mem_used_per

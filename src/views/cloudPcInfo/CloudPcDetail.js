@@ -15,6 +15,10 @@ import CloudPcSecurity from './CloudPcSecurity'
 const CloudPcDetail = ({ meta }) => {
   const [cloudPcList, setCloudPcList] = useState([])
   const [loading, setLoading] = useState(true)
+  const wrapperProps = {
+    routeMeta: meta,
+    loading: loading
+  }
   const style = {
     divRow: {
       borderBottom: '1px solid #ddd',
@@ -56,7 +60,7 @@ const CloudPcDetail = ({ meta }) => {
     <>
       <Row className="mr-30">
         <Col offset={2}>
-          <ContainerWrapper loading={loading} routeMeta={meta}>
+          <ContainerWrapper {...wrapperProps}>
             {cloudPcList.map((item) => (
               <Row style={style.divRow} key={item.vm_id}>
                 <Col span={8}>

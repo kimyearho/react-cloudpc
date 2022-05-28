@@ -31,10 +31,11 @@ const CloudPcSecurity = (props) => {
     }
   }
 
-  useEffect(() => {
-    fetchSecurityPolicy(props.secu_plcy_id)
-  }, [props.secu_plcy_id])
-
+  /**
+   * 특정 정책을 조회 합니다.
+   *
+   * @param {String} secu_plcy_id - 정책 아이디
+   */
   const fetchSecurityPolicy = async (secu_plcy_id) => {
     try {
       const data = await call_securityPolicy(secu_plcy_id)
@@ -46,6 +47,10 @@ const CloudPcSecurity = (props) => {
       console.error(error)
     }
   }
+
+  useEffect(() => {
+    fetchSecurityPolicy(props.secu_plcy_id)
+  }, [props.secu_plcy_id])
 
   return (
     <>

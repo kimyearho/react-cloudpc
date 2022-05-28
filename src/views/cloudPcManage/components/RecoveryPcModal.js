@@ -6,6 +6,7 @@ import { recoveryModalOptions } from '../../../utils/modalOptions'
 import { call_updateVmRecovery } from '../../../api/resource'
 import { confirmBox } from '../../../components/messageBox/MessageBox'
 import CommonWrapperModal from '../../../components/modal/CommonWrapperModal'
+import { recoveryModalColumns } from '../recovery-helper'
 import _ from 'lodash'
 
 const RecoveryPcModal = ({
@@ -17,26 +18,8 @@ const RecoveryPcModal = ({
   const [loading, setLoading] = useState(false)
   const [selectedRow, setSelectedRow] = useState({})
   const [vmList, setVmList] = useState([])
-  const columns = [
-    {
-      title: 'Cloud PC 유형',
-      dataIndex: 'tnt_mtd_cd_nm'
-    },
-    {
-      title: 'Cloud PC ID',
-      dataIndex: 'vm_nm'
-    },
-    {
-      title: 'Cloud PC 별칭',
-      dataIndex: 'vm_als'
-    }
-  ]
 
-  useEffect(() => {
-    setLoading(true)
-    fetchResource()
-  }, [])
-
+  //* 전체 가상 PC를 조회
   const fetchResource = async () => {
     try {
       const data = await call_resource()
@@ -49,6 +32,7 @@ const RecoveryPcModal = ({
     }
   }
 
+  //* 라디오 버튼을 클릭했을때
   const rowSelection = {
     onChange: (_, selectedRows) => {
       if (selectedRows.length > 0) {
@@ -61,6 +45,7 @@ const RecoveryPcModal = ({
     })
   }
 
+  //* 오류 복구 실행
   const recoveryExcute = () => {
     if (_.isEmpty(selectedRow)) return
     const { vm_power_sts_cd } = selectedRow
@@ -91,10 +76,16 @@ const RecoveryPcModal = ({
     }
   }
 
+  //* 오류 복구 팝업 닫기
   const closeRecoveryModal = () => {
     recoveryModalOptions.buttonProps.disabled = true
     handelCancel()
   }
+
+  useEffect(() => {
+    setLoading(true)
+    fetchResource()
+  }, [])
 
   return (
     <>
@@ -124,7 +115,7 @@ const RecoveryPcModal = ({
                     ...rowSelection
                   }}
                   size="small"
-                  columns={columns}
+                  columns={recoveryModalColumns}
                   dataSource={vmList}
                   pagination={false}
                   loading={loading}

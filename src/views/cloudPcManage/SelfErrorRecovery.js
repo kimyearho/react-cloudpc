@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Row, Col, Space, Table, Tag, Button } from 'antd'
+import { Row, Col, Space, Table, Button } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
 import { call_recoveryList } from '../../api/system'
 import { recoveryFactory } from '../../api/factory/system_factory'
 
 import ContainerWrapper from '../../components/container/ContainerWrapper'
 import RecoveryPcModal from './components/RecoveryPcModal'
+import { recoveryColumns } from './recovery-helper'
 
 const SelfErrorRecovery = ({ meta }) => {
   const [loading, setLoading] = useState(true)
@@ -17,42 +18,20 @@ const SelfErrorRecovery = ({ meta }) => {
     userAccount: state.user.userAccount
   }))
 
-  const columns = [
-    {
-      title: '실행 일자',
-      dataIndex: 'act_tm',
-      key: 'act_tm'
-    },
-    {
-      title: 'Cloud PC 유형',
-      dataIndex: 'tnt_mtd_cd_nm',
-      key: 'tnt_mtd_cd_nm'
-    },
-    {
-      title: '가상 PC 명',
-      dataIndex: 'vm_nm',
-      key: 'vm_nm'
-    },
-    {
-      title: '복구 결과',
-      key: 'act_cd_nm',
-      dataIndex: 'act_cd_nm',
-      render: (_, { act_cd, act_cd_nm }) => {
-        const customColor = act_cd === 'Z007E1B' ? '#108ee9' : '#f50'
-        return (
-          <>
-            <Tag color={customColor} key={act_cd_nm}>
-              {act_cd_nm}
-            </Tag>
-          </>
-        )
-      }
-    }
-  ]
+  //* 래퍼 props
+  const wrapperProps = {
+    routeMeta: meta,
+    loading: loading,
+    height: '700px'
+  }
 
-  useEffect(() => {
-    fetchRecoveryList()
-  }, [])
+  //* 페이징 props
+  const paginationProps = {
+    position: ['bottomLeft'],
+    total: recoveryList.length,
+    pageSize: 5,
+    defaultCurrent: 1
+  }
 
   /**
    * @description
@@ -78,11 +57,15 @@ const SelfErrorRecovery = ({ meta }) => {
     }
   }
 
+  useEffect(() => {
+    fetchRecoveryList()
+  }, [])
+
   return (
     <>
       <Row className="mr-30">
         <Col offset={2}>
-          <ContainerWrapper loading={false} routeMeta={meta} height="700px">
+          <ContainerWrapper {...wrapperProps}>
             <Row>
               <Col span={24}>
                 <Space className="grid-title">
@@ -96,14 +79,9 @@ const SelfErrorRecovery = ({ meta }) => {
               <Col span={24}>
                 <Table
                   className="ant-table"
-                  columns={columns}
+                  columns={recoveryColumns}
                   size="middle"
-                  pagination={{
-                    position: ['bottomLeft'],
-                    total: recoveryList.length,
-                    pageSize: 5,
-                    defaultCurrent: 1
-                  }}
+                  pagination={paginationProps}
                   dataSource={recoveryList}
                   loading={loading}
                 />

@@ -16,13 +16,13 @@ const root = ReactDOM.createRoot(container)
 
 //* React 18 bootstrap
 root.render(
-  //<React.StrictMode>
+  // <React.StrictMode>
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>
-  //</React.StrictMode>
+  // </React.StrictMode>
 )
 
 // import reportWebVitals from './reportWebVitals';

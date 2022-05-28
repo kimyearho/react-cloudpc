@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { routers } from '../../router/router'
-import { Breadcrumb, Card, Space, Spin } from 'antd'
+import { useNavigate } from 'react-router-dom'
+import { Card, Spin } from 'antd'
 import { metaFactory } from '../../api/factory/common_factory'
-import { HomeOutlined } from '@ant-design/icons'
 import AlertDescription from '../alert/AlertDescription'
-import CloudPcTopMenu from '../topSubmenu/CloudPcTopMenu'
+import CloudPcResourceTopSubMenu from '../topSubmenu/CloudPcTopMenu'
+import SearchForm from '../searchForm/SearchForm'
+import BreadCrumb from '../breadcrumb/BreadCrumb'
 
 const ContainerLoading = () => {
   return (
@@ -17,70 +17,67 @@ const ContainerLoading = () => {
   )
 }
 
-const ContainerWrapper = ({ loading, routeMeta, children, height }) => {
+const ContainerWrapper = ({
+  loading,
+  routeMeta,
+  height,
+  useSearch,
+  searchType,
+  children,
+  callback
+}) => {
   const navigate = useNavigate()
-  const { pathname } = useLocation()
-  const [meta, setMeta] = useState({})
+  const [metaData, setMetaData] = useState({})
 
-  const routes = routers[0].children
-  const currentRoute = routes.filter((item) => item.path === pathname)
-  const breadcrumbChildItems = () => {
-    let breadcrumbItems = []
-    currentRoute.forEach((item) => {
-      breadcrumbItems.push(
-        <Breadcrumb.Item key={item.key}>{item.label}</Breadcrumb.Item>
-      )
-      if (item.children && item.children.length > 0) {
-        item.children.forEach((child) => {
-          breadcrumbItems.push(
-            <Breadcrumb.Item key={child.key}>{child.label}</Breadcrumb.Item>
-          )
-        })
-      }
-    })
-    return breadcrumbItems
-  }
-
-  useEffect(() => {
-    if (routeMeta) {
-      setMeta(metaFactory(routeMeta))
-    }
-  }, [routeMeta])
-
+  //* BreadCrumb에서 Home 아이콘을 클릭했을때 메인 페이지로 리다이렉트한다.
   const onRedirect = () => {
     navigate('/dashboard', { replace: true })
   }
 
+  /**
+   * @description
+   * 검색 조회 callback
+   *
+   * @param {Object} model - 검색 조건과, 검색어
+   */
+  const searchCallback = (model) => {
+    callback(model)
+  }
+
+  //* alert props
+  const alertProps = {
+    alertTitle: metaData['alertTitle'],
+    alertMessage: metaData['alertMessage']
+  }
+
+  //* search props
+  const searchProps = {
+    selectSearch: searchType,
+    callback: searchCallback
+  }
+
+  useEffect(() => {
+    if (routeMeta) {
+      setMetaData(metaFactory(routeMeta))
+    }
+  }, [routeMeta])
+
   return (
     <>
       <Card
+        bordered
         className="container-panel"
         style={{ height: height }}
-        title={<div className="container-title">{meta.ctrTitle}</div>}
-        bordered={false}
-        extra={
-          <>
-            <Space>
-              <Breadcrumb separator=">" style={{ fontSize: '13px' }}>
-                <Breadcrumb.Item
-                  style={{ cursor: 'pointer' }}
-                  onClick={onRedirect}
-                >
-                  <HomeOutlined />
-                </Breadcrumb.Item>
-                {breadcrumbChildItems()}
-              </Breadcrumb>
-            </Space>
-          </>
-        }
+        title={<div className="container-title">{metaData['ctrTitle']}</div>}
+        extra={<BreadCrumb callback={onRedirect} />}
       >
-        {meta.ctrShowAlert && (
-          <AlertDescription
-            alertTitle={meta.alertTitle}
-            alertMessage={meta.alertMessage}
-          />
-        )}
-        {meta.ctrTopSubmenu && <CloudPcTopMenu />}
+        {/* 컨테이너 알림 메시지 */}
+        {metaData['ctrShowAlert'] && <AlertDescription {...alertProps} />}
+        {/* 가상 PC 전용 메뉴 */}
+        {metaData['ctrTopSubmenu'] && <CloudPcResourceTopSubMenu />}
+        {/* 공통 검색 폼 */}
+        {useSearch === true && <SearchForm {...searchProps} />}
+        {/* 컨테이너 로딩과 콘텐츠 */}
         {loading === true ? <ContainerLoading /> : children}
       </Card>
     </>
