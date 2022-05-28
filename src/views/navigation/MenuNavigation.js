@@ -55,17 +55,32 @@ function MenuNavigation() {
     {
       key: 'dashboard',
       icon: <WindowsOutlined />,
-      label: <Link to="/dashboard">Home</Link>
+      label: (
+        <Link to="/dashboard">
+          대시보드
+          <Divider type="vertical" />
+        </Link>
+      )
     },
     {
       key: 'cpc-info',
       icon: <CodeSandboxOutlined />,
-      label: <Link to="/cpc-info">Cloud PC 정보</Link>
+      label: (
+        <Link to="/cpc-info">
+          Cloud PC 정보
+          <Divider type="vertical" />
+        </Link>
+      )
     },
     {
       key: 'cpc-setting',
       icon: <CodeSandboxOutlined />,
-      label: 'Cloud PC 관리',
+      label: (
+        <span>
+          Cloud PC 관리
+          <Divider type="vertical" />
+        </span>
+      ),
       children: [
         {
           key: '1',
@@ -123,46 +138,41 @@ function MenuNavigation() {
 
   return (
     <>
-      <div className="ant-pro-top-nav-header light">
-        <div className="ant-pro-top-nav-header-main wide">
-          <div className="ant-pro-top-nav-header-main-left">
-            <div className="ant-pro-top-nav-header-logo">
-              <img src={logo} alt="logo" onClick={redirectDashboard} />
-            </div>
-          </div>
-          <div className="ant-pro-top-nav-header-menu">
-            <Menu
-              mode="horizontal"
-              selectedKeys={[currentKey]}
-              items={menus}
-              onClick={onCurrentKey}
-            />
-          </div>
-          <div className="ant-pro-right-content ant-space-right">
-            <div className="ant-pro-right-content-resize">
-              <Space size={'middle'}>
-                <Popover
-                  placement="bottomLeft"
-                  content={content}
-                  trigger="click"
-                >
-                  <Avatar
-                    style={{ backgroundColor: '#096dd9', cursor: 'pointer' }}
-                    icon={<UserOutlined />}
-                  />
-                </Popover>
-                <Button ghost>
-                  <Icon
-                    style={{ verticalAlign: 'text-bottom' }}
-                    component={() => <img src={ko} alt="language" />}
-                  />
-                  한국어
-                </Button>
-              </Space>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Row className="top-nav-header light">
+        <Col span={6}>
+          <img
+            className="logo"
+            src={logo}
+            alt="logo"
+            onClick={redirectDashboard}
+          />
+        </Col>
+        <Col span={8} offset={2}>
+          <Menu
+            mode="horizontal"
+            selectedKeys={[currentKey]}
+            items={menus}
+            onClick={onCurrentKey}
+          />
+        </Col>
+        <Col span={4} offset={4}>
+          <Space className="fr mr-10px" size={'middle'}>
+            <Popover placement="bottomRight" content={content} trigger="click">
+              <Avatar
+                style={{ backgroundColor: '#096dd9', cursor: 'pointer' }}
+                icon={<UserOutlined />}
+              />
+            </Popover>
+            <Button ghost>
+              <Icon
+                style={{ verticalAlign: 'text-bottom' }}
+                component={() => <img src={ko} alt="language" />}
+              />
+              한국어
+            </Button>
+          </Space>
+        </Col>
+      </Row>
     </>
   )
 }
