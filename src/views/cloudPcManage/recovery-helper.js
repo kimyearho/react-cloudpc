@@ -9,12 +9,18 @@ export const recoveryColumns = [
   {
     title: 'Cloud PC 유형',
     dataIndex: 'tnt_mtd_cd_nm',
-    key: 'tnt_mtd_cd_nm'
+    key: 'tnt_mtd_cd_nm',
+    render: (_, { tnt_mtd_cd_nm }) => {
+      return !tnt_mtd_cd_nm ? '-' : tnt_mtd_cd_nm
+    }
   },
   {
     title: '가상 PC 명',
     dataIndex: 'vm_nm',
-    key: 'vm_nm'
+    key: 'vm_nm',
+    render: (_, { vm_nm }) => {
+      return !vm_nm ? '-' : vm_nm
+    }
   },
   {
     title: '복구 결과',

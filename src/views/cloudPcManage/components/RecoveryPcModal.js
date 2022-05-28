@@ -70,7 +70,7 @@ const RecoveryPcModal = ({
           }, 10000)
         } catch (error) {
           console.error(error)
-          setLoading(false)
+          listLoading(false)
         }
       })
     }

@@ -21,7 +21,6 @@ const SelfErrorRecovery = ({ meta }) => {
   //* 래퍼 props
   const wrapperProps = {
     routeMeta: meta,
-    loading: loading,
     height: '700px'
   }
 
@@ -54,6 +53,7 @@ const SelfErrorRecovery = ({ meta }) => {
       setLoading(false)
     } catch (error) {
       console.error(error)
+      setLoading(false)
     }
   }
 
