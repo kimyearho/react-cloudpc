@@ -1,39 +1,18 @@
 import React, { Suspense } from 'react'
-import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { RequireUserAuth, IsDefaultLogin } from './RequireUserAuth'
 import { WindowsOutlined, CodeSandboxOutlined } from '@ant-design/icons'
 
 import Layout from '../layouts/Layout'
-import Login from '../views/login/Login'
 import Home from '../views/dashboard/Dashboard'
 
-// const Home = React.lazy(() => import('../views/home/Home'))
+/* Lazy Routes */
 const CloudPcDetail = React.lazy(() =>
   import('../views/cloudPcInfo/CloudPcDetail')
 )
-
 const SelfErrorRecovery = React.lazy(() =>
   import('../views/cloudPcManage/SelfErrorRecovery')
 )
-
-const RequireAuth = ({ children }) => {
-  const isAuthentication = useSelector(
-    (state) => state.user.userInfo.isAuthentication
-  )
-  if (!isAuthentication) {
-    return <Navigate to="/login" replace />
-  }
-  return children
-}
-
-const IsLogin = () => {
-  const isAuthentication = useSelector(
-    (state) => state.user.userInfo.isAuthentication
-  )
-  if (!isAuthentication) {
-    return <Login />
-  }
-}
+const Notice = React.lazy(() => import('../views/support/Notice'))
 
 export const routers = [
   {
@@ -44,7 +23,7 @@ export const routers = [
       {
         key: 'login',
         path: '/login',
-        element: <IsLogin />
+        element: <IsDefaultLogin />
       },
       {
         key: 'dashboard',
@@ -52,9 +31,9 @@ export const routers = [
         index: true,
         icon: <WindowsOutlined />,
         element: (
-          <RequireAuth>
+          <RequireUserAuth>
             <Home />
-          </RequireAuth>
+          </RequireUserAuth>
         )
       },
       {
@@ -68,7 +47,7 @@ export const routers = [
             index: true,
             label: 'Cloud PC 목록',
             element: (
-              <RequireAuth>
+              <RequireUserAuth>
                 <Suspense fallback={<></>}>
                   <CloudPcDetail
                     meta={{
@@ -78,7 +57,7 @@ export const routers = [
                     }}
                   />
                 </Suspense>
-              </RequireAuth>
+              </RequireUserAuth>
             )
           }
         ]
@@ -94,7 +73,7 @@ export const routers = [
             index: true,
             label: '자가 오류 복구',
             element: (
-              <RequireAuth>
+              <RequireUserAuth>
                 <Suspense fallback={<></>}>
                   <SelfErrorRecovery
                     meta={{
@@ -115,7 +94,33 @@ export const routers = [
                     }}
                   />
                 </Suspense>
-              </RequireAuth>
+              </RequireUserAuth>
+            )
+          }
+        ]
+      },
+      {
+        key: 'cpcsupport',
+        path: '/cpc-support',
+        icon: <CodeSandboxOutlined />,
+        label: '고객 지원',
+        children: [
+          {
+            key: 'child-cpc-support',
+            index: true,
+            label: '공지 사항',
+            element: (
+              <RequireUserAuth>
+                <Suspense fallback={<></>}>
+                  <Notice
+                    meta={{
+                      title: '공지 사항',
+                      showPcSubmenu: false,
+                      showAlert: false
+                    }}
+                  />
+                </Suspense>
+              </RequireUserAuth>
             )
           }
         ]

@@ -79,7 +79,7 @@ function MenuNavigation() {
       label: '고객 지원',
       children: [
         {
-          key: '1',
+          key: '2',
           label: <Link to="/cpc-support">공지 사항</Link>
         }
       ]

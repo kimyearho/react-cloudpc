@@ -23,7 +23,7 @@ export const recoveryModalOptions = {
 }
 
 export const aliasChangeMdoalOptions = {
-  width: 630,
+  width: 450,
   templateType: 'form',
   title: '가상 PC 별칭 설정',
   description:
@@ -38,7 +38,7 @@ export const aliasChangeMdoalOptions = {
 }
 
 export const userPcPeriodModalOptions = {
-  width: 560,
+  width: 450,
   templateType: 'form',
   title: '가상 PC 기간 연장 신청',
   description:

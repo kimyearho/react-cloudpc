@@ -113,6 +113,7 @@ export const PeriodExtensionModal = (rootProps) => {
             payload
           )
           if (status === 200) {
+            message.config({ top: 100 })
             message.info('신청이 취소 되었습니다.')
             parentProps.handleCancel()
           }
@@ -144,7 +145,7 @@ export const PeriodExtensionModal = (rootProps) => {
         try {
           const { status } = await call_userPcPeriodRequest(payload)
           if (status === 200) {
-            message.info('기간 연장 신청 되었습니다.')
+            message.success('기간 연장 신청 되었습니다.')
             parentProps.handleCancel()
           }
         } catch (error) {
@@ -162,7 +163,7 @@ export const PeriodExtensionModal = (rootProps) => {
         </Form.Item>
         <Form.Item label="기간 연장 희망일" name="desired_date">
           <DatePicker
-            style={{ width: '50%' }}
+            style={{ width: '100%' }}
             allowClear={false}
             disabled={!_.isEmpty(requestPeriod)}
             disabledDate={disabledDate}
