@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import _ from 'lodash'
+import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { Form, Input, DatePicker, message } from 'antd'
 import {
@@ -6,11 +8,12 @@ import {
   call_userPcPeriodRequest,
   call_userPcPeriodRequestCancel
 } from '../../../api/user'
-import { confirmBox, infoBox } from '../../../components/messageBox/MessageBox'
 import CommonWrapperModal from '../../../components/modal/CommonWrapperModal'
-
-import _ from 'lodash'
-import moment from 'moment'
+import { confirmBox, infoBox } from '../../../components/messageBox/MessageBox'
+import {
+  notificationSuccess,
+  notificationInfo
+} from '../../../components/notification/Notification'
 
 const dateFormat = 'YYYY-MM-DD'
 
@@ -113,8 +116,10 @@ export const PeriodExtensionModal = (rootProps) => {
             payload
           )
           if (status === 200) {
-            message.config({ top: 100 })
-            message.info('신청이 취소 되었습니다.')
+            notificationInfo({
+              message: '알림',
+              description: '신청이 취소 되었습니다.'
+            })
             parentProps.handleCancel()
           }
         } catch (error) {
@@ -145,7 +150,7 @@ export const PeriodExtensionModal = (rootProps) => {
         try {
           const { status } = await call_userPcPeriodRequest(payload)
           if (status === 200) {
-            message.success('기간 연장 신청 되었습니다.')
+            notificationSuccess({ description: '기간 연장 신청 되었습니다.' })
             parentProps.handleCancel()
           }
         } catch (error) {

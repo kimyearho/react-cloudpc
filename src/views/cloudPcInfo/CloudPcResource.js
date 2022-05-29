@@ -3,6 +3,7 @@ import { Col, Card, Row, Button, message } from 'antd'
 import { call_updateVmAlias } from '../../api/resource'
 import { AliasChangeMdoal } from '../dashboard/DashboardModal'
 import { aliasChangeMdoalOptions } from '../../utils/modalOptions'
+import { notificationSuccess } from '../../components/notification/Notification'
 
 import iconCpu from '../../assets/images/security/ico_cpu.png'
 import iconMem from '../../assets/images/security/ico_mem.png'
@@ -57,7 +58,7 @@ const CloudPcResource = ({
       const model = { newAlias: data.newAlias, vmAuthId: alias.vm_auth_id }
       const { status } = await call_updateVmAlias(model)
       if (status === 200) {
-        message.success('별칭이 변경 되었습니다.')
+        notificationSuccess({ description: '별칭이 변경 되었습니다.' })
         setIsModalVisible(false)
         callback()
       }

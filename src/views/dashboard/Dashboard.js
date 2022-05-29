@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import _ from 'lodash'
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Collapse, Space, Spin, Menu, Button, message } from 'antd'
+import { Row, Col, Collapse, Space, Spin, Menu, Button } from 'antd'
 import { DesktopOutlined } from '@ant-design/icons'
 import { userResourceFactory } from '../../api/factory/resource_factory'
 import {
@@ -16,8 +17,7 @@ import CustomHeader from './CustomHeader'
 import ControlContent from './ControlContent'
 import { AliasChangeMdoal } from './DashboardModal'
 import { aliasChangeMdoalOptions } from '../../utils/modalOptions'
-
-import _ from 'lodash'
+import { notificationSuccess } from '../../components/notification/Notification'
 
 const { Panel } = Collapse
 
@@ -151,7 +151,7 @@ function Dashboard() {
         setResource(resourceList)
         setAlias(null)
         setIsModalVisible(false)
-        message.success('별칭이 변경 되었습니다.')
+        notificationSuccess({ description: '별칭이 변경 되었습니다.' })
       }
     } catch (error) {
       console.error(error)

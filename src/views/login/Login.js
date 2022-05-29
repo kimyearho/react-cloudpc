@@ -10,13 +10,13 @@ import {
   Form,
   Space,
   Row,
-  message,
   Typography
 } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { authUser, userAccount } from '../../store/actions/user_action'
 import { SET_LOADING } from '../../store/modules/app'
 import { useNavigate } from 'react-router-dom'
+import { notificationSuccess } from '../../components/notification/Notification'
 import _ from 'lodash'
 
 import banner1 from '../../assets/images/login/user_banner_01.png'
@@ -71,7 +71,9 @@ const Login = () => {
               setTimeout(() => {
                 navigate('/dashboard', { replace: true })
                 dispatch(SET_LOADING(false))
-                message.info('정상적으로 로그인 되었습니다.')
+                notificationSuccess({
+                  description: '정상적으로 로그인 되었습니다.'
+                })
               }, 600)
             }
           }
