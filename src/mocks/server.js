@@ -1,5 +1,8 @@
 import { setupWorker } from 'msw'
 import module from './handlers'
+import { init } from './db/user'
 
-// Setup requests interception using the given handlers.
-export const worker = setupWorker(...module)
+export function setupBrowserMock() {
+  init()
+  setupWorker(...module).start()
+}

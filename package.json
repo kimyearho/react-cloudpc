@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.1.0",
     "@mswjs/data": "^0.10.1",
     "faker": "^6.6.6",
     "msw": "^0.41.1"

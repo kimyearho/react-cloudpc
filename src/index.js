@@ -8,6 +8,8 @@ import App from './views/App'
 import { Provider } from 'react-redux'
 import { injectStore } from './utils/request'
 import store from './store/store'
+
+import { setupBrowserMock } from './mocks/server'
 injectStore(store)
 
 //* React 18 bootstrap
@@ -16,8 +18,7 @@ const root = ReactDOM.createRoot(container)
 
 // Start the mocking conditionally.
 if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/server')
-  worker.start()
+  setupBrowserMock()
 }
 
 //* React 18 bootstrap
