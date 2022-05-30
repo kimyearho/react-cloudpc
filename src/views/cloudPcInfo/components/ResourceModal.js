@@ -2,7 +2,7 @@
 import _ from 'lodash'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
-import { Form, Input, DatePicker, message } from 'antd'
+import { Form, Input, DatePicker } from 'antd'
 import {
   call_userPcPeriodHistory,
   call_userPcPeriodRequest,

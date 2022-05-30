@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Col, Card, Row, Button, message } from 'antd'
+import { Col, Card, Row, Button } from 'antd'
 import { call_updateVmAlias } from '../../api/resource'
 import { AliasChangeMdoal } from '../dashboard/DashboardModal'
 import { aliasChangeMdoalOptions } from '../../utils/modalOptions'
