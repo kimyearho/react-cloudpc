@@ -4,6 +4,7 @@ import { Layout, Spin } from 'antd'
 import { Header, Content, Footer } from 'antd/lib/layout/layout'
 import { Outlet } from 'react-router-dom'
 import MenuNavigation from '../views/navigation/MenuNavigation'
+import staticDefaultImage from '../assets/images/portal.jpg'
 
 const AppLayout = () => {
   const { loading, isAuthentication, meta } = useSelector((state) => ({
@@ -12,11 +13,16 @@ const AppLayout = () => {
     meta: state.user.portalPublic
   }))
 
+  //* 연동 이미지가 있으면 사용하고, 없으면 기본 이미지를 사용한다.
+  const ptal_bg_stor_path =
+    meta['portal'].ptal_bg_stor_path === null
+      ? staticDefaultImage
+      : meta['portal'].ptal_bg_stor_path
+
   const portalImage = () => {
     if (meta && isAuthentication) {
       return {
-        background:
-          'url(' + meta['portal'].ptal_bg_stor_path + ') 0% 0% / cover',
+        background: 'url(' + ptal_bg_stor_path + ') 0% 0% / cover',
         overflow: 'hidden'
       }
     }

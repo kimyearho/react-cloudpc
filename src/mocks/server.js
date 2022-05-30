@@ -1,5 +1,5 @@
 import { setupWorker } from 'msw'
-import { staticMetaData } from './handlers/user'
+import module from './handlers'
 
 // Setup requests interception using the given handlers.
-export const worker = setupWorker(...staticMetaData)
+export const worker = setupWorker(...module)

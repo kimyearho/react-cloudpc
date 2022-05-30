@@ -1,0 +1,33 @@
+{
+  "data": {
+    "img_id": "eb3af757-3869-4a1c-846a-d830ded6553d",
+    "img_nm": "windows10_ent.raw",
+    "img_descp": null,
+    "img_cre_tm": "2021-09-02 20:36",
+    "img_file_size": "40960",
+    "img_serv_yn": "Y",
+    "img_sts_cd": "T003CC",
+    "img_sts_cd_nm": "생성 완료",
+    "init_cre_yn": "Y",
+    "img_sw_l": [
+      {
+        "seq_no": "1",
+        "sw_nm": "Windows 10 Enter",
+        "sw_typ_cd": "T001OS",
+        "sw_typ_cd_nm": "Operating System"
+      }
+    ],
+    "reg_id": "787a12f6-d7e5-11ec-9d66-56f465f67b97",
+    "reg_nm": "SuperAdmin",
+    "reg_conn_id": "superadmin",
+    "reg_ts": "2022-04-12 17:15",
+    "mod_id": "5c8f57ac-ba4a-11ec-9d66-56f465f67b98",
+    "mod_nm": "정지운",
+    "mod_conn_id": "superadmin50",
+    "mod_ts": "2022-05-03 15:14",
+    "tnt_id": "-",
+    "tnt_nm": "-",
+    "img_cre_vm_id": null,
+    "visibility": "public"
+  }
+}

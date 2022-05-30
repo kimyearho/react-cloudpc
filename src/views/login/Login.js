@@ -59,11 +59,11 @@ const Login = () => {
         try {
           const { payload } = await dispatch(authUser(values))
           const { acct_id } = payload.data
-          const { authorization } = payload.headers
+          // const { authorization } = payload.headers
           if (!_.isEmpty(acct_id)) {
             const params = {
-              acctId: acct_id,
-              accessToken: authorization
+              acctId: acct_id
+              // accessToken: authorization
             }
             const { meta } = await dispatch(userAccount(params))
             if (meta.requestStatus === 'fulfilled') {

@@ -1,0 +1,21 @@
+{
+  "data": {
+    "acct_id": "e5c5cf3a-caaf-11ec-9d66-56f465f67b97",
+    "acct_vlid_end_dt": "2023-07-31",
+    "grp_typ_cd": "U001USR",
+    "acct_2nd_cert_tgt_yn": "N",
+    "passwd_mdfy_tgt_yn": "N",
+    "acct_conn_id": "kimyearho",
+    "acct_nm": "김연호",
+    "usr_grp_id": "6025649d-bede-11ec-9d66-56f465f67b97",
+    "conn_net_cd": "U005TOT",
+    "vm_grp_id": [],
+    "tnt_id": "d78357ccde5842f58795f994d284dcbd",
+    "tnt_nm": "test-tenant-02",
+    "cert_plcy_id": "960170b5-cea0-11ec-9d66-56f465f67b97",
+    "sess_expr_mi_cnt": "120",
+    "grp_typ_cd_nm": "General User",
+    "acct_sts_cd": "U013NR",
+    "ad_itlk_acct_yn": "N"
+  }
+}

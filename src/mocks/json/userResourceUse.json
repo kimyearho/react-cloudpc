@@ -1,0 +1,12 @@
+{
+  "data": {
+    "time": "2022-05-30 17:33:38",
+    "cpu_usage": 0.0,
+    "mem_total": 8191.0,
+    "mem_used": 1535.0,
+    "disk_total": 40408.0,
+    "disk_used": 12894.0,
+    "vm_auth_id": "DEE-303540",
+    "reason": null
+  }
+}
