@@ -14,6 +14,12 @@ injectStore(store)
 const container = document.getElementById('root')
 const root = ReactDOM.createRoot(container)
 
+// Start the mocking conditionally.
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = require('./mocks/server')
+  worker.start()
+}
+
 //* React 18 bootstrap
 root.render(
   // <React.StrictMode>
