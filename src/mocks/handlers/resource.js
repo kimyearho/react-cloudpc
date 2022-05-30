@@ -30,3 +30,21 @@ export const mock_userResourceUse = () => {
     }
   )
 }
+
+export const mock_changeVmAlais = () => {
+  return rest.put(
+    '/v1/resource/vpcs/resources/:vm_auth_id/user',
+    (_, res, ctx) => {
+      return res(ctx.json())
+    }
+  )
+}
+
+export const mock_updateVmRecovery = () => {
+  return rest.post(
+    '/v1/resource/vpcs/resources/:vm_auth_id/initial',
+    (_, res, ctx) => {
+      return res(ctx.json())
+    }
+  )
+}
