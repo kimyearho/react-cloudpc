@@ -77,7 +77,7 @@ function Dashboard() {
       //* 3. VM의 이미지 아이디로 이미지 정보 조회
       const resourceImageData = await call_imageInfo(userResourceData.img_id)
       //* 4. 이미지내 소프트 웨어 이름을 1번에서 조회했던 VM데이터에 추가한다.
-      userResourceData.sw_nm = resourceImageData.img_sw_l[0].sw_nm
+      userResourceData.sw_nm = resourceImageData.sw_nm
       //* 5. 사용자 VM 상태 갱신
       await fetchUsageResource(userResourceData, key)
     } catch (error) {

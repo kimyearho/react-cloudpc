@@ -1,12 +1,34 @@
 {
-  "data": {
-    "time": "2022-05-30 17:33:38",
-    "cpu_usage": 0.0,
-    "mem_total": 8191.0,
-    "mem_used": 1535.0,
-    "disk_total": 40408.0,
-    "disk_used": 12894.0,
-    "vm_auth_id": "DEE-303540",
-    "reason": null
-  }
+  "data": [
+    {
+      "time": "2022-05-30 17:33:38",
+      "cpu_usage": 15.0,
+      "mem_total": 8191.0,
+      "mem_used": 1535.0,
+      "disk_total": 40408.0,
+      "disk_used": 12894.0,
+      "vm_auth_id": "DEE-303540",
+      "reason": null
+    },
+    {
+      "time": "2022-05-30 17:33:38",
+      "cpu_usage": 35.0,
+      "mem_total": 8191.0,
+      "mem_used": 3735.0,
+      "disk_total": 40408.0,
+      "disk_used": 22000.0,
+      "vm_auth_id": "DEE-319869",
+      "reason": null
+    },
+    {
+      "time": "2022-05-30 17:33:38",
+      "cpu_usage": 70.0,
+      "mem_total": 8191.0,
+      "mem_used": 4002.0,
+      "disk_total": 40408.0,
+      "disk_used": 15000.0,
+      "vm_auth_id": "DEE-332989",
+      "reason": null
+    }
+  ]
 }

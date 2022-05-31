@@ -62,7 +62,7 @@ const CloudPcDetail = ({ meta }) => {
         <Col offset={2}>
           <ContainerWrapper {...wrapperProps}>
             {cloudPcList.map((item) => (
-              <Row style={style.divRow} key={item.vm_id}>
+              <Row style={style.divRow} key={item.id}>
                 <Col span={8}>
                   {/* 좌측 CloudPc 정보 */}
                   <CloudPcPeriod {...userPcPeriodFactory(item)} />

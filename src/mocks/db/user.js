@@ -52,7 +52,7 @@ export const db_user = factory({
   }
 })
 
-export const init = () => {
+export const userInit = () => {
   db_user.static.create(staticPublic['data'])
   db_user.auth.create(userAuth['data'])
   db_user.account.create(userAccount['data'])

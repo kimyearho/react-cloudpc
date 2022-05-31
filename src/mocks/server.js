@@ -1,8 +1,11 @@
 import { setupWorker } from 'msw'
 import module from './handlers'
-import { init } from './db/user'
+
+import { userInit } from './db/user'
+import { resourceInit } from './db/resource'
 
 export function setupBrowserMock() {
-  init()
+  userInit()
+  resourceInit()
   setupWorker(...module).start()
 }

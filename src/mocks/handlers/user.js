@@ -1,32 +1,31 @@
 import { rest } from 'msw'
-import vmPeriodHistory from '../json/vmPeriodHistory.json'
 
-import { db_user } from '../db/user'
+import { db_user as db } from '../db/user'
 
 export const mock_staticPublic = () => {
   return rest.get(
     '/v1/nauth/system/portals/ui/BBB/public/:type',
     (_, res, ctx) => {
-      return res(ctx.json(db_user.static.getAll().pop()))
+      return res(ctx.json(db.static.getAll().pop()))
     }
   )
 }
 
 export const mock_userAuth = () => {
   return rest.post('/v1/gw/authentications/', (req, res, ctx) => {
-    return res(ctx.json(db_user.auth.getAll().pop()))
+    return res(ctx.json(db.auth.getAll().pop()))
   })
 }
 
 export const mock_userAccount = () => {
   return rest.get('/v1/user/accounts/:acct_id', (req, res, ctx) => {
-    return res(ctx.json(db_user.account.getAll().pop()))
+    return res(ctx.json(db.account.getAll().pop()))
   })
 }
 
 export const mock_userPcPeriodHistory = () => {
   return rest.get('/v1/user/work/request', (req, res, ctx) => {
-    return res(ctx.json(vmPeriodHistory))
+    return res(ctx.json(db.periodHistory.getAll().pop()))
   })
 }
 
