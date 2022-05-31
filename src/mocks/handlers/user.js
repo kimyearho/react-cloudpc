@@ -40,3 +40,16 @@ export const mock_userPcPeriodRequestCancel = () => {
     return res(ctx.status(200))
   })
 }
+
+export const mock_recoveryList = () => {
+  return rest.get('/v1/user/accounts/usg/history', (_, res, ctx) => {
+    const data = db.recovery.findMany({
+      where: {
+        vm_nm: {
+          notEquals: ''
+        }
+      }
+    })
+    return res(ctx.json(data))
+  })
+}

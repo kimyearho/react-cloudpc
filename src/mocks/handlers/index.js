@@ -4,7 +4,8 @@ import {
   mock_userAuth,
   mock_userPcPeriodHistory,
   mock_userPcPeriodRequest,
-  mock_userPcPeriodRequestCancel
+  mock_userPcPeriodRequestCancel,
+  mock_recoveryList
 } from './user'
 import {
   mock_resource,
@@ -15,7 +16,7 @@ import {
   mock_updateVmRecovery
 } from './resource'
 import { mock_securityPolicy } from './security'
-import { mock_recoveryList, mock_noticeList } from './system'
+import { mock_noticeList } from './system'
 
 const module = [
   mock_staticPublic(),
@@ -24,6 +25,7 @@ const module = [
   mock_userPcPeriodHistory(),
   mock_userPcPeriodRequest(),
   mock_userPcPeriodRequestCancel(),
+  mock_recoveryList(),
   mock_resource(),
   mock_userResource(),
   mock_userResourceImage(),
@@ -31,7 +33,6 @@ const module = [
   mock_securityPolicy(),
   mock_changeVmAlais(),
   mock_updateVmRecovery(),
-  mock_recoveryList(),
   mock_noticeList()
 ]
 

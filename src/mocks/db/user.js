@@ -1,10 +1,12 @@
-import { factory, primaryKey, nullable } from '@mswjs/data'
+import { factory, primaryKey, nullable, manyOf } from '@mswjs/data'
 import { faker } from '@faker-js/faker'
+import _ from 'lodash'
 
 import staticPublic from '../json/staticPublic.json'
 import userAuth from '../json/userAuth.json'
 import userAccount from '../json/userAccount.json'
 import vmPeriodHistory from '../json/vmPeriodHistory.json'
+import errorRecoveryList from '../json/recoveryList.json'
 
 export const db_user = factory({
   static: {
@@ -45,6 +47,18 @@ export const db_user = factory({
     cert_plcy_nm: String,
     acct_vlid_end_dt: String
   },
+  recoveryList: {
+    id: primaryKey(faker.datatype.uuid),
+    data: manyOf('recovery')
+  },
+  recovery: {
+    id: primaryKey(faker.datatype.uuid),
+    act_tm: String,
+    tnt_mtd_cd_nm: String,
+    vm_nm: String,
+    act_cd: String,
+    act_cd_nm: String
+  },
   periodHistory: {
     id: primaryKey(faker.datatype.uuid),
     req_vlid_end_dt: String,
@@ -52,9 +66,16 @@ export const db_user = factory({
   }
 })
 
+const recovery_init = () => {
+  return _.map(errorRecoveryList['data'], (item) =>
+    db_user.recovery.create({ ...item })
+  )
+}
+
 export const userInit = () => {
   db_user.static.create(staticPublic['data'])
   db_user.auth.create(userAuth['data'])
   db_user.account.create(userAccount['data'])
   db_user.periodHistory.create(vmPeriodHistory['data'])
+  db_user.recoveryList.create({ data: recovery_init() })
 }
