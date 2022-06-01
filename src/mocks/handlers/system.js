@@ -5,7 +5,6 @@ export const mock_noticeList = () => {
   return rest.get('/v1/system/notices', (req, res, ctx) => {
     const search_type = req.url.searchParams.get('search_type')
     const search_word = req.url.searchParams.get('search_word')
-    console.log(search_type, search_word)
 
     let data = []
     if (search_type && search_word) {
@@ -16,7 +15,6 @@ export const mock_noticeList = () => {
           }
         }
       })
-      console.log(data)
     } else {
       data = db.noticeList.getAll().pop()
     }

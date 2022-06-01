@@ -1,10 +1,12 @@
 import React, { Suspense } from 'react'
 import { WindowsOutlined, CodeSandboxOutlined } from '@ant-design/icons'
 import Layout from '../layouts/Layout'
-import Home from '../views/dashboard/Dashboard'
+// import Home from '../views/dashboard/Dashboard'
+import LazyLoader from '../components/lazyLoader/LazyLoader'
 import { RequireUserAuth, IsDefaultLogin } from './RequireUserAuth'
 
 /* Lazy Routes */
+const Home = React.lazy(() => import('../views/dashboard/Dashboard'))
 const CloudPcDetail = React.lazy(() =>
   import('../views/cloudPcInfo/CloudPcDetail')
 )
@@ -31,7 +33,9 @@ export const routers = [
         icon: <WindowsOutlined />,
         element: (
           <RequireUserAuth>
-            <Home />
+            <Suspense fallback={<LazyLoader />}>
+              <Home />
+            </Suspense>
           </RequireUserAuth>
         )
       },
@@ -47,7 +51,7 @@ export const routers = [
             label: 'Cloud PC 목록',
             element: (
               <RequireUserAuth>
-                <Suspense fallback={<></>}>
+                <Suspense fallback={<LazyLoader />}>
                   <CloudPcDetail
                     meta={{
                       title: 'Cloud PC 목록',
@@ -73,7 +77,7 @@ export const routers = [
             label: '자가 오류 복구',
             element: (
               <RequireUserAuth>
-                <Suspense fallback={<></>}>
+                <Suspense fallback={<LazyLoader />}>
                   <SelfErrorRecovery
                     meta={{
                       title: '자가 오류 복구',
@@ -110,7 +114,7 @@ export const routers = [
             label: '공지 사항',
             element: (
               <RequireUserAuth>
-                <Suspense fallback={<></>}>
+                <Suspense fallback={<LazyLoader />}>
                   <Notice
                     meta={{
                       title: '공지 사항',
