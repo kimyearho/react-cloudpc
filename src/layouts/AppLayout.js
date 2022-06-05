@@ -6,6 +6,14 @@ import { Outlet } from 'react-router-dom'
 import MenuNavigation from '../views/navigation/MenuNavigation'
 import staticDefaultImage from '../assets/images/portal.jpg'
 
+/**
+ * @description
+ * 앱 레이아웃 컴퓨넌트 입니다.
+ * 해당 레이아웃은 인증 정보가 참인 경우 사용 됩니다.
+ * 로그인 페이지를 제외한 모든 페이지에서 사용되는 공통 레이아웃 입니다.
+ *
+ * @returns Layout
+ */
 const AppLayout = () => {
   const { loading, isAuthentication, meta } = useSelector((state) => ({
     loading: state.app.loading,
