@@ -7,6 +7,7 @@ import { SET_LOGOUT } from '../store/modules/user'
 import { SET_LOADING } from '../store/modules/app'
 
 let store
+//* store를 범용으로 사용하기위해 store 인스턴스를 주입합니다.
 export const injectStore = (_store) => {
   store = _store
 }
