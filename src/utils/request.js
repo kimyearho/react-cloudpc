@@ -21,7 +21,9 @@ service.interceptors.request.use((config) => {
   config.headers['X-CloudPC-Request-Poc'] = 'POCUSER'
   config.headers['X-CloudPC-Request-ID'] = uuid()
   config.headers['Accept-Language'] = 'ko'
+  //* 토큰이 있으면
   if (getToken) {
+    //* 토큰이 있으면 헤더에 추가 합니다.
     config.headers['authorization'] = getToken()
   }
   return config
