@@ -15,6 +15,30 @@ export const mock_noticeList = () => {
           }
         }
       })
+    } else if (!search_type && search_word) {
+      let title = db.notice.findMany({
+        where: {
+          title: {
+            contains: [search_word]
+          }
+        }
+      })
+      if (title.length <= 0) {
+        let cont = db.notice.findMany({
+          where: {
+            cont: {
+              contains: [search_word]
+            }
+          }
+        })
+        if (cont.length > 0) {
+          data = cont
+        } else {
+          data = []
+        }
+      } else {
+        data = title
+      }
     } else {
       data = db.noticeList.getAll().pop()
     }

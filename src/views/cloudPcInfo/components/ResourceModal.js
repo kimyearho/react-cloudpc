@@ -57,7 +57,7 @@ export const PeriodExtensionModal = (rootProps) => {
         req_acct_id: parentProps.modalData.acct_id
       }
       const { data } = await call_userPcPeriodHistory(queryParams)
-      if (data.length > 0) {
+      if (!_.isEmpty(data.req_vlid_end_dt)) {
         //* React는 불변성을 유지해야하지만 동적으로 Props를 변경이 필요할 때가 있다.
         //* 그 경우 아래처럼 상태를 복사하여 덮어쓰는 형태로 재사용이 가능하다.
         //* 참고로 Object type의 props는 상태변경시 비용이 많이들어 Not bad하다.
@@ -66,7 +66,7 @@ export const PeriodExtensionModal = (rootProps) => {
           modalData: {
             ...prevState.modalData,
             pgrs_sts_cd: 'J001S',
-            desired_date: moment(data[0].req_vlid_end_dt)
+            desired_date: moment(data.req_vlid_end_dt)
           },
           modalOptions: {
             ...prevState.modalOptions,
@@ -78,8 +78,8 @@ export const PeriodExtensionModal = (rootProps) => {
         }))
         setRequestPeriod({
           pgrs_sts_cd: 'J001S',
-          req_vlid_end_dt: data[0].req_vlid_end_dt,
-          usr_req_id: data[0].usr_req_id
+          req_vlid_end_dt: data.req_vlid_end_dt,
+          usr_req_id: data.usr_req_id
         })
       }
     } catch (error) {
@@ -135,7 +135,8 @@ export const PeriodExtensionModal = (rootProps) => {
         req_vlid_end_dt: moment(props.desired_date).format('YYYYMMDD'),
         tgt_acct_id: parentData.acct_id,
         tgt_vm_id: parentData.vm_id,
-        usr_req_div_cd: 'J003PET'
+        usr_req_div_cd: 'J003PET',
+        usr_req_id: parentData.acct_id
       }
       const infoProps = {
         title: '알림',

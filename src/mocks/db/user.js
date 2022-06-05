@@ -61,8 +61,14 @@ export const db_user = factory({
   },
   periodHistory: {
     id: primaryKey(faker.datatype.uuid),
+    pgrs_sts_cd: String,
+    req_acct_id: String,
+    req_ch_cd: String,
     req_vlid_end_dt: String,
-    usr_req_id: String
+    tgt_acct_id: String,
+    tgt_vm_id: String,
+    usr_req_id: String,
+    usr_req_div_cd: String
   }
 })
 

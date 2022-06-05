@@ -28,6 +28,7 @@ export const db_resource = factory({
     vm_vlid_stt_dt: String,
     vm_vlid_end_dt: String,
     tnt_mtd_cd_nm: String,
+    vm_power_sts_cd: String,
     secu_plcy_id: String
   },
   images: {

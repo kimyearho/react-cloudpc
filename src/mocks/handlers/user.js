@@ -30,14 +30,37 @@ export const mock_userPcPeriodHistory = () => {
 }
 
 export const mock_userPcPeriodRequest = () => {
-  return rest.post('/v1/user/work/request', (_, res, ctx) => {
-    return res(ctx.status(200))
+  return rest.post('/v1/user/work/request', (req, res, ctx) => {
+    const body = req.body
+    const user = db.periodHistory.create({
+      ...body
+    })
+    return res(ctx.json(user))
   })
 }
 
 export const mock_userPcPeriodRequestCancel = () => {
-  return rest.put('/v1/user/work/request/:request_id', (_, res, ctx) => {
-    return res(ctx.status(200))
+  return rest.put('/v1/user/work/request/:request_id', (req, res, ctx) => {
+    const { request_id } = req.params
+    const user = db.periodHistory.update({
+      where: {
+        usr_req_id: {
+          equals: request_id
+        }
+      },
+      data: {
+        pgrs_sts_cd: '',
+        req_acct_id: '',
+        req_ch_cd: '',
+        req_vlid_end_dt: '',
+        tgt_acct_id: '',
+        tgt_vm_id: '',
+        usr_req_div_cd: '',
+        usr_req_id: ''
+      }
+    })
+
+    return res(ctx.json(user))
   })
 }
 
