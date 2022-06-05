@@ -18,6 +18,7 @@ import {
 import { mock_securityPolicy } from './security'
 import { mock_noticeList } from './system'
 
+//* 모든 API Mocking
 const module = [
   mock_staticPublic(),
   mock_userAuth(),

@@ -1,12 +1,14 @@
 import { rest } from 'msw'
 import { db_resource as db } from '../db/resource'
 
+//* 전체 가상 PC 목록을 조회 합니다.
 export const mock_resource = () => {
   return rest.get('/v1/resource/vpcs/resources', (_, res, ctx) => {
     return res(ctx.json(db.resources.getAll().pop()))
   })
 }
 
+//* 특정 가상 PC를 조회 합니다.
 export const mock_userResource = () => {
   return rest.get(
     '/v1/resource/vpcs/resources/:vm_auth_id',
@@ -24,6 +26,7 @@ export const mock_userResource = () => {
   )
 }
 
+//* 특정 가상 PC의 사용률을 조회 합니다.
 export const mock_userResourceUse = () => {
   return rest.get(
     '/v1/management/dashboard/user/:vm_auth_id/stat',
@@ -41,12 +44,14 @@ export const mock_userResourceUse = () => {
   )
 }
 
+//* 특정 이미지 정보를 조회 합니다.
 export const mock_userResourceImage = () => {
   return rest.get('/v1/resource/images/:image_id', (_, res, ctx) => {
     return res(ctx.json(db.images.getAll().pop()))
   })
 }
 
+//* 특정 가상 PC의 별칭을 변경 합니다.
 export const mock_changeVmAlais = () => {
   return rest.put(
     '/v1/resource/vpcs/resources/:vm_auth_id/user',
@@ -70,6 +75,7 @@ export const mock_changeVmAlais = () => {
   )
 }
 
+//* 자가 오류 복구를 실행 합니다. (데이터 변경은 없음)
 export const mock_updateVmRecovery = () => {
   return rest.post(
     '/v1/resource/vpcs/resources/:vm_auth_id/initial',

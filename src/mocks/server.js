@@ -6,6 +6,7 @@ import { resourceInit } from './db/resource'
 import { operationInit } from './db/operation'
 import { systemInit } from './db/system'
 
+//* In-Memory Database
 export function setupBrowserMock() {
   //* USER API 초기화
   userInit()
