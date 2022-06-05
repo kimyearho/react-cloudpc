@@ -17,6 +17,24 @@ const ContainerLoading = () => {
   )
 }
 
+/**
+ * @description
+ * 컨테이너 래퍼 컴포넌트 입니다.
+ * 메인 페이지를 제외한 모든 페이지에서 사용되는 카드형 공통 컨테이너로,
+ * Router meta props를 이용하여 컨테이너 알림 메시지나, extra를 사용할 수 있습니다.
+ * 컨테이너 props는 아래 정보를 참고 해주세요.
+ *
+ * @param {...props} {
+ *                      loading: true / false   | 컨테이너에 로딩을 표시할지 여부 | (default: false)
+ *                      routeMeta: {...props}   | 라우터 props (Vue style)
+ *                      height: number          | 컨테이너 높이                  | (default: 700px)
+ *                      useSearch: true / false | 검색기능 사용 여부             | (default: false)
+ *                      searchType: object      | 검색 옵션
+ *                      children: <Node>        | 하위 Node
+ *                      callback: function      | child callback
+ *                   }
+ * @returns
+ */
 const ContainerWrapper = ({
   loading,
   routeMeta,
@@ -67,7 +85,7 @@ const ContainerWrapper = ({
       <Card
         bordered
         className="container-panel"
-        style={{ height: height }}
+        style={{ height: height ? height : '700px' }}
         title={<div className="container-title">{metaData['ctrTitle']}</div>}
         extra={<BreadCrumb callback={onRedirect} />}
       >

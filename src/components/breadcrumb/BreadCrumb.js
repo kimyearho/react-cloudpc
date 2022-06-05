@@ -4,6 +4,13 @@ import { Breadcrumb, Space } from 'antd'
 import { routers } from '../../router/router'
 import { HomeOutlined } from '@ant-design/icons'
 
+/**
+ * @description
+ * Router 정보를 이용하여 현재 페이지의 Breadcrumb를 생성 합니다.
+ *
+ * @param {function} callback
+ * @returns JSX
+ */
 const BreadCrumb = ({ callback }) => {
   const { pathname } = useLocation()
   const routes = routers[0].children
