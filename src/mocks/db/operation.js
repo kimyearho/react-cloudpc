@@ -50,3 +50,7 @@ const createPolicy = () => {
 export const operationInit = () => {
   db_operation.policyList.create({ data: createPolicy() })
 }
+
+export const operationCount = () => {
+  return db_operation.policyList.count() > 0 ? true : false
+}

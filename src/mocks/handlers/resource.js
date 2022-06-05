@@ -50,7 +50,21 @@ export const mock_userResourceImage = () => {
 export const mock_changeVmAlais = () => {
   return rest.put(
     '/v1/resource/vpcs/resources/:vm_auth_id/user',
-    (_, res, ctx) => {
+    (req, res, ctx) => {
+      const { vm_auth_id } = req.params
+      const { vm_als } = req.body
+      const updateAlias = db.vm.update({
+        where: {
+          vm_auth_id: {
+            equals: vm_auth_id
+          }
+        },
+        data: {
+          vm_als: vm_als
+        }
+      })
+      console.log(updateAlias)
+
       return res(ctx.json())
     }
   )

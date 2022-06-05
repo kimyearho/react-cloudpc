@@ -79,3 +79,7 @@ export const userInit = () => {
   db_user.periodHistory.create(vmPeriodHistory['data'])
   db_user.recoveryList.create({ data: recovery_init() })
 }
+
+export const userCount = () => {
+  return db_user.account.count() > 0 ? true : false
+}

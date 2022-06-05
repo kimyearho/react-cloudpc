@@ -28,3 +28,7 @@ const init = () => {
 export const systemInit = () => {
   db_system.noticeList.create({ data: init() })
 }
+
+export const systemCount = () => {
+  return db_system.noticeList.count() > 0 ? true : false
+}

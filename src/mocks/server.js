@@ -7,9 +7,14 @@ import { operationInit } from './db/operation'
 import { systemInit } from './db/system'
 
 export function setupBrowserMock() {
+  //* USER API 초기화
   userInit()
+  //* RESOURCE API 초기화
   resourceInit()
+  //* OPERATION API 초기화
   operationInit()
+  //* SYSTEM API 초기화
   systemInit()
+  //* SERVICE WORKER 시작
   setupWorker(...module).start()
 }

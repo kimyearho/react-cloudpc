@@ -70,3 +70,7 @@ export const resourceInit = () => {
   db_resource.images.create(userResourceImage['data'])
   db_resource.monitor.create({ data: stat_init })
 }
+
+export const resourceCount = () => {
+  return db_resource.resources.count() > 0 ? true : false
+}
