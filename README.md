@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="500" src="https://images.velog.io/images/cindy-choi/post/b7eee01d-fa21-4257-8b02-44bc19022bb8/image.png">
+  <img src="./src/assets/images/sample.jpg">
 </div>
 
 ---
