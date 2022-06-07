@@ -103,8 +103,10 @@ body {
   box-shadow: 0 1px 4px 0 rgb(0 21 41 / 12%);
   transition: background 0.3s, width 0.2s;
 
-  .logo {
+  .logo h2 {
     margin-left: 20px;
+    color: #ffffff;
+    font-weight: 700;
     cursor: pointer;
   }
 

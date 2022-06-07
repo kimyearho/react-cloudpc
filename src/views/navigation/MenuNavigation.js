@@ -11,7 +11,6 @@ import {
 } from '@ant-design/icons'
 import { userInfoFactory } from '../../api/factory/user_factory'
 import Icon from '@ant-design/icons'
-import logo from '../../assets/images/img_logo.png'
 import ko from '../../assets/images/ko.png'
 
 function MenuNavigation() {
@@ -140,12 +139,9 @@ function MenuNavigation() {
     <>
       <Row className="top-nav-header light">
         <Col span={6}>
-          <img
-            className="logo"
-            src={logo}
-            alt="logo"
-            onClick={redirectDashboard}
-          />
+          <Button className="logo" type="link" onClick={redirectDashboard}>
+            <h2>INSoft Cloud PC by React</h2>
+          </Button>
         </Col>
         <Col span={8} offset={2}>
           <Menu
