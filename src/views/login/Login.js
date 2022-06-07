@@ -17,6 +17,7 @@ import { authUser, userAccount } from '../../store/actions/user_action'
 import { SET_LOADING } from '../../store/modules/app'
 import { useNavigate } from 'react-router-dom'
 import { notificationSuccess } from '../../components/notification/Notification'
+import { useTranslation } from 'react-i18next'
 import _ from 'lodash'
 
 import banner1 from '../../assets/images/login/user_banner_01.png'
@@ -24,6 +25,7 @@ import banner2 from '../../assets/images/login/user_banner_02.png'
 import banner3 from '../../assets/images/login/user_banner_03.png'
 
 const Login = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isAuthentication } = useSelector((state) => ({
@@ -42,13 +44,13 @@ const Login = () => {
     username: [
       {
         required: true,
-        message: '아이디를 입력해주세요.'
+        message: t('validate.login.validate_login_id')
       }
     ],
     password: [
       {
         required: true,
-        message: '비밀번호를 입력해주세요.'
+        message: t('validate.login.validate_login_pw')
       }
     ]
   }
@@ -72,7 +74,7 @@ const Login = () => {
                 navigate('/dashboard', { replace: true })
                 dispatch(SET_LOADING(false))
                 notificationSuccess({
-                  description: '정상적으로 로그인 되었습니다.'
+                  description: t('message.login.success')
                 })
               }, 600)
             }
@@ -126,7 +128,7 @@ const Login = () => {
                   }}
                   onFinish={onFinish}
                 >
-                  <Form.Item label="아이디">
+                  <Form.Item label={t('form.label.login.id')}>
                     <Form.Item noStyle name="username" rules={rules.username}>
                       <Input
                         prefix={
@@ -139,7 +141,7 @@ const Login = () => {
                   </Form.Item>
 
                   <Form.Item
-                    label="비밀번호"
+                    label={t('form.label.login.pw')}
                     style={{ padding: '10px 0 10px 0' }}
                   >
                     <Form.Item noStyle name="password" rules={rules.password}>
@@ -160,17 +162,21 @@ const Login = () => {
                       className="login-form-button"
                       size="large"
                     >
-                      로그인
+                      {t('button.login.submit')}
                     </Button>
                   </Form.Item>
 
                   <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
-                      <Checkbox>아이디 저장</Checkbox>
+                      <Checkbox>{t('form.label.login.save_id')}</Checkbox>
                     </Form.Item>
                     <Space className="fr" split={<Divider type="vertical" />}>
-                      <Typography.Link>아이디 찾기</Typography.Link>
-                      <Typography.Link>비밀번호 찾기</Typography.Link>
+                      <Typography.Link>
+                        {t('form.label.login.find_id')}
+                      </Typography.Link>
+                      <Typography.Link>
+                        {t('form.label.login.find_pw')}
+                      </Typography.Link>
                     </Space>
                   </Form.Item>
                 </Form>

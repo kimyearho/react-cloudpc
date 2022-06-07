@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import 'antd/dist/antd.min.css'
 import './styles/index.scss'
+import './i18n'
 import App from './views/App'
 
 import { Provider } from 'react-redux'

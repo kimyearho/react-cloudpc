@@ -1,0 +1,6 @@
+{
+  "login": {
+    "validate_login_id": "아이디를 입력해주세요.",
+    "validate_login_pw": "비밀번호를 입력해주세요."
+  }
+}
