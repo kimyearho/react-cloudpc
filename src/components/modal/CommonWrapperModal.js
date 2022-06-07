@@ -3,6 +3,23 @@ import React, { useEffect } from 'react'
 import { Alert, Modal, Form, Button, Divider } from 'antd'
 import _ from 'lodash'
 
+/**
+ * @description
+ * 래퍼 팝업 컴포넌트 입니다.
+ * 기본적으로 폼을 가지는 팝업 컴포넌트로써, slot 형태로 사용할 수 있습니다.
+ * modal props를 사용하여 하나의 컴포넌트로 다양한 팝업을 개발 가능 합니다.
+ * 전용 props는 아래 정보를 참고 해주세요.
+ *
+ * @param {...props} {
+ *                      isModalVisible: true / false   | 팝업을 표시할지 여부 | (default: false)
+ *                      modalData: {object}            | 팝업 Form에 bind될 데이터 모음
+ *                      modalOptions: {object}         | 팝업 옵션
+ *                      handleOk: function             | 팝업에서 submit 이벤트가 발생시
+ *                      handleCancel: function         | 팝업을 닫을 때 사용
+ *                      children: JSX
+ *                   }
+ * @returns
+ */
 const CommonModal = ({
   isModalVisible,
   modalData,

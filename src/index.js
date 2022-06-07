@@ -24,13 +24,13 @@ if (process.env.NODE_ENV === 'development') {
 
 //* React 18 bootstrap
 root.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
 )
 
 // import reportWebVitals from './reportWebVitals';
