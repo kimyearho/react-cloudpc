@@ -1,4 +1,5 @@
-<iframe width="800" height="450" src="https://www.youtube.com/embed/w34KdyQ2BKU?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Video Label](./src/assets/images/sample.jpg)](https://youtu.be/w34KdyQ2BKU)
+(이미지 클릭시 유튜브 시연 링크로 이동합니다.)
 
 ---
 
