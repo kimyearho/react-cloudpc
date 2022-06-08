@@ -1,5 +1,5 @@
 [![Video Label](./src/assets/images/sample.jpg)](https://youtu.be/w34KdyQ2BKU)
-(이미지 클릭시 유튜브 시연 링크로 이동합니다.)
+(유튜브 영상은 보안이 우려되어 비공개처리되었습니다.)
 
 ---
 
