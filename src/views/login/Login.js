@@ -123,7 +123,7 @@ const Login = () => {
                   layout="horizontal"
                   initialValues={{
                     username: 'kimyearho',
-                    password: '1851617kK@',
+                    password: '123456789!',
                     remember: true
                   }}
                   onFinish={onFinish}
