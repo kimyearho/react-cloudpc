@@ -63,6 +63,7 @@
 ### Package
 
 - ESLint 및 Prettier 설명은 생략 합니다.
+- 모든 소스는 Functional Component를 사용합니다.
 
 ```
 src
